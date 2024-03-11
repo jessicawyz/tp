@@ -7,12 +7,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,6 +31,25 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a remark string into a Remark object.
+     *
+     * @param remarkString The remark string to be parsed.
+     * @return A Remark object.
+     * @throws ParseException If the remarkString is invalid.
+     */
+    public static Remark parseRemark(String remarkString) throws ParseException {
+        requireNonNull(remarkString);
+        String trimmedRemark = remarkString.trim();
+        if (trimmedRemark.isEmpty()) {
+            throw new ParseException("Remark cannot be empty");
+        }
+        if (!Remark.isValidRemark(trimmedRemark)) {
+            throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        return new Remark(trimmedRemark);
     }
 
     /**
