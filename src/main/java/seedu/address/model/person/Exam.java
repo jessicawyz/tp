@@ -92,5 +92,13 @@ public class Exam {
     public int hashCode() {
         return date.hashCode() + time.hashCode();
     }
+
+    public Object getDate() {
+        return date;
+    }
+
+    public Object getTime() {
+        return time;
+    }
 }
 

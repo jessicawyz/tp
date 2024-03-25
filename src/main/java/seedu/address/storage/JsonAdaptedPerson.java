@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -33,6 +34,7 @@ class JsonAdaptedPerson {
     private final String subject;
     private final String uniqueId;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedExam> exams = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -41,7 +43,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("subject") String subject,
-                             @JsonProperty("uniqueId") String uniqueId) {
+                             @JsonProperty("uniqueId") String uniqueId, @JsonProperty("exams") List<JsonAdaptedExam> exams) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -50,6 +52,9 @@ class JsonAdaptedPerson {
         this.uniqueId = uniqueId;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (exams != null) {
+            this.exams.addAll(exams);
         }
     }
 
@@ -66,6 +71,9 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         subject = source.getSubject().value;
         uniqueId = source.getUniqueId().id;
+        exams.addAll(source.getExams().stream()
+                .map(JsonAdaptedExam::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -77,6 +85,11 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Exam> personExams = new ArrayList<>();
+        for (JsonAdaptedExam exam : exams) {
+            personExams.add(exam.toModelType());
         }
 
         if (name == null) {
@@ -120,7 +133,8 @@ class JsonAdaptedPerson {
         final Subject modelSubject = new Subject(subject);
         final Address modelAddress = new Address(address);
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelSubject, modelId);
+        final Set<Exam> modelExams = new HashSet<>(personExams);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelSubject, modelId, modelExams);
     }
 
 }
