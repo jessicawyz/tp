@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -11,11 +13,16 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 
 /**
@@ -166,5 +173,49 @@ public class ParserUtil {
         } catch (NumberFormatException e) {
             throw new ParseException("Unique ID must be an integer.");
         }
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code LocalDate}.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static LocalDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        try {
+            return LocalDate.parse(trimmedDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid date format. Please enter the date in the format dd-MM-yyyy.");
+        }
+    }
+
+    /**
+     * Parses a {@code String time} into a {@code LocalTime}.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static LocalTime parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        try {
+            return LocalTime.parse(trimmedTime, DateTimeFormatter.ofPattern("HH:mm"));
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid time format. Please enter the time in the format HH:mm.");
+        }
+    }
+
+    /**
+     * Parses an {@code Exam} object from the input {@code date} and {@code time}.
+     *
+     * @throws ParseException if either the date or time is invalid.
+     */
+    public static Exam parseExam(String date, String time) throws ParseException {
+        LocalDate parsedDate = parseDate(date);
+        LocalTime parsedTime = null;
+        if (time != null && !time.isEmpty()) {
+            parsedTime = parseTime(time);
+        }
+        return new Exam(parsedDate, Optional.ofNullable(parsedTime));
     }
 }

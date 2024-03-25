@@ -1,0 +1,96 @@
+package seedu.address.model.person;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Optional;
+
+/**
+ * Represents a Person's exam details in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidExamDate(LocalDate)} and {@link #isValidExamTime(LocalTime)}
+ */
+public class Exam {
+
+    public static final String MESSAGE_CONSTRAINTS_DATE = "Exam date must be a valid date in the format dd-MM-yyyy";
+    public static final String MESSAGE_CONSTRAINTS_TIME = "Exam time must be a valid time in the format HH:mm";
+
+    public final LocalDate date;
+    public final Optional<LocalTime> time;
+
+    /**
+     * Constructs an {@code Exam} with optional time.
+     *
+     * @param date A valid exam date.
+     * @param time A valid exam time (optional).
+     */
+    public Exam(LocalDate date, Optional<LocalTime> time) {
+        requireNonNull(date);
+        requireNonNull(time);
+        checkArgument(isValidExamDate(date), MESSAGE_CONSTRAINTS_DATE);
+        // Check if time is present, and if present, validate it, else time can be null
+        if (time.isPresent()) {
+            checkArgument(isValidExamTime(time.get()), MESSAGE_CONSTRAINTS_TIME);
+        }
+        this.date = date;
+        this.time = time;
+    }
+
+    /**
+     * Returns true if a given date is a valid exam date (from today onwards).
+     */
+    public static boolean isValidExamDate(LocalDate test) {
+        LocalDate currentDate = LocalDate.now();
+        return !test.isBefore(currentDate);
+    }
+
+    /**
+     * Returns true if a given time is a valid exam time (in 24-hour clock format in HHmm).
+     */
+    public static boolean isValidExamTime(LocalTime test) {
+        if (test == null) {
+            return false; // Null time is not valid
+        }
+        // Check if the time format is in HHmm
+        String timeString = test.format(DateTimeFormatter.ofPattern("HHmm"));
+        try {
+            LocalTime parsedTime = LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HHmm"));
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public String toString() {
+        // Format date and time for display
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Date: ").append(date.format(dateFormatter));
+        time.ifPresent(t -> stringBuilder.append(", Time: ").append(t.format(DateTimeFormatter.ofPattern("HH:mm"))));
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (!(other instanceof Exam)) {
+            return false;
+        }
+
+        Exam otherExam = (Exam) other;
+        return date.equals(otherExam.date) && time.equals(otherExam.time);
+    }
+
+    @Override
+    public int hashCode() {
+        return date.hashCode() + time.hashCode();
+    }
+}
+

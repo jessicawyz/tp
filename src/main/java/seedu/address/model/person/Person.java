@@ -29,13 +29,14 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Subject subject;
+    private final Set<Exam> exams;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Subject subject,
-                  Id uniqueId) {
-        requireAllNonNull(name, phone, email, address, tags, subject);
+                  Id uniqueId, Set<Exam> exams) {
+        requireAllNonNull(name, phone, email, address, tags, subject, exams);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -43,19 +44,21 @@ public class Person {
         this.tags.addAll(tags);
         this.subject = subject;
         this.uniqueId = uniqueId;
+        this.exams = exams == null ? new HashSet<>() : new HashSet<>(exams);
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Subject subject) {
-        requireAllNonNull(name, phone, email, address, tags, subject);
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Subject subject, Set<Exam> exams) {
+        requireAllNonNull(name, phone, email, address, tags, subject, exams);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.subject = subject;
+        this.exams = exams == null ? new HashSet<>() : new HashSet<>(exams);
     }
 
     public Name getName() {
@@ -95,6 +98,11 @@ public class Person {
         return this.uniqueId = uniqueId;
     }
 
+    /** Returns the exams of the person */
+    public Set<Exam> getExams() {
+        return Collections.unmodifiableSet(exams);
+    }
+
 
     /**
      * Returns true if both persons have the same ID.
@@ -129,7 +137,8 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && subject.equals(otherPerson.subject)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && exams.equals(otherPerson.exams);
     }
 
     @Override
@@ -147,6 +156,7 @@ public class Person {
                 .add("address", address)
                 .add("subject", subject)
                 .add("tags", tags)
+                .add("exams", exams)
                 .toString();
     }
 
