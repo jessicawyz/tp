@@ -29,12 +29,13 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Subject subject;
+    private final LogList logs;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Subject subject,
-                  Id uniqueId) {
+                  Id uniqueId, LogList logs) {
         requireAllNonNull(name, phone, email, address, tags, subject);
         this.name = name;
         this.phone = phone;
@@ -43,12 +44,13 @@ public class Person {
         this.tags.addAll(tags);
         this.subject = subject;
         this.uniqueId = uniqueId;
+        this.logs = logs;
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Subject subject) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Subject subject, LogList logs) {
         requireAllNonNull(name, phone, email, address, tags, subject);
         this.name = name;
         this.phone = phone;
@@ -56,6 +58,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.subject = subject;
+        this.logs = logs;
     }
 
     public Name getName() {
@@ -93,6 +96,14 @@ public class Person {
     /** Sets the uniqueId of the person */
     public Id setUniqueId(Id uniqueId) {
         return this.uniqueId = uniqueId;
+    }
+
+    public LogList getLogs() {
+        return logs;
+    }
+
+    public void addLog(Log entry) {
+        logs.addEntry(entry);
     }
 
 

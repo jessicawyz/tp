@@ -66,6 +66,7 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         subject = source.getSubject().value;
         uniqueId = source.getUniqueId().id;
+
     }
 
     /**
@@ -120,7 +121,7 @@ class JsonAdaptedPerson {
         final Subject modelSubject = new Subject(subject);
         final Address modelAddress = new Address(address);
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelSubject, modelId);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelSubject, modelId, );
     }
 
 }
