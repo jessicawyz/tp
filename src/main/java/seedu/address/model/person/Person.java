@@ -2,10 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -98,8 +95,8 @@ public class Person {
         return this.uniqueId = uniqueId;
     }
 
-    public LogList getLogs() {
-        return logs;
+    public List<Log> getLogs() {
+        return logs.getList();
     }
 
     public void addLog(Log entry) {

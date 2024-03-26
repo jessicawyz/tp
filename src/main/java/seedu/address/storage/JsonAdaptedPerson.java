@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -10,13 +11,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Id;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Subject;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,6 +28,7 @@ class JsonAdaptedPerson {
     private final String subject;
     private final String uniqueId;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedLog> logs = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -41,7 +37,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("subject") String subject,
-                             @JsonProperty("uniqueId") String uniqueId) {
+                             @JsonProperty("uniqueId") String uniqueId, @JsonProperty("logs") List<JsonAdaptedLog> logs) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -50,6 +46,9 @@ class JsonAdaptedPerson {
         this.uniqueId = uniqueId;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (logs != null) {
+            this.logs.addAll(logs);
         }
     }
 
@@ -66,6 +65,9 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         subject = source.getSubject().value;
         uniqueId = source.getUniqueId().id;
+        logs.addAll(source.getLogs().stream()
+                .map(JsonAdaptedLog::new)
+                .collect(Collectors.toList()));
 
     }
 
@@ -78,6 +80,11 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Log> personLogs = new ArrayList<>();
+        for (JsonAdaptedLog log : logs) {
+            personLogs.add(log.toModelType());
         }
 
         if (name == null) {
@@ -121,7 +128,8 @@ class JsonAdaptedPerson {
         final Subject modelSubject = new Subject(subject);
         final Address modelAddress = new Address(address);
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelSubject, modelId, );
+        final LogList modelLogs = new LogList(personLogs);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelSubject, modelId, modelLogs);
     }
 
 }

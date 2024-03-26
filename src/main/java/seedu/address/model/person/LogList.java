@@ -11,4 +11,8 @@ public class LogList {
     public void addEntry(Log log) {
         logs.add(log);
     }
+
+    public List<Log> getList() {
+        return this.logs;
+    }
 }
