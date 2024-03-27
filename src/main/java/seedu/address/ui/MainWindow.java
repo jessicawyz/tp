@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.AllExamsList;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -123,7 +124,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
         System.out.println("i am inner parts");
-        examListPanel = new ExamListPanel(logic.getFilteredPersonList());
+        examListPanel = new ExamListPanel(AllExamsList.exams);
         examListPanelPlaceholder.getChildren().add(examListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

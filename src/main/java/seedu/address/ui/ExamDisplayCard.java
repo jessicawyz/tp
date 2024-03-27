@@ -28,15 +28,15 @@ public class ExamDisplayCard extends UiPart<Region> {
     @FXML
     private Label examTimeLabel;
 
-    private final Person person;
+    //private final Person person;
     private final Exam exam;
 
-    public ExamDisplayCard(Person person, Exam exam) {
+    public ExamDisplayCard(Exam exam) {
         super(FXML);
-        this.person = person;
+        //this.person = person;
         this.exam = exam;
-        personNameLabel.setText("Name: " + person.getName().fullName);
-        personIdLabel.setText("ID: " + person.getUniqueId().toString());
+        //personNameLabel.setText("Name: " + person.getName().fullName);
+        //personIdLabel.setText("ID: " + person.getUniqueId().toString());
         examNameLabel.setText("Exam: " + exam.getExamName());
         examDateLabel.setText("Date: " + exam.getDate().toString());
         exam.getExamTime().ifPresent(time -> examTimeLabel.setText("Time: " + time.toString()));
