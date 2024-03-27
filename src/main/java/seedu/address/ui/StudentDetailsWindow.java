@@ -17,6 +17,8 @@ public class StudentDetailsWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(StudentDetailsWindow.class);
     private static final String FXML = "StudentDetailsWindow.fxml";
 
+    private static String content;
+
     @FXML
     private Button copyButton;
 
@@ -38,12 +40,8 @@ public class StudentDetailsWindow extends UiPart<Stage> {
     /**
      * Creates a new SummaryStatsWindow.
      */
-    public StudentDetailsWindow(Logic logic) {
+    public StudentDetailsWindow() {
         this(new Stage());
-        this.logic = logic;
-        totalPerson = logic.getTotalPersons();
-        String output = STUDENT_DETAILS_MESSAGE + " " + Integer.toString(totalPerson);
-        detailsMessage.setText(output);
     }
 
     /**
@@ -64,10 +62,12 @@ public class StudentDetailsWindow extends UiPart<Stage> {
      *         </li>
      *     </ul>
      */
-    public void show() {
+    public void show(String content) {
         logger.fine("Showing total Student Count about the application.");
         getRoot().show();
         getRoot().centerOnScreen();
+
+        detailsMessage.setText(content);
     }
 
     /**

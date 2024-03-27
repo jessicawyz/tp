@@ -9,28 +9,32 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root resizable="false" title="Student Details Window" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.ScrollPane?>
+<fx:root resizable="false" title="Student Details Window" type="javafx.stage.Stage"
+         xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+         minWidth="220" minHeight="200">
     <scene>
         <Scene>
             <stylesheets>
                 <URL value="@StudentDetailsWindow.css" />
             </stylesheets>
-
-            <HBox alignment="CENTER" fx:id="studentDetailsContainer">
-                <children>
-                    <Label fx:id="detailsMessage" text="Label">
-                        <HBox.margin>
-                            <Insets right="5.0" />
-                        </HBox.margin>
-                    </Label>
-                </children>
-                <opaqueInsets>
-                    <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
-                </opaqueInsets>
-                <padding>
-                    <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
-                </padding>
+            <ScrollPane fitToWidth="true" vbarPolicy="AS_NEEDED">
+                <HBox alignment="CENTER" fx:id="studentDetailsContainer">
+                    <children>
+                        <Label fx:id="detailsMessage" text="Label">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                    <opaqueInsets>
+                        <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+                    </opaqueInsets>
+                    <padding>
+                        <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+                    </padding>
             </HBox>
+            </ScrollPane>
         </Scene>
     </scene>
 </fx:root>

@@ -69,7 +69,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         summaryStatsWindow = new SummaryStatsWindow(logic);
-        studentDetailsWindow = new StudentDetailsWindow(logic);
+        studentDetailsWindow = new StudentDetailsWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -164,9 +164,9 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @FXML
-    public void handleStudentDetails() {
+    public void handleStudentDetails(String content) {
         if (!studentDetailsWindow.isShowing()) {
-            studentDetailsWindow.show();
+            studentDetailsWindow.show(content);
         } else {
             studentDetailsWindow.focus();
         }
@@ -216,7 +216,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isShowStudentDetails()) {
-                handleStudentDetails();
+                handleStudentDetails(commandResult.getPopupDisplay());
             }
 
             return commandResult;

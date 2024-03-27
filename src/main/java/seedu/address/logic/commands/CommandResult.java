@@ -12,6 +12,7 @@ import seedu.address.commons.util.ToStringBuilder;
 public class CommandResult {
 
     private final String feedbackToUser;
+    private final String popupDisplay;
 
     /** Help information should be shown to the user. */
     private final boolean showHelp;
@@ -27,9 +28,10 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showSummaryStats,
+    public CommandResult(String feedbackToUser, String popupDisplay, boolean showHelp, boolean exit, boolean showSummaryStats,
                          boolean showStudentDetails) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.popupDisplay = popupDisplay;
         this.showHelp = showHelp;
         this.exit = exit;
         this.showSummaryStats = showSummaryStats;
@@ -41,11 +43,14 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false);
+        this(feedbackToUser, null, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+    public String getPopupDisplay() {
+        return popupDisplay;
     }
 
     public boolean isShowHelp() {

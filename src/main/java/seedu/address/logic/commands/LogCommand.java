@@ -57,7 +57,7 @@ public class LogCommand extends Command {
             throw new CommandException(MESSAGE_POSITIVE_INTEGER_AND_ZERO);
         }
 
-        Person targetPerson = lastShownList.get(targetId);
+        Person targetPerson = model.getPersonByUniqueId(targetId);
 
         if (targetPerson == null) {
             throw new CommandException(MESSAGE_NO_SUCH_PERSON);

@@ -5,3 +5,7 @@
 #studentDetailsContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
+
+#scrollContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
