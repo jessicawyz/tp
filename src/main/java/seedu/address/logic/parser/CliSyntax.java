@@ -13,5 +13,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_ID = new Prefix("-id");
     public static final Prefix PREFIX_SUBJECT = new Prefix("-subject");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_STYLE = new Prefix("-style");
+    public static final Prefix PREFIX_HOURS = new Prefix("-hours");
+    public static final Prefix PREFIX_NOTES = new Prefix("-notes");
+    public static final Prefix PREFIX_CONTENT = new Prefix("-content");
 
 }
