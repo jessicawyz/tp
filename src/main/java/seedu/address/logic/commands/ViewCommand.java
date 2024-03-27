@@ -61,13 +61,15 @@ public class ViewCommand extends Command {
         if (namePredicate != null) {
             model.updateFilteredPersonList(namePredicate);
             return new CommandResult(
-                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                    false, false, false, true);
         } else if (idPredicate != null) {
             model.updateFilteredPersonList(idPredicate);
             return new CommandResult(
-                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                    false, false, false, true);
         } else {
-            return new CommandResult(MESSAGE_SUCCESS, false, false, true);
+            return new CommandResult(MESSAGE_SUCCESS, false, false, true, false);
         }
     }
 

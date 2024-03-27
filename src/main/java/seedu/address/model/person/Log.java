@@ -40,4 +40,15 @@ public class Log {
     public String getNotes() {
         return this.notes;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(String.format("Log on %s\n", date))
+                .append("Hours: " + hours + "\n")
+                .append("Learning Style: " + learningStyle + "\n")
+                .append("Lesson Content: " + lessonContent + "\n")
+                .append("Notes: " + notes + "\n");
+        return builder.toString();
+    }
 }
