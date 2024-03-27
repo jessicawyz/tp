@@ -95,8 +95,8 @@ public class Person {
         return this.uniqueId = uniqueId;
     }
 
-    public List<Log> getLogs() {
-        return logs.getList();
+    public LogList getLogs() {
+        return logs;
     }
 
     public void addLog(Log entry) {

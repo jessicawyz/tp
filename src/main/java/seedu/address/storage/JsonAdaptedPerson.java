@@ -65,7 +65,7 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         subject = source.getSubject().value;
         uniqueId = source.getUniqueId().id;
-        logs.addAll(source.getLogs().stream()
+        logs.addAll(source.getLogs().getList().stream()
                 .map(JsonAdaptedLog::new)
                 .collect(Collectors.toList()));
 

@@ -11,6 +11,7 @@ import seedu.address.model.person.Person;
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 public class LogCommand extends Command {
     public static final String COMMAND_WORD = "log";
@@ -48,5 +49,7 @@ public class LogCommand extends Command {
         }
 
         model.addLog(targetPerson, logDetails);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(logDetails)));
     }
 }
