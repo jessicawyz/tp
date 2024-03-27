@@ -35,6 +35,8 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private SummaryStatsWindow summaryStatsWindow;
+    private ExamDisplayCard examDisplayCard;
+    private ExamListPanel examListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -44,6 +46,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane examDisplayCardPlaceholder;
+
+    @FXML
+    private StackPane examListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -114,6 +122,9 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        System.out.println("i am inner parts");
+        examListPanel = new ExamListPanel(logic.getFilteredPersonList());
+        examListPanelPlaceholder.getChildren().add(examListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

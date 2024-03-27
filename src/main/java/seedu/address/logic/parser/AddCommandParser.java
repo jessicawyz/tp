@@ -51,7 +51,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList, subject, null);
+        Person person = new Person(name, phone, email, address, tagList, subject, null, null);
 
         return new AddCommand(person);
     }

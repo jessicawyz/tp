@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -15,7 +13,9 @@ import seedu.address.model.person.Person;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Adds an exam to a person's record.
@@ -26,10 +26,12 @@ public class AddExamCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an exam to a person's record. "
             + "Parameters: "
             + PREFIX_ID + "ID "
+            + PREFIX_EXAM_NAME + "EXAM_NAME "
             + PREFIX_DATE + "EXAM_DATE "
             + "[" + PREFIX_TIME + "EXAM_TIME]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "000001 "
+            + PREFIX_EXAM_NAME + "Math "
             + PREFIX_DATE + "2024-04-10 "
             + PREFIX_TIME + "14:00";
 
@@ -38,15 +40,18 @@ public class AddExamCommand extends Command {
     private final int uniqueId;
     private final LocalDate examDate;
     private final Optional<LocalTime> examTime;
+    private final String examName;
 
     /**
      * Creates an AddExamCommand to add the specified {@code Exam} to the person with the specified {@code Id}.
      */
-    public AddExamCommand(int uniqueId, LocalDate examDate, Optional<LocalTime> examTime) {
+    public AddExamCommand(int uniqueId, String examName, LocalDate examDate, Optional<LocalTime> examTime) {
         requireNonNull(uniqueId);
+        requireNonNull(examName);
         requireNonNull(examDate);
         requireNonNull(examTime);
         this.uniqueId = uniqueId;
+        this.examName = examName;
         this.examDate = examDate;
         this.examTime = examTime;
     }
@@ -59,11 +64,18 @@ public class AddExamCommand extends Command {
         if (personToUpdate == null) {
             throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
         }
+        Set<Exam> updatedExams = new HashSet<>();
 
-        Exam newExam = new Exam(examDate, examTime);
+        if (personToUpdate.getExams() != null) {
+            updatedExams.addAll(personToUpdate.getExams());
+        }
+        Exam newExam = new Exam(examName, examDate, examTime);
+
+        updatedExams.add(newExam);
+
         Person updatedPerson = new Person(personToUpdate.getName(), personToUpdate.getPhone(),
                 personToUpdate.getEmail(), personToUpdate.getAddress(), personToUpdate.getTags(),
-                personToUpdate.getSubject(), personToUpdate.getUniqueId(), newExam);
+                personToUpdate.getSubject(), personToUpdate.getUniqueId(), updatedExams);
 
         model.setPerson(personToUpdate, updatedPerson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, uniqueId));
@@ -81,6 +93,7 @@ public class AddExamCommand extends Command {
 
         AddExamCommand otherCommand = (AddExamCommand) other;
         return uniqueId == otherCommand.uniqueId
+                && examName.equals(otherCommand.examName)
                 && examDate.equals(otherCommand.examDate)
                 && examTime.equals(otherCommand.examTime);
     }

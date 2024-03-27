@@ -16,14 +16,16 @@ import java.util.Optional;
  */
 public class JsonAdaptedExam {
 
+    private final String name;
     private final Object date;
     private final Object time; // Optional time field
 
     /**
-     * Constructs a {@code JsonAdaptedExam} with the given {@code date} and {@code time}.
+     * Constructs a {@code JsonAdaptedExam} with the given {@code name}, {@code date}, and {@code time}.
      */
     @JsonCreator
-    public JsonAdaptedExam(Object date, Object time) {
+    public JsonAdaptedExam(String name, Object date, Object time) {
+        this.name = name;
         this.date = date;
         this.time = time;
     }
@@ -32,11 +34,16 @@ public class JsonAdaptedExam {
      * Converts a given {@code Exam} into this class for Jackson use.
      */
     public JsonAdaptedExam(Exam source) {
+        this.name = source.getExamName();
         this.date = source.getDate();
         this.time = source.getTime();
     }
 
     @JsonValue
+    public String getName() {
+        return name;
+    }
+
     public Object getDate() {
         return date;
     }
@@ -51,6 +58,9 @@ public class JsonAdaptedExam {
      * @throws IllegalValueException if there were any data constraints violated in the adapted exam.
      */
     public Exam toModelType() throws IllegalValueException {
+        // Parse name
+        String parsedName = name;
+
         // Parse date
         LocalDate parsedDate;
         try {
@@ -76,6 +86,6 @@ public class JsonAdaptedExam {
             throw new IllegalValueException("Invalid time format"); // Handle unexpected type for time
         }
 
-        return new Exam(parsedDate, parsedTime);
+        return new Exam(parsedName, parsedDate, parsedTime);
     }
 }

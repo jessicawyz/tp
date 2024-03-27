@@ -15,11 +15,14 @@ import java.util.Optional;
  */
 public class Exam {
 
+    public static final String MESSAGE_CONSTRAINTS_EXAM_NAME = "Exam name cannot be blank";
     public static final String MESSAGE_CONSTRAINTS_DATE = "Exam date must be a valid date in the format dd-MM-yyyy";
     public static final String MESSAGE_CONSTRAINTS_TIME = "Exam time must be a valid time in the format HH:mm";
 
     public final LocalDate date;
     public final Optional<LocalTime> time;
+
+    public final String name;
 
     /**
      * Constructs an {@code Exam} with optional time.
@@ -27,7 +30,8 @@ public class Exam {
      * @param date A valid exam date.
      * @param time A valid exam time (optional).
      */
-    public Exam(LocalDate date, Optional<LocalTime> time) {
+    public Exam(String name, LocalDate date, Optional<LocalTime> time) {
+        requireNonNull(name);
         requireNonNull(date);
         requireNonNull(time);
         checkArgument(isValidExamDate(date), MESSAGE_CONSTRAINTS_DATE);
@@ -35,8 +39,17 @@ public class Exam {
         if (time.isPresent()) {
             checkArgument(isValidExamTime(time.get()), MESSAGE_CONSTRAINTS_TIME);
         }
+        this.name = name;
         this.date = date;
         this.time = time;
+    }
+
+    /**
+     * Returns true if the given exam name is valid.
+     */
+    public static boolean isValidExamName(String name) {
+        // Exam name should not be null or empty
+        return name != null && !name.trim().isEmpty();
     }
 
     /**
@@ -96,9 +109,19 @@ public class Exam {
     public Object getDate() {
         return date;
     }
+    public LocalDate getExamDate() {
+        return date;
+    }
 
+    public Optional<LocalTime> getExamTime() {
+        return time;
+    }
     public Object getTime() {
         return time;
+    }
+
+    public String getExamName() {
+        return name;
     }
 }
 

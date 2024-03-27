@@ -206,16 +206,31 @@ public class ParserUtil {
     }
 
     /**
-     * Parses an {@code Exam} object from the input {@code date} and {@code time}.
+     * Parses a {@code String examName} into an {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code examName} is invalid.
+     */
+    public static String parseExamName(String examName) throws ParseException {
+        requireNonNull(examName);
+        String trimmedExamName = examName.trim();
+        if (!Exam.isValidExamName(trimmedExamName)) {
+            throw new ParseException(Exam.MESSAGE_CONSTRAINTS_EXAM_NAME);
+        }
+        return trimmedExamName;
+    }
+
+    /**
+     * Parses an {@code Exam} object from the input {@code name}, {@code date} and {@code time}.
      *
      * @throws ParseException if either the date or time is invalid.
      */
-    public static Exam parseExam(String date, String time) throws ParseException {
+    public static Exam parseExam(String name, String date, String time) throws ParseException {
         LocalDate parsedDate = parseDate(date);
         LocalTime parsedTime = null;
         if (time != null && !time.isEmpty()) {
             parsedTime = parseTime(time);
         }
-        return new Exam(parsedDate, Optional.ofNullable(parsedTime));
+        return new Exam(name, parsedDate, Optional.ofNullable(parsedTime));
     }
 }

@@ -20,18 +20,19 @@ public class AddExamCommandParser implements Parser<AddExamCommand> {
     @Override
     public AddExamCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_DATE, PREFIX_TIME);
+                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_EXAM_NAME, PREFIX_DATE, PREFIX_TIME);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_DATE) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExamCommand.MESSAGE_USAGE));
         }
 
         int uniqueId = ParserUtil.parseUniqueId(argMultimap.getValue(PREFIX_ID).get());
+        String examName = ParserUtil.parseExamName(argMultimap.getValue(PREFIX_EXAM_NAME).get());
         LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Optional<LocalTime> time = argMultimap.getValue(PREFIX_TIME).isPresent()
                 ? Optional.of(ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get())) : Optional.empty();
 
-        return new AddExamCommand(uniqueId, date, time);
+        return new AddExamCommand(uniqueId, examName, date, time);
     }
 
     /**
