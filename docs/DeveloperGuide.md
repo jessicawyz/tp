@@ -251,9 +251,20 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### View student feature
+The `view` command is a feature that allows the user to find details related to student(s) and retrieve their details.
+It consists of 3 variants
+1. `view -all` : shows all students currently recorded in TuteeTally.
+2. `view -name`: shows all students recorded with their name, or part of their name matching the input.
+2. `view -id` : finds (unique) student associated with the unique id.
+3. `view -stats` : opens a popup for summary statistics with regard to all students.
+#### Proposed Implementation
+The checking of which variant of `view` is triggered is detected based on the presence of prefixes in `ViewCommandParser#parse`.
 
-_{Explain here how the data archiving feature will be implemented}_
+If more than one valid prefix `-all`, `-name`, `-id`, or `stats` are present, `ViewCommandParser` creates `ViewCommands` in the following order of precedence:
+* `all` > `name` > `id` > `stats`
+
+
 
 
 --------------------------------------------------------------------------------------------------------------------
