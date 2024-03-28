@@ -23,6 +23,8 @@ public class Exam {
     public final Optional<LocalTime> time;
 
     public final String name;
+    public String studentName;
+    public Id uniqueId;
 
     /**
      * Constructs an {@code Exam} with optional time.
@@ -42,6 +44,25 @@ public class Exam {
         this.name = name;
         this.date = date;
         this.time = time;
+    }
+
+
+    public Exam(String name, LocalDate date, Optional<LocalTime> time, String studentName, Id uniqueId) {
+        requireNonNull(name);
+        requireNonNull(date);
+        requireNonNull(time);
+        requireNonNull(studentName);
+        requireNonNull(uniqueId);
+        checkArgument(isValidExamDate(date), MESSAGE_CONSTRAINTS_DATE);
+        // Check if time is present, and if present, validate it, else time can be null
+        if (time.isPresent()) {
+            checkArgument(isValidExamTime(time.get()), MESSAGE_CONSTRAINTS_TIME);
+        }
+        this.name = name;
+        this.date = date;
+        this.time = time;
+        this.studentName = studentName;
+        this.uniqueId = uniqueId;
     }
 
     /**
@@ -123,5 +144,8 @@ public class Exam {
     public String getExamName() {
         return name;
     }
+
+    public String getStudentName() {return studentName;}
+    public Id getUniqueId() {return uniqueId;}
 }
 

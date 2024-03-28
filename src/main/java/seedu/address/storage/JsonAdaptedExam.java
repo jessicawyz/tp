@@ -1,11 +1,13 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Exam;
+import seedu.address.model.person.Id;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -18,16 +20,24 @@ public class JsonAdaptedExam {
 
     private final String name;
     private final Object date;
-    private final Object time; // Optional time field
+    private final Object time;
+    private final String studentName; // Student name
+    private final int uniqueId; // Unique ID
 
     /**
      * Constructs a {@code JsonAdaptedExam} with the given {@code name}, {@code date}, and {@code time}.
      */
     @JsonCreator
-    public JsonAdaptedExam(String name, Object date, Object time) {
+    public JsonAdaptedExam(@JsonProperty("name") String name,
+                           @JsonProperty("date") Object date,
+                           @JsonProperty("time") Object time,
+                           @JsonProperty("studentName") String studentName,
+                           @JsonProperty("uniqueId") int uniqueId) {
         this.name = name;
         this.date = date;
         this.time = time;
+        this.studentName = studentName;
+        this.uniqueId = uniqueId;
     }
 
     /**
@@ -37,9 +47,10 @@ public class JsonAdaptedExam {
         this.name = source.getExamName();
         this.date = source.getDate();
         this.time = source.getTime();
+        this.studentName = source.getStudentName();
+        this.uniqueId = source.getUniqueId().getInt();
     }
 
-    @JsonValue
     public String getName() {
         return name;
     }
@@ -50,6 +61,14 @@ public class JsonAdaptedExam {
 
     public Object getTime() {
         return time;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public int getUniqueId() {
+        return uniqueId;
     }
 
     /**
@@ -71,21 +90,18 @@ public class JsonAdaptedExam {
 
         // Parse optional time
         Optional<LocalTime> parsedTime;
-        if (time instanceof Optional) {
-            Optional<?> optionalTime = (Optional<?>) time;
-            if (optionalTime.isPresent()) {
-                try {
-                    parsedTime = Optional.of(ParserUtil.parseTime(optionalTime.get().toString())); // Convert Object to String
-                } catch (ParseException e) {
-                    throw new IllegalValueException(e.getMessage());
-                }
-            } else {
-                parsedTime = Optional.empty();
-            }
-        } else {
-            throw new IllegalValueException("Invalid time format"); // Handle unexpected type for time
+        try {
+            parsedTime = ParserUtil.parseTime(time.toString()); // Convert Object to String
+        } catch (ParseException e) {
+            throw new IllegalValueException(e.getMessage());
         }
 
-        return new Exam(parsedName, parsedDate, parsedTime);
+        // Parse student name
+        String parsedStudentName = studentName;
+
+        // Parse unique ID
+        Id parsedUniqueId = ParserUtil.parseUniqueIdtoId(uniqueId);
+
+        return new Exam(parsedName, parsedDate, parsedTime, parsedStudentName, parsedUniqueId);
     }
 }

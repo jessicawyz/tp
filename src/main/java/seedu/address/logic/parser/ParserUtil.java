@@ -175,6 +175,10 @@ public class ParserUtil {
         }
     }
 
+    public static Id parseUniqueIdtoId(int uniqueId) throws ParseException {
+        return new Id(uniqueId);
+    }
+
     /**
      * Parses a {@code String date} into a {@code LocalDate}.
      *
@@ -191,15 +195,19 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String time} into a {@code LocalTime}.
+     * Parses a {@code String time} into a {@code Option<LocalTime>}.
      *
      * @throws ParseException if the given {@code time} is invalid.
      */
-    public static LocalTime parseTime(String time) throws ParseException {
-        requireNonNull(time);
+    public static Optional<LocalTime> parseTime(String time) throws ParseException {
+        if (time == null || time.isEmpty()) {
+            return Optional.empty();
+        }
+
         String trimmedTime = time.trim();
         try {
-            return LocalTime.parse(trimmedTime, DateTimeFormatter.ofPattern("HH:mm"));
+            LocalTime parsedTime = LocalTime.parse(trimmedTime, DateTimeFormatter.ofPattern("HH:mm"));
+            return Optional.of(parsedTime);
         } catch (DateTimeParseException e) {
             throw new ParseException("Invalid time format. Please enter the time in the format HH:mm.");
         }
@@ -225,12 +233,12 @@ public class ParserUtil {
      *
      * @throws ParseException if either the date or time is invalid.
      */
-    public static Exam parseExam(String name, String date, String time) throws ParseException {
+    /*public static Exam parseExam(String name, String date, String time) throws ParseException {
         LocalDate parsedDate = parseDate(date);
-        LocalTime parsedTime = null;
+        Optional<LocalTime> parsedTime;
         if (time != null && !time.isEmpty()) {
             parsedTime = parseTime(time);
         }
-        return new Exam(name, parsedDate, Optional.ofNullable(parsedTime));
-    }
+        return new Exam(name, parsedDate, parsedTime);
+    }*/
 }
