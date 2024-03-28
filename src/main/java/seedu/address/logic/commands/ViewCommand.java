@@ -67,7 +67,7 @@ public class ViewCommand extends Command {
             return new CommandResult(
                     String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
         } else {
-            return new CommandResult(MESSAGE_SUCCESS, false, false, true);
+            return new CommandResult(Messages.MESSAGE_INVALID_COMMAND_FORMAT); // throw a exception or smth - Marcus
         }
     }
 
