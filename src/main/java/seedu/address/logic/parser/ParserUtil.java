@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -13,10 +14,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
-
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -166,5 +167,32 @@ public class ParserUtil {
         } catch (NumberFormatException e) {
             throw new ParseException("Unique ID must be an integer.");
         }
+    }
+
+    /**
+     * Parses a {@code String payment} into a {@code double}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code payment} is invalid.
+     */
+    public static Payment parsePayment(Optional<String> payment) throws ParseException {
+        requireNonNull(payment);
+        if (payment.isEmpty()) {
+            return new Payment(0.0);
+        } else {
+            String trimmedPayment = payment.get().trim();
+            double paymentAmount;
+            try {
+                paymentAmount = Double.parseDouble(trimmedPayment);
+            } catch (NumberFormatException e) {
+                throw new ParseException("Payment amount must be a valid number.");
+            }
+
+            if (paymentAmount < 0) {
+                throw new ParseException("Payment amount must not be negative.");
+            }
+            return new Payment(paymentAmount);
+        }
+
     }
 }

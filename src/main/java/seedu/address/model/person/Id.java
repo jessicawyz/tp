@@ -45,10 +45,19 @@ public class Id {
     }
 
     @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other instanceof Id) {
             Id otherId = (Id) other;
-            return id.equals(otherId.id);
+            if (isValidId(otherId.id) && isValidId(id)) {
+                return Integer.parseInt(otherId.id) == Integer.parseInt(id);
+            } else {
+                return otherId.id.equals(id);
+            }
         } else {
             return false;
         }
