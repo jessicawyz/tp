@@ -158,6 +158,18 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### View all feature
+
+#### Implementation
+
+The mechanism is similar to list feature in `AddressBook`. parser checks for `-all` flag and execute showing the entire list of students.
+
+The feature can return user to the whole list after user uses view -id/view -name function to see specific student. User has to add in all people before being able to use view all.
+
+Below is a sequence diagram of how view all interacts with multiple classes. 
+
+<puml src="diagrams/ViewAllSequenceDiagram.puml" alt="ViewAllSequenceDiagram" />
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -250,6 +262,15 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
+
+**Aspect: How view all executes:**
+* **Alternative 1 (current choice):** In a view command class with view -id/-name.
+    * Pros: Clear execution line.
+    * Cons: Several if else checks, more prone to errors.
+
+* **Alternative 2:** Separate classes for each view command
+    * Pros: Easy to implement, less merge conflicts.
+    * Cons: Large number of files and parsers needed.
 
 ### \[Proposed\] Data archiving
 
