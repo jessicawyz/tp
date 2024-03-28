@@ -277,7 +277,7 @@ The `ViewCommandParser` uses ``ViewCommandParser#arePrefixesPresent`` to check f
 **Step 3:** All checks for prefixes return false, and falls into the default case. A ``CommandResult`` with the ``isStatsCommand`` set to true is returned
 <puml src="diagrams/ViewParserSequenceDiagram2.puml" />
 
-For the prefixes ``-name`` and ``-id``, a filtered list containing the search results will be returned. 
+For the prefixes ``-name`` and ``-id``, a filtered list containing the search results will be returned.
 Both variants utilize a similar logic to of passing in a ``prefix`` to ``model#updateFilteredPersonList`` to adjust the entries displayed by the GUI.
 <puml src="diagrams/ViewIdSequenceDiagram.puml" />
 
