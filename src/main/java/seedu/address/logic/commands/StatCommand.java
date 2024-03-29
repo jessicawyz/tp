@@ -18,7 +18,6 @@ public class StatCommand extends ViewCommand {
 
     public static final String MESSAGE_SUCCESS = "Viewing the Summary stats of students";
 
-    
 
     /**
      * Constructor for a non search based view command (stats or all)
@@ -29,7 +28,7 @@ public class StatCommand extends ViewCommand {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-            return new CommandResult(MESSAGE_SUCCESS, false, false, true);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, true);
     }
 
 
