@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.StatCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Id;
@@ -66,7 +67,7 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         if (arePrefixesPresent(argMultimap, PREFIX_ALL)) {
             return new ListCommand();
         } else if (arePrefixesPresent(argMultimap, PREFIX_STATS) || arePrefixesPresent(argMultimap, PREFIX_STATSLONG)) {
-            return new ViewCommand();
+            return new StatCommand();
         }
         Name name = null;
         try {
