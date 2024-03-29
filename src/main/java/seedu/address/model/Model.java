@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.AllExamsList;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Person;
 
 /**
@@ -99,5 +101,7 @@ public interface Model {
      * Returns the person with the given unique ID.
      * Returns null if the person does not exist.
      */
-    Person getPersonByUniqueId(int uniqueId);
+    Person getPersonByUniqueId(String uniqueId);
+
+    public AllExamsList getAllExamList();
 }

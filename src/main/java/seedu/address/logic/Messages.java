@@ -18,7 +18,8 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
-    public static final String MESSAGE_PERSON_NOT_FOUND = "This person does not exist in the address book";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found";
+    public static final String MESSAGE_EXAM_NOT_FOUND = "Exam to delete cannot be found";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -46,7 +47,9 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Subjects:")
                 .append(person.getSubject())
-                .append("; Tags: ");
+                .append("; Tags: ")
+                .append("; Payment: ")
+                .append(person.getPayment());
         person.getTags().forEach(builder::append);
         return builder.toString();
     }

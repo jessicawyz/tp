@@ -16,8 +16,22 @@ public class AllExamsList {
     }
 
     public static void addExamToList(Exam exam) {
+        if (exam == null) {
+            System.out.println("exam is null before adding to allexamlist");
+        }
         exams.add(exam);
         getSortedByDate(exams);
+    }
+
+    public static void deleteExamFromList(Exam examToDelete) {
+        Iterator<Exam> iterator = exams.iterator();
+        while (iterator.hasNext()) {
+            Exam exam = iterator.next();
+            if (exam.equals(examToDelete)) {
+                iterator.remove();
+                break;
+            }
+        }
     }
 
     public static void getSortedByDate(List<Exam> exams) {
@@ -48,6 +62,5 @@ public class AllExamsList {
         };
 
         Collections.sort(exams, comparator); // Sort the exams list using the comparator
-        System.out.println(exams);
     }
 }

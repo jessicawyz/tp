@@ -89,9 +89,9 @@ public class Exam {
             return false; // Null time is not valid
         }
         // Check if the time format is in HHmm
-        String timeString = test.format(DateTimeFormatter.ofPattern("HHmm"));
+        String timeString = test.format(DateTimeFormatter.ofPattern("HH:mm"));
         try {
-            LocalTime parsedTime = LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HHmm"));
+            LocalTime parsedTime = LocalTime.parse(timeString, DateTimeFormatter.ofPattern("HH:mm"));
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -101,7 +101,7 @@ public class Exam {
     @Override
     public String toString() {
         // Format date and time for display
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Date: ").append(date.format(dateFormatter));
         time.ifPresent(t -> stringBuilder.append(", Time: ").append(t.format(DateTimeFormatter.ofPattern("HH:mm"))));

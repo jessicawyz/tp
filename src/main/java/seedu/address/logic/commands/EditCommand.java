@@ -22,7 +22,15 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
+import seedu.address.model.person.Exam;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -96,7 +104,8 @@ public class EditCommand extends Command {
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code editPersonDescriptor}. Note: This method does not modify payment information,
+     * as payments are handled through dedicated payment commands.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
@@ -109,9 +118,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Id uniqueID = editPersonDescriptor.getId().orElse(personToEdit.getUniqueId());
         Set<Exam> updatedExams = editPersonDescriptor.getExams().orElse(personToEdit.getExams());
+        Payment payment = personToEdit.getPayment(); // Payment is not editable
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedTags, updatedSubjects, uniqueID, updatedExams);
+                updatedAddress, updatedTags, updatedSubjects, uniqueID, updatedExams, payment);
     }
 
     @Override
@@ -140,7 +150,8 @@ public class EditCommand extends Command {
 
     /**
      * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * corresponding field value of the person, except for the payment information, which is immutable
+     * through this command.
      */
     public static class EditPersonDescriptor {
         private Name name;
@@ -222,6 +233,8 @@ public class EditCommand extends Command {
         public Optional<Id> getId() {
             return Optional.ofNullable(uniqueID);
         }
+
+
 
         /**
          * Sets {@code tags} to this object's {@code tags}.

@@ -30,13 +30,15 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final Subject subject;
     private final Set<Exam> exams;
+    private final Payment payment;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Subject subject,
-                  Id uniqueId, Set<Exam> exams) {
-        requireAllNonNull(name, phone, email, address, tags, subject);
+                  Id uniqueId, Set<Exam> exams, Payment payment) {
+        requireAllNonNull(name, phone, email, address, tags, subject, payment);
+
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -45,13 +47,16 @@ public class Person {
         this.subject = subject;
         this.uniqueId = uniqueId;
         this.exams = exams == null ? new HashSet<>() : new HashSet<>(exams);
+        this.payment = payment;
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Subject subject, Set<Exam> exams) {
-        requireAllNonNull(name, phone, email, address, tags, subject, exams);
+
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Set<Tag> tags, Subject subject, Set<Exam> exams, Payment payment) {
+        requireAllNonNull(name, phone, email, address, tags, subject);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -59,6 +64,7 @@ public class Person {
         this.tags.addAll(tags);
         this.subject = subject;
         this.exams = exams == null ? new HashSet<>() : new HashSet<>(exams);
+        this.payment = payment;
     }
 
     public Name getName() {
@@ -79,6 +85,10 @@ public class Person {
 
     public Subject getSubject() {
         return subject;
+    }
+
+    public Payment getPayment() {
+        return payment;
     }
 
     /**
@@ -138,13 +148,14 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && subject.equals(otherPerson.subject)
                 && tags.equals(otherPerson.tags)
-                && exams.equals(otherPerson.exams);
+                && exams.equals(otherPerson.exams)
+                && payment.equals(otherPerson.payment);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, uniqueId, exams);
+        return Objects.hash(name, phone, email, address, tags, uniqueId, exams, payment);
     }
 
     @Override
@@ -157,6 +168,7 @@ public class Person {
                 .add("subject", subject)
                 .add("tags", tags)
                 .add("exams", exams)
+                .add("payment", payment)
                 .toString();
     }
 

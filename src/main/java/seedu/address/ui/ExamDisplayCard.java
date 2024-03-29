@@ -31,6 +31,7 @@ public class ExamDisplayCard extends UiPart<Region> {
 
     public ExamDisplayCard(Exam exam) {
         super(FXML);
+        System.out.println("this is exam display card");
         this.exam = exam;
         personNameLabel.setText(exam.getStudentName());
         personIdLabel.setText("#" + exam.getUniqueId().toString());

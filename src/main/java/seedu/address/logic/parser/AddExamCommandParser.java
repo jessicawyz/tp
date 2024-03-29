@@ -26,10 +26,9 @@ public class AddExamCommandParser implements Parser<AddExamCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExamCommand.MESSAGE_USAGE));
         }
 
-        int uniqueId = ParserUtil.parseUniqueId(argMultimap.getValue(PREFIX_ID).get());
+        String uniqueId = argMultimap.getValue(PREFIX_ID).get();
         String examName = ParserUtil.parseExamName(argMultimap.getValue(PREFIX_EXAM_NAME).get());
         LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        /*Optional<LocalTime> time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());*/
         Optional<String> timeValue = argMultimap.getValue(PREFIX_TIME);
         Optional<LocalTime> time;
         if (timeValue.isPresent()) {

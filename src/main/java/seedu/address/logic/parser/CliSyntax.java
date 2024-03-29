@@ -16,5 +16,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_EXAM_NAME = new Prefix("-exam");
     public static final Prefix PREFIX_DATE = new Prefix("-date");
     public static final Prefix PREFIX_TIME = new Prefix("-time");
-
+    public static final Prefix PREFIX_PAYMENT = new Prefix("-payment");
 }
+

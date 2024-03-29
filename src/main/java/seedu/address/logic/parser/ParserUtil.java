@@ -16,6 +16,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Exam;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
@@ -23,7 +24,6 @@ import seedu.address.model.tag.Tag;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -188,9 +188,9 @@ public class ParserUtil {
         requireNonNull(date);
         String trimmedDate = date.trim();
         try {
-            return LocalDate.parse(trimmedDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+            return LocalDate.parse(trimmedDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         } catch (DateTimeParseException e) {
-            throw new ParseException("Invalid date format. Please enter the date in the format dd-MM-yyyy.");
+            throw new ParseException("Invalid date format. Please enter the date in the format yyyy-MM-dd.");
         }
     }
 
@@ -213,6 +213,21 @@ public class ParserUtil {
         }
     }
 
+    public static Optional<LocalTime> parseTimeFromStorage(String time) throws ParseException {
+        if (time.equals("null") || time.isEmpty()) {
+            return Optional.empty();
+        }
+
+        String trimmedTime = time.trim();
+        try {
+            LocalTime parsedTime = LocalTime.parse(trimmedTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
+            parsedTime = LocalTime.parse(parsedTime.format(DateTimeFormatter.ofPattern("HH:mm")), DateTimeFormatter.ofPattern("HH:mm"));
+            return Optional.of(parsedTime);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Hi, Invalid time format. Please enter the time in the format HH:mm:ss.");
+        }
+    }
+
     /**
      * Parses a {@code String examName} into an {@code String}.
      * Leading and trailing whitespaces will be trimmed.
@@ -229,16 +244,29 @@ public class ParserUtil {
     }
 
     /**
-     * Parses an {@code Exam} object from the input {@code name}, {@code date} and {@code time}.
+     * Parses a {@code String payment} into a {@code double}.
+     * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if either the date or time is invalid.
+     * @throws ParseException if the given {@code payment} is invalid.
      */
-    /*public static Exam parseExam(String name, String date, String time) throws ParseException {
-        LocalDate parsedDate = parseDate(date);
-        Optional<LocalTime> parsedTime;
-        if (time != null && !time.isEmpty()) {
-            parsedTime = parseTime(time);
+    public static Payment parsePayment(Optional<String> payment) throws ParseException {
+        requireNonNull(payment);
+        if (payment.isEmpty()) {
+            return new Payment(0.0);
+        } else {
+            String trimmedPayment = payment.get().trim();
+            double paymentAmount;
+            try {
+                paymentAmount = Double.parseDouble(trimmedPayment);
+            } catch (NumberFormatException e) {
+                throw new ParseException("Payment amount must be a valid number.");
+            }
+
+            if (paymentAmount < 0) {
+                throw new ParseException("Payment amount must not be negative.");
+            }
+            return new Payment(paymentAmount);
         }
-        return new Exam(name, parsedDate, parsedTime);
-    }*/
+
+    }
 }

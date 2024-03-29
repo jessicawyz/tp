@@ -1,15 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.AllExamsList;
 import seedu.address.model.person.Exam;
-import seedu.address.model.person.Id;
 import seedu.address.model.person.Person;
 
 import java.time.LocalDate;
@@ -19,12 +20,12 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * Adds an exam to a person's record.
+ * Deletes an exam from a person's record.
  */
-public class AddExamCommand extends Command {
-    public static final String COMMAND_WORD = "addexam";
+public class DeleteExamCommand extends Command {
+    public static final String COMMAND_WORD = "deleteexam";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an exam to a person's record. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an exam from a person's record. "
             + "Parameters: "
             + PREFIX_ID + "ID "
             + PREFIX_EXAM_NAME + "EXAM_NAME "
@@ -36,7 +37,7 @@ public class AddExamCommand extends Command {
             + PREFIX_DATE + "2024-04-10 "
             + PREFIX_TIME + "14:00";
 
-    public static final String MESSAGE_SUCCESS = "Added exam to person with ID: %1$s";
+    public static final String MESSAGE_SUCCESS = "Deleted exam from person with ID: %1$s";
 
     private final String uniqueId;
     private final LocalDate examDate;
@@ -44,9 +45,9 @@ public class AddExamCommand extends Command {
     private final String examName;
 
     /**
-     * Creates an AddExamCommand to add the specified {@code Exam} to the person with the specified {@code Id}.
+     * Creates a DeleteExamCommand to delete the specified {@code Exam} from the person with the specified {@code Id}.
      */
-    public AddExamCommand(String uniqueId, String examName, LocalDate examDate, Optional<LocalTime> examTime) {
+    public DeleteExamCommand(String uniqueId, String examName, LocalDate examDate, Optional<LocalTime> examTime) {
         requireNonNull(uniqueId);
         requireNonNull(examName);
         requireNonNull(examDate);
@@ -71,12 +72,24 @@ public class AddExamCommand extends Command {
             updatedExams.addAll(personToUpdate.getExams());
         }
 
-        String personName = personToUpdate.getName().fullName;
-        Id personUniqueId = personToUpdate.getUniqueId();
-        Exam newExam = new Exam(examName, examDate, examTime, personName, personUniqueId);
+        // Find the exam to delete
+        Exam examToDelete = null;
+        for (Exam exam : updatedExams) {
+            if (exam.getExamName().equals(examName)
+                    && exam.getExamDate().equals(examDate)
+                    && exam.getExamTime().equals(examTime)) {
+                examToDelete = exam;
+                break;
+            }
+        }
 
-        updatedExams.add(newExam);
-        AllExamsList.addExamToList(newExam);
+        // If the exam exists, remove it
+        if (examToDelete != null) {
+            updatedExams.remove(examToDelete);
+            AllExamsList.deleteExamFromList(examToDelete);
+        } else {
+            throw new CommandException(Messages.MESSAGE_EXAM_NOT_FOUND);
+        }
 
         Person updatedPerson = new Person(personToUpdate.getName(), personToUpdate.getPhone(),
                 personToUpdate.getEmail(), personToUpdate.getAddress(), personToUpdate.getTags(),
@@ -92,14 +105,15 @@ public class AddExamCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof AddExamCommand)) {
+        if (!(other instanceof DeleteExamCommand)) {
             return false;
         }
 
-        AddExamCommand otherCommand = (AddExamCommand) other;
+        DeleteExamCommand otherCommand = (DeleteExamCommand) other;
         return uniqueId == otherCommand.uniqueId
                 && examName.equals(otherCommand.examName)
                 && examDate.equals(otherCommand.examDate)
                 && examTime.equals(otherCommand.examTime);
     }
 }
+
