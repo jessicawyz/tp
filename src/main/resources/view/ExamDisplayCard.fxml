@@ -38,4 +38,10 @@
             </HBox>
         </VBox>
     </GridPane>
+    <VBox alignment="CENTER_RIGHT" minHeight="105" style="-fx-background-color: #0099cc;">
+        <padding>
+            <Insets top="5" right="15" bottom="5" left="5" />
+        </padding>
+        <Label fx:id="daysUntilLabel" styleClass="cell_big_label" />
+    </VBox>
 </HBox>

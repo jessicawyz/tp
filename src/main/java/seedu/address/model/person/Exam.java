@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Represents a Person's exam details in the address book.
@@ -96,6 +97,11 @@ public class Exam {
         } catch (DateTimeParseException e) {
             return false;
         }
+    }
+
+    public long getDaysFromCurrentDate() {
+        LocalDate currentDate = LocalDate.now();
+        return Math.abs(ChronoUnit.DAYS.between(currentDate, date));
     }
 
     @Override

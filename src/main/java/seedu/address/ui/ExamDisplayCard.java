@@ -27,6 +27,9 @@ public class ExamDisplayCard extends UiPart<Region> {
 
     @FXML
     private Label examTimeLabel;
+
+    @FXML
+    private Label daysUntilLabel;
     private final Exam exam;
 
     public ExamDisplayCard(Exam exam) {
@@ -38,5 +41,6 @@ public class ExamDisplayCard extends UiPart<Region> {
         examNameLabel.setText(exam.getExamName());
         examDateLabel.setText(exam.getDate().toString());
         exam.getExamTime().ifPresent(time -> examTimeLabel.setText(time.toString()));
+        daysUntilLabel.setText(String.valueOf(exam.getDaysFromCurrentDate()) + " Days from now");
     }
 }
