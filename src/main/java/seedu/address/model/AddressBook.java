@@ -18,7 +18,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final AllExamsList allExamsList;
+    private final AllExamsList allExamsList = new AllExamsList();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -31,9 +31,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
     }
 
-    {
-        allExamsList = new AllExamsList();
-    }
 
     public AddressBook() {}
 
@@ -83,8 +80,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public void addExam(Exam e) {
+        System.out.println("!addressbook add exam before: " + AllExamsList.exams.size());
         AllExamsList.addExamToList(e);
-        System.out.println("addressbook add exam: " + AllExamsList.exams.size());
+        System.out.println("!addressbook add exam: " + AllExamsList.exams.size());
     }
 
     /**
@@ -120,8 +118,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
-    public AllExamsList getAllExamsList() {
-        return allExamsList;
+    public ObservableList<Exam> getAllExamsList() {
+        System.out.println("in addressbook getall examslist: ALL: " + AllExamsList.exams.size());
+        System.out.println("in addressbook getall examslist: all: " + allExamsList.exams.size());
+        return allExamsList.exams;
     }
 
     @Override

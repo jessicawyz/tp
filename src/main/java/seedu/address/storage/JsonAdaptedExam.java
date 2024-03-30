@@ -109,7 +109,6 @@ public class JsonAdaptedExam {
         System.out.println("newExam: " + newExam);
         System.out.println("newExam: " + parsedName);
 
-        //AllExamsList.addExamToList(newExam);
         return newExam;
     }
 

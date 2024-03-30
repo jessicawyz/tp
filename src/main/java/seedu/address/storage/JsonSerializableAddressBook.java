@@ -57,7 +57,7 @@ class JsonSerializableAddressBook {
             addressBook.addPerson(person);
             Set<Exam> exams = person.getExams();
             System.out.println("size of exams we got from person: " + exams.size());
-            //printed 2 here which is correct
+            //correct number here
             for (Exam exam : exams) {
                 addressBook.addExam(exam);
             }

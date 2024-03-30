@@ -188,8 +188,8 @@ public class ModelManager implements Model {
 
 
     @Override
-    public AllExamsList getAllExamList() {
-        System.out.println("in model, we print exmas: " + addressBook.getAllExamsList().exams.size());
+    public ObservableList<Exam> getAllExamList() {
+        System.out.println("in model, we print exams: " + addressBook.getAllExamsList().size());
         //got 0 here which is not right
         return addressBook.getAllExamsList();
     }

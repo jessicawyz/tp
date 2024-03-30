@@ -103,5 +103,5 @@ public interface Model {
      */
     Person getPersonByUniqueId(String uniqueId);
 
-    public AllExamsList getAllExamList();
+    public ObservableList<Exam> getAllExamList();
 }
