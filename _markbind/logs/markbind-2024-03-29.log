@@ -1,0 +1,19 @@
+2024-03-28T19:26:52.377Z - error: No config file found in parent directories of C:\CodeStuff\cs2103t\tp
+2024-03-28T19:26:52.387Z - error: uncaughtException: The "path" argument must be of type string. Received undefined date=Fri Mar 29 2024 03:26:52 GMT+0800 (Singapore Standard Time), pid=412, uid=null, gid=null, cwd=C:\CodeStuff\cs2103t\tp, execPath=C:\Program Files\nodejs\node.exe, version=v18.13.0, argv=[C:\Program Files\nodejs\node.exe, C:\Users\liuyi\AppData\Roaming\npm\node_modules\markbind-cli\index.js, serve], rss=100614144, heapTotal=66772992, heapUsed=48349744, external=1929241, arrayBuffers=995243, loadavg=[0, 0, 0], uptime=42482.468
+TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
+    at new NodeError (node:internal/errors:400:5)
+    at validateString (node:internal/validators:163:11)
+    at Object.join (node:path:429:7)
+    at serve (C:\Users\liuyi\AppData\Roaming\npm\node_modules\markbind-cli\src\cmd\serve.js:57:27)
+    at Command.<anonymous> (C:\Users\liuyi\AppData\Roaming\npm\node_modules\markbind-cli\index.js:62:5)
+    at Command.listener [as _actionHandler] (C:\Users\liuyi\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\commander\lib\command.js:488:17)
+    at C:\Users\liuyi\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\commander\lib\command.js:1227:65
+    at Command._chainOrCall (C:\Users\liuyi\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\commander\lib\command.js:1144:12)
+    at Command._parseCommand (C:\Users\liuyi\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\commander\lib\command.js:1227:27)
+    at Command._dispatchSubcommand (C:\Users\liuyi\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\commander\lib\command.js:1050:25)
+    at Command._parseCommand (C:\Users\liuyi\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\commander\lib\command.js:1193:19)
+    at Command.parse (C:\Users\liuyi\AppData\Roaming\npm\node_modules\markbind-cli\node_modules\commander\lib\command.js:897:10)
+    at Object.<anonymous> (C:\Users\liuyi\AppData\Roaming\npm\node_modules\markbind-cli\index.js:87:9)
+    at Module._compile (node:internal/modules/cjs/loader:1218:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1272:10)
+    at Module.load (node:internal/modules/cjs/loader:1081:32)

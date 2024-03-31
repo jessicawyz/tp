@@ -24,6 +24,7 @@ checkstyle {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+    jvmArgs '-ea'
 }
 
 task coverage(type: JacocoReport) {
@@ -67,7 +68,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'tuteetally.jar'
 }
 
 defaultTasks 'clean', 'test'

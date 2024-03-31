@@ -17,5 +17,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_DATE = new Prefix("-date");
     public static final Prefix PREFIX_TIME = new Prefix("-time");
     public static final Prefix PREFIX_PAYMENT = new Prefix("-payment");
+    public static final Prefix PREFIX_STATS = new Prefix("-stats");
+    public static final Prefix PREFIX_STATSLONG = new Prefix("-statistics");
+    public static final Prefix PREFIX_ALL = new Prefix("-all");
+
 }
 
