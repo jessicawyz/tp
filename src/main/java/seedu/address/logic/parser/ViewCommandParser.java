@@ -2,8 +2,11 @@ package seedu.address.logic.parser;
 
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATSLONG;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -21,32 +24,6 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
  * Parses input arguments and creates a new ListCommand or ViewCommand object depending on the arguments.
  */
 public class ViewCommandParser implements Parser<ViewCommand> {
-
-    /**
-     * Parses the given {@code String} of arguments in the context of the ViewCommand
-     * and returns a ViewCommand object for execution.
-     *
-     * @throws ParseException if the user input does not conform the expected format
-     */
-    /*
-    public Command parse(String arguments) throws ParseException {
-        if (arguments.trim().equals("-all")) {
-            return new ListCommand();
-        } else if (arguments.trim().equals("-statistics")) {
-            return new ViewCommand();
-        } else if (arguments.trim().equals("-stats")) {
-            return new ViewCommand();
-        } else {
-            throw new ParseException("Invalid arguments for 'view' command");
-        }
-    }*/
-    // TEMPORARY - Move to CliSyntax
-    public static final Prefix PREFIX_STATS = new Prefix("-stats");
-    public static final Prefix PREFIX_STATSLONG = new Prefix("-statistics");
-    public static final Prefix PREFIX_ALL = new Prefix("-all");
-
-    // End of temporary
-
     /**
      * Parses view command arguments and returns the new command as a new view command object.
      * @param args Input arguments.
@@ -67,7 +44,6 @@ public class ViewCommandParser implements Parser<ViewCommand> {
 
         String trimmedArgs = args.trim();
         Set<Prefix> usedPrefixes = argMultimap.getAllPrefixes();
-        System.out.println(usedPrefixes.toString());
         // Check size of prefix set is not more than 2 (1 for preamble, 1 for prefix)
         if (usedPrefixes.size() > 2) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_MULTIPREFIX));
