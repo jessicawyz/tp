@@ -80,7 +80,7 @@ public class AddExamCommand extends Command {
 
         Person updatedPerson = new Person(personToUpdate.getName(), personToUpdate.getPhone(),
                 personToUpdate.getEmail(), personToUpdate.getAddress(), personToUpdate.getTags(),
-                personToUpdate.getSubject(), personToUpdate.getUniqueId(), updatedExams, personToUpdate.getPayment());
+                personToUpdate.getSubject(), personToUpdate.getUniqueId(), updatedExams, personToUpdate.getPayment(), personToUpdate.getLogs());
 
         model.setPerson(personToUpdate, updatedPerson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, uniqueId));

@@ -109,6 +109,7 @@ public class Person {
     /** Returns the exams of the person */
     public Set<Exam> getExams() {
         return Collections.unmodifiableSet(exams);
+    }
 
     public LogList getLogs() {
         return logs;

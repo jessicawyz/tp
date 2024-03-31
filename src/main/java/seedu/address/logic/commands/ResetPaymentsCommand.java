@@ -45,7 +45,7 @@ public class ResetPaymentsCommand extends Command {
         Payment newPayment = new Payment(0);
         Person updatedPerson = new Person(personToUpdate.getName(), personToUpdate.getPhone(),
                 personToUpdate.getEmail(), personToUpdate.getAddress(), personToUpdate.getTags(),
-                personToUpdate.getSubject(), personToUpdate.getUniqueId(), personToUpdate.getExams(), newPayment);
+                personToUpdate.getSubject(), personToUpdate.getUniqueId(), personToUpdate.getExams(), newPayment, personToUpdate.getLogs());
 
         model.setPerson(personToUpdate, updatedPerson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, uniqueId));

@@ -105,8 +105,6 @@ public interface Model {
     Person getPersonByUniqueId(String uniqueId);
 
     public ObservableList<Exam> getAllExamList();
-  
-    Person getPersonByUniqueId(int uniqueId);
 
     void addLog(Person person, Log log);
 }

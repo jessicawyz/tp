@@ -10,16 +10,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Exam;
-import seedu.address.model.person.Id;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Payment;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Subject;
-import seedu.address.model.person.Log;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,12 +21,9 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
-                    getTagSet("friends"), 
-                       new Subject("test"), 
-                       new Id("000000"), 
-                       getSampleExams(), 
-                       new Payment(0.0)),
-                       new LogList(new ArrayList<>()))
+                    getTagSet("friends"), new Subject("test"),
+                    new Id("000000"), getSampleExams(),
+                    new Payment(0.0), new LogList(new ArrayList<>()))
         };
     }
 

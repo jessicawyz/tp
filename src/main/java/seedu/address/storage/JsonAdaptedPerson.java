@@ -11,16 +11,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Exam;
-import seedu.address.model.person.Id;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Payment;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Subject;
-import seedu.address.model.person.Log;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -50,7 +41,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("subject") String subject,
-                             @JsonProperty("uniqueId") String uniqueId, @JsonProperty("exams") List<JsonAdaptedExam> exams, 
+                             @JsonProperty("uniqueId") String uniqueId, @JsonProperty("exams") List<JsonAdaptedExam> exams,
                              @JsonProperty("payment") String payment, @JsonProperty("logs") List<JsonAdaptedLog> logs) {
         this.name = name;
         this.phone = phone;
@@ -65,6 +56,7 @@ class JsonAdaptedPerson {
 
         if (exams != null) {
             this.exams.addAll(exams);
+        }
 
         if (logs != null) {
             this.logs.addAll(logs);
@@ -108,7 +100,8 @@ class JsonAdaptedPerson {
         final List<Exam> personExams = new ArrayList<>();
         for (JsonAdaptedExam exam : exams) {
             personExams.add(exam.toModelType());
-          
+        }
+
         final List<Log> personLogs = new ArrayList<>();
         for (JsonAdaptedLog log : logs) {
             personLogs.add(log.toModelType());
@@ -156,7 +149,6 @@ class JsonAdaptedPerson {
         if (payment == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Payment.class.getSimpleName()));
         }
-
         final Id modelId = new Id(uniqueId);
         final Subject modelSubject = new Subject(subject);
         final Address modelAddress = new Address(address);
@@ -168,5 +160,4 @@ class JsonAdaptedPerson {
         return new Person(modelName, modelPhone, modelEmail, modelAddress,
                 modelTags, modelSubject, modelId, modelExams, modelPayment, modelLogs);
     }
-
 }

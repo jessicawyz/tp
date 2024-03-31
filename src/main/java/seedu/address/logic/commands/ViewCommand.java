@@ -66,7 +66,7 @@ public class ViewCommand extends Command {
             return new CommandResult(
                     String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
                     null,
-                    false, false, false, true);
+                    false, false, false, false);
         } else if (idPredicate != null) {
             model.updateFilteredPersonList(idPredicate);
             Person person = model.getFilteredPersonList().get(0);
