@@ -38,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     private SummaryStatsWindow summaryStatsWindow;
     private ExamDisplayCard examDisplayCard;
     private ExamListPanel examListPanel;
+    private StudentDetailsWindow studentDetailsWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -77,6 +78,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         summaryStatsWindow = new SummaryStatsWindow(logic);
+        studentDetailsWindow = new StudentDetailsWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -174,6 +176,15 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    @FXML
+    public void handleStudentDetails(String content) {
+        if (!studentDetailsWindow.isShowing()) {
+            studentDetailsWindow.show(content);
+        } else {
+            studentDetailsWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -215,6 +226,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowSummaryStats()) {
                 handleSummaryStats();
+            }
+
+            if (commandResult.isShowStudentDetails()) {
+                handleStudentDetails(commandResult.getPopupDisplay());
             }
 
             return commandResult;

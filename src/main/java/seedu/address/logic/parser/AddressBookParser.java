@@ -57,6 +57,9 @@ public class AddressBookParser {
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
 
+        case LogCommand.COMMAND_WORD:
+            return new LogCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 

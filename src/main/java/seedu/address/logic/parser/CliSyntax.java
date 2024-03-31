@@ -20,6 +20,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_STATS = new Prefix("-stats");
     public static final Prefix PREFIX_STATSLONG = new Prefix("-statistics");
     public static final Prefix PREFIX_ALL = new Prefix("-all");
+    public static final Prefix PREFIX_STYLE = new Prefix("-style");
+    public static final Prefix PREFIX_HOURS = new Prefix("-hours");
+    public static final Prefix PREFIX_NOTES = new Prefix("-notes");
+    public static final Prefix PREFIX_CONTENT = new Prefix("-content");
 
 }
 

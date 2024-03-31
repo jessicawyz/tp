@@ -2,10 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -31,14 +28,14 @@ public class Person {
     private final Subject subject;
     private final Set<Exam> exams;
     private final Payment payment;
+    private final LogList logs;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Subject subject,
-                  Id uniqueId, Set<Exam> exams, Payment payment) {
+                  Id uniqueId, Set<Exam> exams, Payment payment, LogList logs) {
         requireAllNonNull(name, phone, email, address, tags, subject, payment);
-
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,14 +45,14 @@ public class Person {
         this.uniqueId = uniqueId;
         this.exams = exams == null ? new HashSet<>() : new HashSet<>(exams);
         this.payment = payment;
+        this.logs = logs;
     }
 
     /**
      * Every field must be present and not null.
      */
-
     public Person(Name name, Phone phone, Email email, Address address,
-                  Set<Tag> tags, Subject subject, Set<Exam> exams, Payment payment) {
+                  Set<Tag> tags, Subject subject, Set<Exam> exams, Payment payment, LogList logs) {
         requireAllNonNull(name, phone, email, address, tags, subject);
         this.name = name;
         this.phone = phone;
@@ -65,6 +62,7 @@ public class Person {
         this.subject = subject;
         this.exams = exams == null ? new HashSet<>() : new HashSet<>(exams);
         this.payment = payment;
+        this.logs = logs;
     }
 
     public Name getName() {
@@ -111,6 +109,13 @@ public class Person {
     /** Returns the exams of the person */
     public Set<Exam> getExams() {
         return Collections.unmodifiableSet(exams);
+
+    public LogList getLogs() {
+        return logs;
+    }
+
+    public void addLog(Log entry) {
+        logs.addEntry(entry);
     }
 
 

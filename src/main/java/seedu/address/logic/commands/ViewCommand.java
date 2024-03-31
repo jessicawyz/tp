@@ -7,6 +7,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.IsSameIdPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -63,13 +64,18 @@ public class ViewCommand extends Command {
         if (namePredicate != null) {
             model.updateFilteredPersonList(namePredicate);
             return new CommandResult(
-                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                    null,
+                    false, false, false, true);
         } else if (idPredicate != null) {
             model.updateFilteredPersonList(idPredicate);
+            Person person = model.getFilteredPersonList().get(0);
             return new CommandResult(
-                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                    person.getLogs().toString(),
+                    false, false, false, true);
         } else {
-            return new CommandResult(Messages.MESSAGE_INVALID_COMMAND_FORMAT); // throw a exception or smth - Marcus
+            return new CommandResult(MESSAGE_SUCCESS, null, false, false, true, false);
         }
     }
 

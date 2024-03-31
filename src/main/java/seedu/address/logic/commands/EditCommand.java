@@ -9,12 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -31,6 +26,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.Exam;
+import seedu.address.model.person.Log;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -121,7 +117,7 @@ public class EditCommand extends Command {
         Payment payment = personToEdit.getPayment(); // Payment is not editable
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedTags, updatedSubjects, uniqueID, updatedExams, payment);
+                updatedAddress, updatedTags, updatedSubjects, uniqueID, updatedExams, payment, personToEdit.getLogs());
     }
 
     @Override

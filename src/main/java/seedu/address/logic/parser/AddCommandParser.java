@@ -9,6 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -21,6 +23,7 @@ import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
+import seedu.address.model.person.Log;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -53,8 +56,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Payment payment = ParserUtil.parsePayment(argMultimap.getValue(PREFIX_PAYMENT));
+        List<Log> logList = new ArrayList<Log>();
 
-        Person person = new Person(name, phone, email, address, tagList, subject, null, null, payment);
+        Person person = new Person(name, phone, email, address, tagList, subject, null, null, payment, new LogList(logList));
 
         return new AddCommand(person);
     }
