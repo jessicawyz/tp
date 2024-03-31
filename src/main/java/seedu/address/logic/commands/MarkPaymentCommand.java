@@ -52,7 +52,7 @@ public class MarkPaymentCommand extends Command {
         Payment newPayment = new Payment(Math.max(0, personToUpdate.getPayment().getAmount() - amount));
         Person updatedPerson = new Person(personToUpdate.getName(), personToUpdate.getPhone(),
                 personToUpdate.getEmail(), personToUpdate.getAddress(), personToUpdate.getTags(),
-                personToUpdate.getSubject(), personToUpdate.getUniqueId(), personToUpdate.getExams(), newPayment);
+                personToUpdate.getSubject(), personToUpdate.getUniqueId(), personToUpdate.getExams(), newPayment, personToUpdate.getLogs());
 
         model.setPerson(personToUpdate, updatedPerson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, uniqueId, amount));

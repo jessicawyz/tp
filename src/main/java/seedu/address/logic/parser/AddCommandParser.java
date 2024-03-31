@@ -24,6 +24,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.person.Log;
+import seedu.address.model.person.LogList;
 import seedu.address.model.tag.Tag;
 
 /**
