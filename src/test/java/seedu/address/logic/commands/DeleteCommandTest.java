@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -73,6 +74,27 @@ public class DeleteCommandTest {
         assertTrue(outOfBoundIndex < model.getAddressBook().getPersonList().size());
         assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_PERSON_NOT_FOUND);
     }
+
+    @Test
+    public void execute_validIdPersonDoesNotExist_throwsCommandException() {
+        Id nonExistentId = new Id("non_existent_id");
+        DeleteCommand deleteCommand = new DeleteCommand(nonExistentId);
+        assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_PERSON_NOT_FOUND);
+    }
+
+    @Test
+    public void execute_nullId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new DeleteCommand(null));
+    }
+
+    @Test
+    public void execute_emptyAddressBook_throwsCommandException() {
+        Model emptyModel = new ModelManager();
+        DeleteCommand deleteCommand = new DeleteCommand(ID_FIRST_PERSON);
+
+        assertCommandFailure(deleteCommand, emptyModel, DeleteCommand.MESSAGE_PERSON_NOT_FOUND);
+    }
+
 
     @Test
     public void equals() {
