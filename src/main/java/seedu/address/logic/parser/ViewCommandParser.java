@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Arrays;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ListCommand;
@@ -14,7 +15,6 @@ import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.IsSameIdPredicate;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -64,41 +64,40 @@ public class ViewCommandParser implements Parser<ViewCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
+
+        String trimmedArgs = args.trim();
+        Set<Prefix> usedPrefixes = argMultimap.getAllPrefixes();
+        System.out.println(usedPrefixes.toString());
+        // Check size of prefix set is not more than 2 (1 for preamble, 1 for prefix)
+        if (usedPrefixes.size() > 2) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_MULTIPREFIX));
+        }
+
         if (arePrefixesPresent(argMultimap, PREFIX_ALL)) {
             return new ListCommand();
-        } else if (arePrefixesPresent(argMultimap, PREFIX_STATS) || arePrefixesPresent(argMultimap, PREFIX_STATSLONG)) {
-            return new StatCommand();
-        }
-        Name name = null;
-        try {
-            if (arePrefixesPresent(argMultimap, PREFIX_NAME)) {
-                name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        } else if (!argMultimap.getAllValues(PREFIX_NAME).isEmpty()) {
+            try {
+                ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            } catch (ParseException e) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
             }
-        } catch (ParseException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
-        }
-        Id id = null;
-        try {
-            if (arePrefixesPresent(argMultimap, PREFIX_ID)) {
-                id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
-            }
-        } catch (ParseException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
-        }
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
-        }
-        if (name == null && id == null) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
-        } else if (id == null) {
             String[] nameKeywords = trimmedArgs.split("\\s+");
             return new ViewCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-        } else {
+        } else if (!argMultimap.getAllValues(PREFIX_ID).isEmpty()) {
+            Id id = null;
+            try {
+                id = ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get());
+            } catch (ParseException e) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
+            }
             return new ViewCommand(new IsSameIdPredicate(id));
+        } else if (arePrefixesPresent(argMultimap, PREFIX_STATS) || arePrefixesPresent(argMultimap, PREFIX_STATSLONG)) {
+            return new StatCommand();
+        } else {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
         }
+
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
