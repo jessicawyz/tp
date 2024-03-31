@@ -22,11 +22,19 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "0", new DeleteCommand(ID_FIRST_PERSON.getInt()));
+        assertParseSuccess(parser, " -id " + ID_FIRST_PERSON, new DeleteCommand(ID_FIRST_PERSON));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_unexpectedPreamble_throwsParseException() {
+        String inputWithUnexpectedPreamble = "unexpected -id " + ID_FIRST_PERSON;
+        assertParseFailure(parser, inputWithUnexpectedPreamble,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
 }

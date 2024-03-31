@@ -26,14 +26,16 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Subject subject;
+    private final Set<Exam> exams;
+    private final Payment payment;
     private final LogList logs;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Subject subject,
-                  Id uniqueId, LogList logs) {
-        requireAllNonNull(name, phone, email, address, tags, subject);
+                  Id uniqueId, Set<Exam> exams, Payment payment, LogList logs) {
+        requireAllNonNull(name, phone, email, address, tags, subject, payment);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -41,13 +43,16 @@ public class Person {
         this.tags.addAll(tags);
         this.subject = subject;
         this.uniqueId = uniqueId;
+        this.exams = exams == null ? new HashSet<>() : new HashSet<>(exams);
+        this.payment = payment;
         this.logs = logs;
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Subject subject, LogList logs) {
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Set<Tag> tags, Subject subject, Set<Exam> exams, Payment payment, LogList logs) {
         requireAllNonNull(name, phone, email, address, tags, subject);
         this.name = name;
         this.phone = phone;
@@ -55,6 +60,8 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.subject = subject;
+        this.exams = exams == null ? new HashSet<>() : new HashSet<>(exams);
+        this.payment = payment;
         this.logs = logs;
     }
 
@@ -78,6 +85,10 @@ public class Person {
         return subject;
     }
 
+    public Payment getPayment() {
+        return payment;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -94,6 +105,10 @@ public class Person {
     public Id setUniqueId(Id uniqueId) {
         return this.uniqueId = uniqueId;
     }
+
+    /** Returns the exams of the person */
+    public Set<Exam> getExams() {
+        return Collections.unmodifiableSet(exams);
 
     public LogList getLogs() {
         return logs;
@@ -137,13 +152,15 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && subject.equals(otherPerson.subject)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && exams.equals(otherPerson.exams)
+                && payment.equals(otherPerson.payment);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, uniqueId);
+        return Objects.hash(name, phone, email, address, tags, uniqueId, exams, payment);
     }
 
     @Override
@@ -155,6 +172,8 @@ public class Person {
                 .add("address", address)
                 .add("subject", subject)
                 .add("tags", tags)
+                .add("exams", exams)
+                .add("payment", payment)
                 .toString();
     }
 

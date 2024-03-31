@@ -69,6 +69,20 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case AddExamCommand.COMMAND_WORD:
+            return new AddExamCommandParser().parse(arguments);
+
+        case DeleteExamCommand.COMMAND_WORD:
+                return new DeleteExamCommandParser().parse(arguments);
+
+        case AddPaymentCommand.COMMAND_WORD:
+            return new AddPaymentCommandParser().parse(arguments);
+
+        case MarkPaymentCommand.COMMAND_WORD:
+            return new MarkPaymentCommandParser().parse(arguments);
+
+        case ResetPaymentsCommand.COMMAND_WORD:
+            return new ResetPaymentsCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

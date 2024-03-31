@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -11,12 +13,17 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -166,5 +173,100 @@ public class ParserUtil {
         } catch (NumberFormatException e) {
             throw new ParseException("Unique ID must be an integer.");
         }
+    }
+
+    public static Id parseUniqueIdtoId(int uniqueId) throws ParseException {
+        return new Id(uniqueId);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code LocalDate}.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static LocalDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        try {
+            return LocalDate.parse(trimmedDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid date format. Please enter the date in the format yyyy-MM-dd.");
+        }
+    }
+
+    /**
+     * Parses a {@code String time} into a {@code Option<LocalTime>}.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static Optional<LocalTime> parseTime(String time) throws ParseException {
+        if (time == null || time.isEmpty()) {
+            return Optional.empty();
+        }
+
+        String trimmedTime = time.trim();
+        try {
+            LocalTime parsedTime = LocalTime.parse(trimmedTime, DateTimeFormatter.ofPattern("HH:mm"));
+            return Optional.of(parsedTime);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid time format. Please enter the time in the format HH:mm.");
+        }
+    }
+
+    public static Optional<LocalTime> parseTimeFromStorage(String time) throws ParseException {
+        if (time.equals("null") || time.isEmpty()) {
+            return Optional.empty();
+        }
+
+        String trimmedTime = time.trim();
+        try {
+            LocalTime parsedTime = LocalTime.parse(trimmedTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
+            parsedTime = LocalTime.parse(parsedTime.format(DateTimeFormatter.ofPattern("HH:mm")), DateTimeFormatter.ofPattern("HH:mm"));
+            return Optional.of(parsedTime);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Hi, Invalid time format. Please enter the time in the format HH:mm:ss.");
+        }
+    }
+
+    /**
+     * Parses a {@code String examName} into an {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code examName} is invalid.
+     */
+    public static String parseExamName(String examName) throws ParseException {
+        requireNonNull(examName);
+        String trimmedExamName = examName.trim();
+        if (!Exam.isValidExamName(trimmedExamName)) {
+            throw new ParseException(Exam.MESSAGE_CONSTRAINTS_EXAM_NAME);
+        }
+        return trimmedExamName;
+    }
+
+    /**
+     * Parses a {@code String payment} into a {@code double}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code payment} is invalid.
+     */
+    public static Payment parsePayment(Optional<String> payment) throws ParseException {
+        requireNonNull(payment);
+        if (payment.isEmpty()) {
+            return new Payment(0.0);
+        } else {
+            String trimmedPayment = payment.get().trim();
+            double paymentAmount;
+            try {
+                paymentAmount = Double.parseDouble(trimmedPayment);
+            } catch (NumberFormatException e) {
+                throw new ParseException("Payment amount must be a valid number.");
+            }
+
+            if (paymentAmount < 0) {
+                throw new ParseException("Payment amount must not be negative.");
+            }
+            return new Payment(paymentAmount);
+        }
+
     }
 }

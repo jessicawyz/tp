@@ -6,6 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_AMY;
@@ -33,7 +35,8 @@ public class TypicalPersons {
             .withPhone("94351253")
             .withSubject("English")
             .withTags("friends")
-            .withUniqueId(getNextUniqueId())
+            .withUniqueId("000001")
+            .withPayment("0.0")
             .build();
 
     public static final Person AMY = new PersonBuilder()
@@ -43,7 +46,9 @@ public class TypicalPersons {
             .withAddress(VALID_ADDRESS_AMY)
             .withTags(VALID_TAG_FRIEND)
             .withSubject(VALID_SUBJECT_AMY)
-            .withUniqueId(getNextUniqueId())
+            .withUniqueId("000002")
+            .withPayment(VALID_PAYMENT_AMY)
+            .withTags("friends")
             .build();
 
     public static final Person BENSON = new PersonBuilder()
@@ -53,7 +58,8 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withTags("owesMoney", "friends")
             .withSubject("Math")
-            .withUniqueId(getNextUniqueId())
+            .withUniqueId("000003")
+            .withPayment("0.0")
             .build();
 
     public static final Person BOB = new PersonBuilder()
@@ -63,7 +69,9 @@ public class TypicalPersons {
             .withAddress(VALID_ADDRESS_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withSubject(VALID_SUBJECT_BOB)
-            .withUniqueId(getNextUniqueId())
+            .withUniqueId("000004")
+            .withPayment(VALID_PAYMENT_BOB)
+            .withTags("friends")
             .build();
 
     public static final Person CARL = new PersonBuilder()
@@ -72,7 +80,8 @@ public class TypicalPersons {
             .withEmail("heinz@example.com")
             .withAddress("wall street")
             .withSubject("Science")
-            .withUniqueId(getNextUniqueId())
+            .withUniqueId("000005")
+            .withPayment("0.0")
             .build();
 
     public static final Person DANIEL = new PersonBuilder()
@@ -82,7 +91,8 @@ public class TypicalPersons {
             .withAddress("10th street")
             .withTags("friends")
             .withSubject("History")
-            .withUniqueId(getNextUniqueId())
+            .withUniqueId("000006")
+            .withPayment("0.0")
             .build();
 
     public static final Person ELLE = new PersonBuilder()
@@ -91,7 +101,8 @@ public class TypicalPersons {
             .withEmail("werner@example.com")
             .withAddress("michegan ave")
             .withSubject("Geography")
-            .withUniqueId(getNextUniqueId())
+            .withUniqueId("000007")
+            .withPayment("0.0")
             .build();
 
     public static final Person FIONA = new PersonBuilder()
@@ -100,7 +111,8 @@ public class TypicalPersons {
             .withEmail("lydia@example.com")
             .withAddress("little tokyo")
             .withSubject("Art")
-            .withUniqueId(getNextUniqueId())
+            .withUniqueId("000008")
+            .withPayment("0.0")
             .build();
 
     public static final Person GEORGE = new PersonBuilder()
@@ -109,7 +121,8 @@ public class TypicalPersons {
             .withEmail("anna@example.com")
             .withAddress("4th street")
             .withSubject("Physics")
-            .withUniqueId(getNextUniqueId())
+            .withUniqueId("000009")
+            .withPayment("0.0")
             .build();
 
     // Manually added
@@ -119,7 +132,9 @@ public class TypicalPersons {
             .withEmail("stefan@example.com")
             .withAddress("little india")
             .withSubject("Chemistry")
-            .withUniqueId(getNextUniqueId())
+            .withUniqueId("000013")
+            .withPayment("0.0")
+            .withTags("friends")
             .build();
 
     public static final Person IDA = new PersonBuilder()
@@ -128,7 +143,9 @@ public class TypicalPersons {
             .withEmail("hans@example.com")
             .withAddress("chicago ave")
             .withSubject("Biology")
-            .withUniqueId(getNextUniqueId())
+            .withUniqueId("000011")
+            .withPayment("0.0")
+            .withTags("friends")
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
@@ -137,9 +154,9 @@ public class TypicalPersons {
 
     private TypicalPersons() {} // prevents instantiation
 
-    private static String getNextUniqueId() {
-        return String.format("#%06d", uniqueIdCounter++);
-    }
+    //    private static String getNextUniqueId() {
+    //        return String.format("#%06d", uniqueIdCounter++);
+    //    }
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.
@@ -153,6 +170,6 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, AMY, BENSON, BOB, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

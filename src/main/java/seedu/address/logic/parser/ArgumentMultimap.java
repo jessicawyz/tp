@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.Messages;
@@ -53,6 +54,14 @@ public class ArgumentMultimap {
             return new ArrayList<>();
         }
         return new ArrayList<>(argMultimap.get(prefix));
+    }
+    /**
+     * Returns all recorded {@code prefix}.
+     * If the no prefixes were used in the command, a set containing only the preamble will be returned.
+     * Modifying the returned set will not affect the underlying data structure of the ArgumentMultimap.
+     */
+    public Set<Prefix> getAllPrefixes() {
+        return argMultimap.keySet();
     }
 
     /**

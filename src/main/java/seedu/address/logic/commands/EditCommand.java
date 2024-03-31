@@ -17,7 +17,16 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
+import seedu.address.model.person.Exam;
+import seedu.address.model.person.Log;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -91,7 +100,8 @@ public class EditCommand extends Command {
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code editPersonDescriptor}. Note: This method does not modify payment information,
+     * as payments are handled through dedicated payment commands.
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
@@ -103,9 +113,11 @@ public class EditCommand extends Command {
         Subject updatedSubjects = editPersonDescriptor.getSubject().orElse(personToEdit.getSubject());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Id uniqueID = editPersonDescriptor.getId().orElse(personToEdit.getUniqueId());
+        Set<Exam> updatedExams = editPersonDescriptor.getExams().orElse(personToEdit.getExams());
+        Payment payment = personToEdit.getPayment(); // Payment is not editable
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedTags, updatedSubjects, uniqueID, personToEdit.getLogs());
+                updatedAddress, updatedTags, updatedSubjects, uniqueID, updatedExams, payment, personToEdit.getLogs());
     }
 
     @Override
@@ -134,7 +146,8 @@ public class EditCommand extends Command {
 
     /**
      * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * corresponding field value of the person, except for the payment information, which is immutable
+     * through this command.
      */
     public static class EditPersonDescriptor {
         private Name name;
@@ -144,6 +157,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Subject subject;
         private Id uniqueID;
+        private Set<Exam> exams;
 
         public EditPersonDescriptor() {}
 
@@ -159,7 +173,9 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setSubject(toCopy.subject);
             setId(toCopy.uniqueID);
+            setExams(toCopy.exams);
         }
+
 
         /**
          * Returns true if at least one field is edited.
@@ -214,6 +230,8 @@ public class EditCommand extends Command {
             return Optional.ofNullable(uniqueID);
         }
 
+
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -229,6 +247,14 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public void setExams(Set<Exam> exams) {
+            this.exams = (exams != null) ? new HashSet<>(exams) : null;
+        }
+
+        public Optional<Set<Exam>> getExams() {
+            return (exams != null) ? Optional.of(Collections.unmodifiableSet(exams)) : Optional.empty();
         }
 
         @Override
@@ -248,7 +274,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(subject, otherEditPersonDescriptor.subject)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(exams, otherEditPersonDescriptor.exams);
         }
 
         @Override
@@ -260,6 +287,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("subject", subject)
                     .add("tags", tags)
+                    .add("exams", exams)
                     .toString();
         }
     }
