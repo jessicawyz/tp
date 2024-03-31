@@ -49,13 +49,34 @@ public class ViewCommandParserTest {
         assertTrue(parser.parse(" -id 123 ") instanceof ViewCommand);
     }
 
-    // @Test
-    // public void parse_nameAndIdPrefixes_throwsParseException() {
-    //     assertThrows(ParseException.class, () -> parser.parse(" -name John Doe -id 123 "));
-    // }
-
     @Test
     public void parse_extraArgumentsWithoutPrefixes_throwsParseException() {
         assertThrows(ParseException.class, () -> parser.parse(" John Doe "));
     }
+
+    @Test
+    public void parse_multipleValidPrefixes_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse(" -name John Doe -id 123 "));
+    }
+
+    @Test
+    public void parse_namePrefixInvalidName_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse(" -name "));
+    }
+
+    @Test
+    public void parse_idPrefixInvalidId_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse(" -id "));
+    }
+
+    @Test
+    public void parse_idPrefixInvalidIdFormat_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse(" -id abc "));
+    }
+
+    @Test
+    public void parse_moreThanTwoPrefixes_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse(" -name John Doe -id 123 -stats "));
+    }
+
 }

@@ -14,5 +14,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_SUBJECT = new Prefix("-subject");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_PAYMENT = new Prefix("-payment");
+    public static final Prefix PREFIX_STATS = new Prefix("-stats");
+    public static final Prefix PREFIX_STATSLONG = new Prefix("-statistics");
+    public static final Prefix PREFIX_ALL = new Prefix("-all");
 
 }
