@@ -19,12 +19,12 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PersonBuilder {
 
-    public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_NAME = "Amy See";
+    public static final String DEFAULT_PHONE = "85355233";
+    public static final String DEFAULT_EMAIL = "amysee@gmail.com";
+    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 9, #08-111";
     public static final String DEFAULT_SUBJECT = "Math";
-    public static final String DEAFULT_UNIQUEID = "1";
+    public static final String DEAFULT_UNIQUEID = "12";
     public static final String DEAFULT_PAYMENT = "0.0";
 
     private Name name;

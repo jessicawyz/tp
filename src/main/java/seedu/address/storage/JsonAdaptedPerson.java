@@ -71,7 +71,6 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         subject = source.getSubject().value;
         uniqueId = source.getUniqueId().id;
-        System.out.println("Payment: " + source.getPayment().value);
         payment = source.getPayment().value;
 
     }
