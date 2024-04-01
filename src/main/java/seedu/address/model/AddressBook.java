@@ -132,7 +132,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.getTotalPersons();
     }
 
-    public double getTotalOwings() { return persons.getTotalOwings(); }
+    public double getTotalOwings() {
+        return persons.getTotalOwings();
+    }
 
-    public void clearSummaryStats() { persons.clearSummaryStats();}
+    public void clearSummaryStats() {
+        persons.clearSummaryStats();
+    }
 }

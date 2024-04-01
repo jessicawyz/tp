@@ -69,7 +69,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
 
-        updateTotalOwings(target,editedPerson);
+        updateTotalOwings(target, editedPerson);
         internalList.set(index, editedPerson);
     }
 
@@ -171,10 +171,13 @@ public class UniquePersonList implements Iterable<Person> {
         totalOwings = totalOwings - target.getPayment().getAmount() + editedPerson.getPayment().getAmount();
     }
 
-    public double getTotalOwings(){
+    public double getTotalOwings() {
         return totalOwings;
     }
 
+    /**
+     * Clears the summary statistics.
+     */
     public void clearSummaryStats() {
         totalPersons = 0;
         totalOwings = 0.0;

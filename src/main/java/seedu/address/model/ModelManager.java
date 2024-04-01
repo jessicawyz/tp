@@ -183,10 +183,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public double getTotalOwings() { return addressBook.getTotalOwings();}
+    public double getTotalOwings() {
+        return addressBook.getTotalOwings();
+    }
 
     @Override
-    public void clearSummaryStats() { addressBook.clearSummaryStats();
+    public void clearSummaryStats() {
+        addressBook.clearSummaryStats();
     }
 
 }

@@ -92,5 +92,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public double getTotalOwings(){ return model.getTotalOwings();}
+    public double getTotalOwings() {
+        return model.getTotalOwings();
+    }
+
 }

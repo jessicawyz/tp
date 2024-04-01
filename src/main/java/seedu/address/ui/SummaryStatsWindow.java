@@ -102,19 +102,19 @@ public class SummaryStatsWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
-    private void updateTotalCountOfPersons(){
+    private void updateTotalCountOfPersons() {
         totalPerson = logic.getTotalPersons();
         String output = SUMMARYSTATS_MESSAGE_COUNT + " " + Integer.toString(totalPerson);
         summaryMessageCountLabel.setText(output);
     }
 
-    private void updateTotalOwingsofPersons(){
+    private void updateTotalOwingsofPersons() {
         totalOwings = logic.getTotalOwings();
         String output = SUMMARYSTATS_MESSAGE_OWING + " " + Double.toString(totalOwings);
         summaryMessageOwingsLabel.setText(output);
     }
 
-    private void updateSummaryStats(){
+    private void updateSummaryStats() {
         updateTotalCountOfPersons();
         updateTotalOwingsofPersons();
     }

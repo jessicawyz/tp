@@ -177,10 +177,14 @@ public class AddCommandTest {
         }
 
         @Override
-        public double getTotalOwings() { throw new AssertionError("This method should not be called."); }
+        public double getTotalOwings() {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
-        public void clearSummaryStats() { throw new AssertionError("This method should not be called."); }
+        public void clearSummaryStats() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
