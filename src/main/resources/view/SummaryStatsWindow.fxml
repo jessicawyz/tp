@@ -22,12 +22,12 @@
           <Insets top="5" right="5" bottom="5" left="15" />
         </padding>
         <children>
-          <Label fx:id="summaryMessage" text="Label">
+          <Label fx:id="summaryMessageCountLabel" text="Label">
             <VBox.margin>
               <Insets right="5.0" />
             </VBox.margin>
           </Label>
-          <Label fx:id="summaryMessageOwings" text="Label">
+          <Label fx:id="summaryMessageOwingsLabel" text="Label">
             <VBox.margin>
               <Insets right="5.0" />
             </VBox.margin>

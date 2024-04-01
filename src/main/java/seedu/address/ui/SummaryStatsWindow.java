@@ -27,10 +27,10 @@ public class SummaryStatsWindow extends UiPart<Stage> {
     private Button copyButton;
 
     @FXML
-    private Label summaryMessage;
+    private Label summaryMessageCountLabel;
 
     @FXML
-    private Label summaryMessageOwings;
+    private Label summaryMessageOwingsLabel;
 
     private Logic logic;
     private int totalPerson;
@@ -105,13 +105,13 @@ public class SummaryStatsWindow extends UiPart<Stage> {
     private void updateTotalCountOfPersons(){
         totalPerson = logic.getTotalPersons();
         String output = SUMMARYSTATS_MESSAGE_COUNT + " " + Integer.toString(totalPerson);
-        summaryMessage.setText(output);
+        summaryMessageCountLabel.setText(output);
     }
 
     private void updateTotalOwingsofPersons(){
         totalOwings = logic.getTotalOwings();
         String output = SUMMARYSTATS_MESSAGE_OWING + " " + Double.toString(totalOwings);
-        summaryMessageOwings.setText(output);
+        summaryMessageOwingsLabel.setText(output);
     }
 
     private void updateSummaryStats(){

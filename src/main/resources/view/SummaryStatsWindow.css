@@ -1,8 +1,8 @@
-#summaryMessage {
+#summaryMessageCountLabel {
     -fx-text-fill: white;
 }
 
-#summaryMessageOwings {
+#summaryMessageOwingsLabel {
     -fx-text-fill: white;
 }
 
