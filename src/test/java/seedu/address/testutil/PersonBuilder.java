@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -131,13 +132,13 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withExams(Exam ... exams) {
-        this.exams = SampleDataUtil.getSampleExams();
+    public PersonBuilder withExams(Exam... exams) {
+        this.exams = new HashSet<>(Arrays.asList(exams));
         return this;
     }
 
-    public PersonBuilder withLogs(Log ... logs) {
-        this.logs = SampleDataUtil.getSampleLogs();
+    public PersonBuilder withLogs(Log... logs) {
+        this.logs = new LogList(Arrays.asList(logs));
         return this;
     }
 

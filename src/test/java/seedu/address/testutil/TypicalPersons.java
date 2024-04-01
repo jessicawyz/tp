@@ -15,11 +15,17 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.person.Exam;
+import seedu.address.model.person.Log;
 import seedu.address.model.person.Person;
 
 /**
@@ -37,6 +43,14 @@ public class TypicalPersons {
             .withTags("friends")
             .withUniqueId("000001")
             .withPayment("0.0")
+            .withExams(
+                    new Exam("English Exam", LocalDate.of(2024, 10, 30), Optional.of(LocalTime.of(9, 0))),
+                    new Exam("Math Exam", LocalDate.of(2024, 11, 15), Optional.empty())
+            )
+            .withLogs(
+                    new Log("Meeting scheduled", "2", "English concepts", "Prepare for exam", null),
+                    new Log("Email received", "1.5", "Math problems", "Study for test", null)
+            )
             .build();
 
     public static final Person AMY = new PersonBuilder()
@@ -49,6 +63,13 @@ public class TypicalPersons {
             .withUniqueId("000002")
             .withPayment(VALID_PAYMENT_AMY)
             .withTags("friends")
+            .withExams(
+                    new Exam("Math Exam", LocalDate.of(2024, 12, 1), Optional.of(LocalTime.of(10, 30)))
+            )
+            .withLogs(
+                    new Log("Study group", "3", "Algebra", "Prepare for exam", null),
+                    new Log("Online lecture", "2", "Geometry", "Review concepts", null)
+            )
             .build();
 
     public static final Person BENSON = new PersonBuilder()
@@ -60,6 +81,13 @@ public class TypicalPersons {
             .withSubject("Math")
             .withUniqueId("000003")
             .withPayment("0.0")
+            .withExams(
+                    new Exam("Math Exam", LocalDate.of(2024, 12, 1), Optional.of(LocalTime.of(10, 30)))
+            )
+            .withLogs(
+                    new Log("Study group", "3", "Algebra", "Prepare for exam", null),
+                    new Log("Online lecture", "2", "Geometry", "Review concepts", null)
+            )
             .build();
 
     public static final Person BOB = new PersonBuilder()
@@ -72,6 +100,14 @@ public class TypicalPersons {
             .withUniqueId("000004")
             .withPayment(VALID_PAYMENT_BOB)
             .withTags("friends")
+            .withExams(
+                    new Exam("Chemistry Exam", LocalDate.of(2024, 11, 25), Optional.of(LocalTime.of(10, 0))),
+                    new Exam("Physics Exam", LocalDate.of(2024, 12, 10), Optional.empty())
+            )
+            .withLogs(
+                    new Log("Study session", "2", "Chemical Reactions", "Review concepts", null),
+                    new Log("Online lecture", "1.5", "Thermodynamics", "Watch video", null)
+            )
             .build();
 
     public static final Person CARL = new PersonBuilder()
@@ -82,6 +118,14 @@ public class TypicalPersons {
             .withSubject("Science")
             .withUniqueId("000005")
             .withPayment("0.0")
+            .withExams(
+                    new Exam("Biology Exam", LocalDate.of(2024, 11, 20), Optional.of(LocalTime.of(9, 0))),
+                    new Exam("Chemistry Exam", LocalDate.of(2024, 12, 5), Optional.empty())
+            )
+            .withLogs(
+                    new Log("Study group", "2.5", "Genetics", "Discuss topics", null),
+                    new Log("Practice questions", "1", "Cell Biology", "Solve problems", null)
+            )
             .build();
 
     public static final Person DANIEL = new PersonBuilder()
@@ -93,6 +137,10 @@ public class TypicalPersons {
             .withSubject("History")
             .withUniqueId("000006")
             .withPayment("0.0")
+            .withExams(
+                    new Exam("History Exam", LocalDate.of(2024, 11, 18), Optional.of(LocalTime.of(13, 30))),
+                    new Exam("Geography Exam", LocalDate.of(2024, 12, 8), Optional.empty())
+            )
             .build();
 
     public static final Person ELLE = new PersonBuilder()
@@ -103,6 +151,10 @@ public class TypicalPersons {
             .withSubject("Geography")
             .withUniqueId("000007")
             .withPayment("0.0")
+            .withLogs(
+                    new Log("Group discussion", "2", "Shakespearean plays", "Prepare for exam", null),
+                    new Log("Essay writing", "1.5", "Modernist literature", "Write draft", null)
+            )
             .build();
 
     public static final Person FIONA = new PersonBuilder()

@@ -38,12 +38,14 @@ public class ViewCommandTest {
 
     @Test
     public void execute_viewById_success() {
-        Id id = new Id("12345");
+        Id id = new Id("000004");
         IsSameIdPredicate predicate = new IsSameIdPredicate(id);
         ViewCommand command = new ViewCommand(predicate);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.updateFilteredPersonList(predicate);
+
+        System.out.println(expectedModel.getFilteredPersonList().isEmpty());
 
         assertCommandSuccess(command, model,
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, expectedModel.getFilteredPersonList().size()),
