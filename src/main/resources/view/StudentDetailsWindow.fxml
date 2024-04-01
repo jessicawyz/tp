@@ -15,16 +15,16 @@
 <?import javafx.scene.layout.Region?>
 <fx:root resizable="false" title="Student Details Window" type="javafx.stage.Stage"
          xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-         minWidth="220" minHeight="200">
+         minWidth="220" minHeight="200" maxHeight="300">
     <scene>
         <Scene>
             <stylesheets>
                 <URL value="@StudentDetailsWindow.css" />
             </stylesheets>
             <ScrollPane fitToWidth="true" vbarPolicy="AS_NEEDED" fx:id="scrollContainer">
-                <HBox alignment="CENTER" fx:id="studentDetailsContainer" HBox.hgrow="ALWAYS">
+                <VBox alignment="CENTER" fx:id="studentDetailsContainer">
                     <children>
-                        <Label fx:id="detailsMessage" styleClass="cell_big_label" wrapText="true" maxWidth="200.0">
+                        <Label fx:id="detailsMessage" styleClass="cell_big_label"  maxWidth="300.0">
                             <minWidth>
                                 <!-- Ensures that the label text is never truncated -->
                                 <Region fx:constant="USE_PREF_SIZE" />
@@ -37,7 +37,7 @@
                     <padding>
                         <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
                     </padding>
-            </HBox>
+            </VBox>
             </ScrollPane>
         </Scene>
     </scene>
