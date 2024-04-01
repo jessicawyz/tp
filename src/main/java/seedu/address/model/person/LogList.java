@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,7 +15,11 @@ public class LogList {
     }
 
     public List<Log> getList() {
-        return this.logs;
+        if (this.logs != null) {
+            return this.logs;
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     @Override
