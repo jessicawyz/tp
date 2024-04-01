@@ -175,6 +175,12 @@ public class AddCommandTest {
         public Person getPersonByUniqueId(String uniqueId) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public double getTotalOwings() { throw new AssertionError("This method should not be called."); }
+
+        @Override
+        public void clearSummaryStats() { throw new AssertionError("This method should not be called."); }
     }
 
     /**
