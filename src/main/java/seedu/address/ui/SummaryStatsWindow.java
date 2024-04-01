@@ -16,7 +16,9 @@ import seedu.address.logic.Logic;
  */
 public class SummaryStatsWindow extends UiPart<Stage> {
 
-    public static final String SUMMARYSTATS_MESSAGE = "The Total Student Count is";
+    public static final String SUMMARYSTATS_MESSAGE_COUNT = "The Total Student Count is";
+
+    public static final String SUMMARYSTATS_MESSAGE_OWING = "The Total Tuition fee owings by Students is $";
 
     private static final Logger logger = LogsCenter.getLogger(SummaryStatsWindow.class);
     private static final String FXML = "SummaryStatsWindow.fxml";
@@ -27,8 +29,13 @@ public class SummaryStatsWindow extends UiPart<Stage> {
     @FXML
     private Label summaryMessage;
 
+    @FXML
+    private Label summaryMessageOwings;
+
     private Logic logic;
     private int totalPerson;
+
+    private double totalOwings;
 
     /**
      * Creates a new SummaryStatsWindow.
@@ -44,7 +51,8 @@ public class SummaryStatsWindow extends UiPart<Stage> {
      */
     public SummaryStatsWindow(Logic logic) {
         this(new Stage());
-        updateTotalCountOfPersons();
+        this.logic = logic;
+        updateSummaryStats();
     }
 
     /**
@@ -67,7 +75,7 @@ public class SummaryStatsWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing total Student Count about the application.");
-        updateTotalCountOfPersons();
+        updateSummaryStats();
         getRoot().show();
         getRoot().centerOnScreen();
     }
@@ -76,7 +84,7 @@ public class SummaryStatsWindow extends UiPart<Stage> {
      * Returns true if the help window is currently being shown.
      */
     public boolean isShowing() {
-        updateTotalCountOfPersons();
+        updateSummaryStats();
         return getRoot().isShowing();
     }
 
@@ -96,8 +104,19 @@ public class SummaryStatsWindow extends UiPart<Stage> {
 
     private void updateTotalCountOfPersons(){
         totalPerson = logic.getTotalPersons();
-        String output = SUMMARYSTATS_MESSAGE + " " + Integer.toString(totalPerson);
+        String output = SUMMARYSTATS_MESSAGE_COUNT + " " + Integer.toString(totalPerson);
         summaryMessage.setText(output);
+    }
+
+    private void updateTotalOwingsofPersons(){
+        totalOwings = logic.getTotalOwings();
+        String output = SUMMARYSTATS_MESSAGE_OWING + " " + Double.toString(totalOwings);
+        summaryMessageOwings.setText(output);
+    }
+
+    private void updateSummaryStats(){
+        updateTotalCountOfPersons();
+        updateTotalOwingsofPersons();
     }
     /**
      * Copies the URL to the user guide to the clipboard.

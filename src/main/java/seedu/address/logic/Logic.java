@@ -52,4 +52,6 @@ public interface Logic {
      * Returns the Total Person Count
      */
     int getTotalPersons();
+
+    double getTotalOwings();
 }

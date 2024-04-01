@@ -131,4 +131,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int getTotalPersons() {
         return persons.getTotalPersons();
     }
+
+    public double getTotalOwings() { return persons.getTotalOwings(); }
+
+    public void clearSummaryStats() { persons.clearSummaryStats();}
 }
