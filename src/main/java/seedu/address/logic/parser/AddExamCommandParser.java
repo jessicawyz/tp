@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.AddExamCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Id;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -25,6 +24,9 @@ public class AddExamCommandParser implements Parser<AddExamCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_DATE) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExamCommand.MESSAGE_USAGE));
         }
+        assert argMultimap.getValue(PREFIX_ID).isPresent() : "Prefix ID value is missing";
+        assert argMultimap.getValue(PREFIX_EXAM_NAME).isPresent() : "Prefix Exam Name value is missing";
+        assert argMultimap.getValue(PREFIX_DATE).isPresent() : "Prefix Date value is missing";
 
         String uniqueId = argMultimap.getValue(PREFIX_ID).get();
         String examName = ParserUtil.parseExamName(argMultimap.getValue(PREFIX_EXAM_NAME).get());
