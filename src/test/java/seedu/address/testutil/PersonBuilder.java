@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -41,7 +42,7 @@ public class PersonBuilder {
     private Id uniqueId;
     private Set<Exam> exams;
     private Payment payment;
-    private List<Log> logs;
+    private LogList logs;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -56,7 +57,7 @@ public class PersonBuilder {
         uniqueId = new Id(DEAFULT_UNIQUEID);
         exams = new HashSet<>();
         payment = new Payment(0.0);
-        logs = new ArrayList<>();
+        logs = new LogList(new ArrayList<>());
     }
 
     /**
@@ -72,7 +73,7 @@ public class PersonBuilder {
         uniqueId = personToCopy.getUniqueId();
         exams = new HashSet<>(personToCopy.getExams());
         payment = personToCopy.getPayment();
-        logs = personToCopy.getLogs().getList();
+        logs = new LogList(personToCopy.getLogs().getList());
     }
 
     /**
@@ -159,18 +160,23 @@ public class PersonBuilder {
      * Parses the {@code logs} into a {@code List<Log>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withLogs(Log... newLogs) {
-        for (Log log : newLogs) {
-            this.logs.add(log);
-        }
+        List<Log> logList = Arrays.asList(newLogs);
+        this.logs = new LogList(logList);
         return this;
     }
 
     /**
+     * Sets the {@code LogList} of the {@code Person} that we are building to an empty list.
+     */
+    public PersonBuilder withEmptyLogs() {
+        this.logs = new LogList(new ArrayList<>()); // Or use Collections.emptyList() if immutable list is preferred
+        return this;
+    }
+    /**
      * Builds the person.
      */
     public Person build() {
-        LogList finalLogList = new LogList(new ArrayList<>(logs));
-        return new Person(name, phone, email, address, tags, subject, uniqueId, exams, payment, finalLogList);
+        return new Person(name, phone, email, address, tags, subject, uniqueId, exams, payment, logs);
     }
 
 }
