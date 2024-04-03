@@ -1,21 +1,26 @@
 package seedu.address.logic.commands;
 
-import com.sun.nio.sctp.MessageInfo;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STYLE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Log;
 import seedu.address.model.person.Person;
 
-import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
+/**
+ * Logs a session for a student.
+ */
 public class LogCommand extends Command {
     public static final String COMMAND_WORD = "log";
     public static final String MESSAGE_SUCCESS = "Student logged successfully";
@@ -39,6 +44,9 @@ public class LogCommand extends Command {
     private final int targetId;
     private final Log logDetails;
 
+    /**
+     * Creates a LogCommand to log the specified {@code Log} to the person with the specified {@code Id}.
+     */
     public LogCommand(int targetId, Log log) {
         requireAllNonNull(log, targetId);
         this.targetId = targetId;

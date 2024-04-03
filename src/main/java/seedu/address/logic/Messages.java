@@ -55,6 +55,9 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code log} for display to the user.
+     */
     public static String format(Log log) {
         final StringBuilder builder = new StringBuilder();
         builder.append(log.getDate())

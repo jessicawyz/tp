@@ -1,22 +1,18 @@
 package seedu.address.ui;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import javafx.util.Pair;
 import seedu.address.model.person.AllExamsList;
 import seedu.address.model.person.Exam;
 import seedu.address.model.person.Person;
 
+/**
+ * Panel containing the list of exams.
+ */
 public class ExamListPanel extends UiPart<Region> {
 
     private static final String FXML = "ExamListPanel.fxml";
@@ -61,6 +57,9 @@ public class ExamListPanel extends UiPart<Region> {
         }
     }*/
 
+    /**
+     * Creates a {@code ExamListPanel} with the given {@code ObservableList}.
+     */
     public ExamListPanel(ObservableList<Person> personList) {
         super(FXML);
         this.personList = personList;
@@ -78,7 +77,7 @@ public class ExamListPanel extends UiPart<Region> {
     }
 
     private void initializeListView() {
-        examListView.setItems(AllExamsList.exams);
+        examListView.setItems(AllExamsList.getExams());
         examListView.setCellFactory(listView -> new ExamListViewCell());
     }
 

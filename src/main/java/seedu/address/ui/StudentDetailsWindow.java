@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,8 +11,9 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 
-import java.util.logging.Logger;
-
+/**
+ * Window to show the details of a student.
+ */
 public class StudentDetailsWindow extends UiPart<Stage> {
     public static final String STUDENT_DETAILS_MESSAGE = "Student details for %s";
 

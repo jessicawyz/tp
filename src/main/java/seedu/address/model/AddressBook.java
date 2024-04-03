@@ -80,10 +80,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.add(p);
     }
 
+    /**
+     * Adds an exam to the address book.
+     * The exam must not already exist in the address book.
+     */
     public void addExam(Exam e) {
-        System.out.println("!addressbook add exam before: " + AllExamsList.exams.size());
+        System.out.println("!addressbook add exam before: " + AllExamsList.getExams().size());
         AllExamsList.addExamToList(e);
-        System.out.println("!addressbook add exam: " + AllExamsList.exams.size());
+        System.out.println("!addressbook add exam: " + AllExamsList.getExams().size());
     }
 
     /**
@@ -120,9 +124,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public ObservableList<Exam> getAllExamsList() {
-        System.out.println("in addressbook getall examslist: ALL: " + AllExamsList.exams.size());
-        System.out.println("in addressbook getall examslist: all: " + allExamsList.exams.size());
-        return allExamsList.exams;
+        System.out.println("in addressbook getall examslist: ALL: " + AllExamsList.getExams().size());
+        System.out.println("in addressbook getall examslist: all: " + allExamsList.getExams().size());
+        return allExamsList.getExams();
     }
 
     @Override
@@ -145,10 +149,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.hashCode();
     }
 
+    /**
+     * Returns the total number of persons in the address book.
+     */
     public int getTotalPersons() {
         return persons.getTotalPersons();
     }
 
+    /**
+     * Adds a log to the person.
+     */
     public void addLogToPerson(Person target, Log log) {
         requireNonNull(target);
         requireNonNull(log);

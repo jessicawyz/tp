@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Represents the list of all logs in the address book.
+ */
 public class LogList {
     private List<Log> logs;
     public LogList(List<Log> logs) {
