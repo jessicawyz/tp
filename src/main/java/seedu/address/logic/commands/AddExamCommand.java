@@ -1,11 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.AllExamsList;
 import seedu.address.model.person.Exam;
@@ -80,7 +82,8 @@ public class AddExamCommand extends Command {
 
         Person updatedPerson = new Person(personToUpdate.getName(), personToUpdate.getPhone(),
                 personToUpdate.getEmail(), personToUpdate.getAddress(), personToUpdate.getTags(),
-                personToUpdate.getSubject(), personToUpdate.getUniqueId(), updatedExams, personToUpdate.getPayment(), personToUpdate.getLogs());
+                personToUpdate.getSubject(), personToUpdate.getUniqueId(), updatedExams,
+                personToUpdate.getPayment(), personToUpdate.getLogs());
 
         model.setPerson(personToUpdate, updatedPerson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, uniqueId));
