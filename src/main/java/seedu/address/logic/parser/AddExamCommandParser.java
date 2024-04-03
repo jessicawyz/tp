@@ -1,8 +1,5 @@
 package seedu.address.logic.parser;
 
-
-import seedu.address.logic.commands.AddExamCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM_NAME;

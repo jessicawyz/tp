@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+//import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
+//import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
@@ -142,6 +142,17 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the exams for the person being built using the provided array of exams.
+     *
+     * @param exams The exams to be associated with the person being built.
+     * @return This {@code PersonBuilder} instance with the specified exams added.
+     */
+    public PersonBuilder withExams(Exam ... exams) {
+        this.exams = SampleDataUtil.getSampleExams();
+        return this;
+    }
+
+    /**
      * Sets the {@code Payment} of the {@code Person} that we are building.
      */
     public PersonBuilder withPayment(String payment) {
@@ -157,20 +168,17 @@ public class PersonBuilder {
         return this;
     }
 
-
-    public PersonBuilder withExams(Exam ... exams) {
-        this.exams = SampleDataUtil.getSampleExams();
-        return this;
-    }
-
+    /**
+     * Sets the logs for the person being built using the provided array of logs.
+     *
+     * @param logs The logs to be associated with the person being built.
+     * @return This {@code PersonBuilder} instance with the specified logs added.
+     */
     public PersonBuilder withLogs(Log ... logs) {
         this.logs = SampleDataUtil.getSampleLogs();
         return this;
     }
 
-    /**
-     * Parses the {@code logs} into a {@code List<Log>} and set it to the {@code Person} that we are building.
-     */
     /*public PersonBuilder withLogs(Log... newLogs) {
         List<Log> logList = Arrays.asList(newLogs);
         this.logs = new LogList(logList);

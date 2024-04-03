@@ -14,7 +14,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalExams.ART_PROJECT_FIONA;
+/*import static seedu.address.testutil.TypicalExams.ART_PROJECT_FIONA;
 import static seedu.address.testutil.TypicalExams.BIOLOGY_FINAL_IDA;
 import static seedu.address.testutil.TypicalExams.CHEMISTRY_TEST_HOON;
 import static seedu.address.testutil.TypicalExams.CHINESE_EXAM_AMY;
@@ -24,13 +24,13 @@ import static seedu.address.testutil.TypicalExams.GEOGRAPHY_EXAM_ELLE;
 import static seedu.address.testutil.TypicalExams.HISTORY_EXAM_CARL;
 import static seedu.address.testutil.TypicalExams.MATH_EXAM_ALICE;
 import static seedu.address.testutil.TypicalExams.PHYSICS_LAB_GEORGE;
-import static seedu.address.testutil.TypicalExams.SCIENCE_EXAM_BOB;
+import static seedu.address.testutil.TypicalExams.SCIENCE_EXAM_BOB;*/
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
+//import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+//import java.util.Set;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
