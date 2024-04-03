@@ -1,13 +1,19 @@
 package seedu.address.model.person;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
+/**
+ * Represents the list of all exams in the address book.
+ */
 public class AllExamsList {
     public static ObservableList<Exam> exams;
 
@@ -15,6 +21,11 @@ public class AllExamsList {
         exams = FXCollections.observableArrayList();
     }
 
+    /**
+     * Adds an exam to the list of all exams.
+     *
+     * @param exam The exam to be added.
+     */
     public static void addExamToList(Exam exam) {
         if (exam == null) {
             System.out.println("exam is null before adding to allexamlist");
@@ -23,6 +34,11 @@ public class AllExamsList {
         getSortedByDate(exams);
     }
 
+    /**
+     * Deletes an exam from the list.
+     *
+     * @param examToDelete The exam to delete.
+     */
     public static void deleteExamFromList(Exam examToDelete) {
         Iterator<Exam> iterator = exams.iterator();
         while (iterator.hasNext()) {
@@ -34,6 +50,11 @@ public class AllExamsList {
         }
     }
 
+    /**
+     * Sorts exams by date.
+     *
+     * @param exams The list of exams to be sorted.
+     */
     public static void getSortedByDate(List<Exam> exams) {
         Comparator<Exam> comparator = (exam1, exam2) -> {
             LocalDate currentDate = LocalDate.now();

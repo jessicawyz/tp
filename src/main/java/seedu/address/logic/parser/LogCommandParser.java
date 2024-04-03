@@ -11,7 +11,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.LogCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Id;
+import seedu.address.model.person.Log;
 
 /**
  * Parses input arguments and creates a new LogCommand object.

@@ -2,17 +2,16 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.AllExamsList;
-import seedu.address.model.person.Exam;
-import seedu.address.model.person.Id;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Exam;
+import seedu.address.model.person.Id;
 
 /**
  * Jackson-friendly version of {@link Exam}.

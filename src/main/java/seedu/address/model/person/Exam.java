@@ -7,8 +7,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Optional;
 import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 
 /**
  * Represents a Person's exam details in the address book.
@@ -24,8 +24,8 @@ public class Exam {
     public final Optional<LocalTime> time;
 
     public final String name;
-    public String studentName;
-    public Id uniqueId;
+    private String studentName;
+    private Id uniqueId;
 
     /**
      * Constructs an {@code Exam} with optional time.
@@ -47,7 +47,11 @@ public class Exam {
         this.time = time;
     }
 
-
+    /**
+     * Represents a Person's exam details in the address book.
+     * Guarantees: immutable; is valid as declared in {@link #isValidExamDate(LocalDate)}
+     * and {@link #isValidExamTime(LocalTime)}
+     */
     public Exam(String name, LocalDate date, Optional<LocalTime> time, String studentName, Id uniqueId) {
         requireNonNull(name);
         requireNonNull(date);
@@ -119,11 +123,9 @@ public class Exam {
         if (this == other) {
             return true;
         }
-
         if (!(other instanceof Exam)) {
             return false;
         }
-
         Exam otherExam = (Exam) other;
         return date.equals(otherExam.date) && time.equals(otherExam.time);
     }
@@ -151,7 +153,11 @@ public class Exam {
         return name;
     }
 
-    public String getStudentName() {return studentName;}
-    public Id getUniqueId() {return uniqueId;}
+    public String getStudentName() {
+        return studentName;
+    }
+    public Id getUniqueId() {
+        return uniqueId;
+    }
 }
 

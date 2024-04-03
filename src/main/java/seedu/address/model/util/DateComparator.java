@@ -3,6 +3,9 @@ package seedu.address.model.util;
 import java.time.LocalDate;
 import java.util.Comparator;
 
+/**
+ * Comparator for comparing dates with a reference date.
+ */
 public class DateComparator implements Comparator<LocalDate> {
     private final LocalDate referenceDate;
 

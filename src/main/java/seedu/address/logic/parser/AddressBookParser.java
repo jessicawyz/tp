@@ -22,7 +22,6 @@ import seedu.address.logic.commands.LogCommand;
 import seedu.address.logic.commands.MarkPaymentCommand;
 import seedu.address.logic.commands.ResetPaymentsCommand;
 import seedu.address.logic.commands.ViewCommand;
-
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

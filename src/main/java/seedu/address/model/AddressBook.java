@@ -80,6 +80,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.add(p);
     }
 
+    /**
+     * Adds an exam to the address book.
+     * The exam must not already exist in the address book.
+     */
     public void addExam(Exam e) {
         System.out.println("!addressbook add exam before: " + AllExamsList.exams.size());
         AllExamsList.addExamToList(e);
@@ -145,10 +149,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.hashCode();
     }
 
+    /**
+     * Returns the total number of persons in the address book.
+     */
     public int getTotalPersons() {
         return persons.getTotalPersons();
     }
 
+    /**
+     * Adds a log to the person.
+     */
     public void addLogToPerson(Person target, Log log) {
         requireNonNull(target);
         requireNonNull(log);
