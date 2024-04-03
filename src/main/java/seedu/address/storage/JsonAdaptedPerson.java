@@ -90,7 +90,6 @@ class JsonAdaptedPerson {
         exams.addAll(source.getExams().stream()
                 .map(JsonAdaptedExam::new)
                 .collect(Collectors.toList()));
-        System.out.println("Payment: " + source.getPayment().value);
         payment = source.getPayment().value;
         logs.addAll(source.getLogs().getList().stream()
                 .map(JsonAdaptedLog::new)

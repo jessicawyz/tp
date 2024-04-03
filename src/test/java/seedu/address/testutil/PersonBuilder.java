@@ -1,11 +1,16 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Id;
+import seedu.address.model.person.Log;
+import seedu.address.model.person.LogList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
@@ -34,7 +39,9 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private Subject subject;
     private Id uniqueId;
+    private Set<Exam> exams;
     private Payment payment;
+    private List<Log> logs;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -47,7 +54,9 @@ public class PersonBuilder {
         tags = new HashSet<>();
         subject = new Subject(DEFAULT_SUBJECT);
         uniqueId = new Id(DEAFULT_UNIQUEID);
+        exams = new HashSet<>();
         payment = new Payment(0.0);
+        logs = new ArrayList<>();
     }
 
     /**
@@ -61,7 +70,9 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         subject = personToCopy.getSubject();
         uniqueId = personToCopy.getUniqueId();
+        exams = new HashSet<>(personToCopy.getExams());
         payment = personToCopy.getPayment();
+        logs = personToCopy.getLogs().getList();
     }
 
     /**
@@ -121,6 +132,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Parses the {@code exams} into a {@code Set<Exam>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withExams(Set<Exam> exams) {
+        this.exams = new HashSet<>(exams); // Copy to ensure encapsulation
+        return this;
+    }
+
+    /**
      * Sets the {@code Payment} of the {@code Person} that we are building.
      */
     public PersonBuilder withPayment(String payment) {
@@ -136,12 +155,22 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags, subject, uniqueId, payment);
+    /**
+     * Parses the {@code logs} into a {@code List<Log>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withLogs(Log... newLogs) {
+        for (Log log : newLogs) {
+            this.logs.add(log);
+        }
+        return this;
     }
 
-    public Person buildWithoutId() {
-        return new Person(name, phone, email, address, tags, subject, payment);
+    /**
+     * Builds the person.
+     */
+    public Person build() {
+        LogList finalLogList = new LogList(new ArrayList<>(logs));
+        return new Person(name, phone, email, address, tags, subject, uniqueId, exams, payment, finalLogList);
     }
 
 }
