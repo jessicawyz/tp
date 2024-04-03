@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -15,11 +16,21 @@ import javafx.collections.ObservableList;
  * Represents the list of all exams in the address book.
  */
 public class AllExamsList {
-    public static ObservableList<Exam> exams;
+    private static ObservableList<Exam> exams;
 
     public AllExamsList() {
         exams = FXCollections.observableArrayList();
     }
+
+    /**
+     * Gets the list of all exams.
+     *
+     * @return The observable list of all exams.
+     */
+    public static ObservableList<Exam> getExams() {
+        return exams;
+    }
+
 
     /**
      * Adds an exam to the list of all exams.

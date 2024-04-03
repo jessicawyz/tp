@@ -12,7 +12,8 @@ import java.util.Optional;
 
 /**
  * Represents a Person's exam details in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidExamDate(LocalDate)} and {@link #isValidExamTime(LocalTime)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidExamDate(LocalDate)}
+ * and {@link #isValidExamTime(LocalTime)}
  */
 public class Exam {
 

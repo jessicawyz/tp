@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +10,17 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Exam;
+import seedu.address.model.person.Id;
+import seedu.address.model.person.Log;
+import seedu.address.model.person.LogList;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -41,8 +50,10 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("subject") String subject,
-                             @JsonProperty("uniqueId") String uniqueId, @JsonProperty("exams") List<JsonAdaptedExam> exams,
-                             @JsonProperty("payment") String payment, @JsonProperty("logs") List<JsonAdaptedLog> logs) {
+                             @JsonProperty("uniqueId") String uniqueId,
+                             @JsonProperty("exams") List<JsonAdaptedExam> exams,
+                             @JsonProperty("payment") String payment,
+                             @JsonProperty("logs") List<JsonAdaptedLog> logs) {
         this.name = name;
         this.phone = phone;
         this.email = email;

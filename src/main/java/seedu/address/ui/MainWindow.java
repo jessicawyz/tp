@@ -16,7 +16,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.AllExamsList;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -176,6 +175,16 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Handles the display of student details.
+     * <p>
+     * If the student details window is not currently showing, this method will
+     * display the window with the given content. If the window is already visible,
+     * it will simply bring the window into focus.
+     *
+     * @param content The content to be displayed in the student details window.
+     *                This should include all relevant details about the student.
+     */
     @FXML
     public void handleStudentDetails(String content) {
         if (!studentDetailsWindow.isShowing()) {

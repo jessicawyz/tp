@@ -5,8 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Exam;
-import seedu.address.model.person.Person;
 
+/**
+ * A UI component that displays information of a {@code Exam}.
+ */
 public class ExamDisplayCard extends UiPart<Region> {
 
     private static final String FXML = "ExamDisplayCard.fxml";
@@ -32,6 +34,9 @@ public class ExamDisplayCard extends UiPart<Region> {
     private Label daysUntilLabel;
     private final Exam exam;
 
+    /**
+     * Creates a {@code ExamDisplayCard} with the given {@code Exam} and index to display.
+     */
     public ExamDisplayCard(Exam exam) {
         super(FXML);
         System.out.println("this is exam display card");
@@ -41,6 +46,6 @@ public class ExamDisplayCard extends UiPart<Region> {
         examNameLabel.setText(exam.getExamName());
         examDateLabel.setText(exam.getDate().toString());
         exam.getExamTime().ifPresent(time -> examTimeLabel.setText(time.toString()));
-        daysUntilLabel.setText(String.valueOf(exam.getDaysFromCurrentDate()) + " Days from now");
+        daysUntilLabel.setText(exam.getDaysFromCurrentDate() + " Days from now");
     }
 }
