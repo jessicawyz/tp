@@ -1,16 +1,18 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.DeleteExamCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Id;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import seedu.address.logic.commands.DeleteExamCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new DeleteExamCommand object.

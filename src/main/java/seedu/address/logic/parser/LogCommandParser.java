@@ -1,20 +1,27 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.AddCommand;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STYLE;
+
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.LogCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Stream;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-
+/**
+ * Parses input arguments and creates a new LogCommand object.
+ */
 public class LogCommandParser {
+    /**
+     * Parses the given {@code String} of arguments in the context of the LogCommand
+     * and returns a LogCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public LogCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_HOURS, PREFIX_NOTES, PREFIX_STYLE, PREFIX_CONTENT);

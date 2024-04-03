@@ -2,7 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
@@ -21,9 +25,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -213,6 +214,11 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Parses a {@code String time} into a {@code Option<LocalTime>}.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
     public static Optional<LocalTime> parseTimeFromStorage(String time) throws ParseException {
         if (time.equals("null") || time.isEmpty()) {
             return Optional.empty();
@@ -221,7 +227,8 @@ public class ParserUtil {
         String trimmedTime = time.trim();
         try {
             LocalTime parsedTime = LocalTime.parse(trimmedTime, DateTimeFormatter.ofPattern("HH:mm:ss"));
-            parsedTime = LocalTime.parse(parsedTime.format(DateTimeFormatter.ofPattern("HH:mm")), DateTimeFormatter.ofPattern("HH:mm"));
+            parsedTime = LocalTime.parse(parsedTime.format(DateTimeFormatter.ofPattern("HH:mm")),
+                    DateTimeFormatter.ofPattern("HH:mm"));
             return Optional.of(parsedTime);
         } catch (DateTimeParseException e) {
             throw new ParseException("Hi, Invalid time format. Please enter the time in the format HH:mm:ss.");
