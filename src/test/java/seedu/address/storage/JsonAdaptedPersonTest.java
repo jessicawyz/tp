@@ -29,6 +29,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_PAYMENT = "abc";
+    private static final String INVALID_PAYMENT_NEG = "-100";
     private static final String INVALID_SUBJECT = " ";
 
 
@@ -173,7 +174,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidPayment_throwsIllegalValueException() {
         JsonAdaptedPerson person =
-                new JsonAdaptedPerson(VALID_NAME, INVALID_PHONE, VALID_EMAIL,
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                         VALID_ADDRESS, VALID_TAGS, VALID_SUBJECT, VALID_UNIQUEID,
                         VALID_EXAMS, INVALID_PAYMENT, VALID_LOGS);
         String expectedMessage = Payment.MESSAGE_CONSTRAINTS;

@@ -49,9 +49,7 @@ public class TypicalPersons {
             .withSubject("English")
             .withTags("friends")
             .withUniqueId("000001")
-            .withExams(new HashSet<>(Set.of(MATH_EXAM_ALICE)))
-            .withPayment("0.0")
-            .withEmptyLogs()
+            //.withExams(new HashSet<>(Set.of(MATH_EXAM_ALICE)))
             .build();
 
     public static final Person AMY = new PersonBuilder()
@@ -62,10 +60,9 @@ public class TypicalPersons {
             .withTags(VALID_TAG_FRIEND)
             .withSubject(VALID_SUBJECT_AMY)
             .withUniqueId("000002")
-            .withExams(new HashSet<>(Set.of(CHINESE_EXAM_AMY)))
+            //.withExams(new HashSet<>(Set.of(CHINESE_EXAM_AMY)))
             .withPayment(VALID_PAYMENT_AMY)
             .withTags("friends")
-            .withEmptyLogs()
             .build();
 
     public static final Person BENSON = new PersonBuilder()
@@ -76,9 +73,8 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends")
             .withSubject("Math")
             .withUniqueId("000003")
-            .withExams(new HashSet<>(Set.of(ENGLISH_EXAM_BENSON)))
+            //.withExams(new HashSet<>(Set.of(ENGLISH_EXAM_BENSON)))
             .withPayment("0.0")
-            .withEmptyLogs()
             .build();
 
     public static final Person BOB = new PersonBuilder()
@@ -89,10 +85,9 @@ public class TypicalPersons {
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withSubject(VALID_SUBJECT_BOB)
             .withUniqueId("000004")
-            .withExams(new HashSet<>(Set.of(SCIENCE_EXAM_BOB)))
+            //.withExams(new HashSet<>(Set.of(SCIENCE_EXAM_BOB)))
             .withPayment(VALID_PAYMENT_BOB)
             .withTags("friends")
-            .withEmptyLogs()
             .build();
 
     public static final Person CARL = new PersonBuilder()
@@ -102,9 +97,8 @@ public class TypicalPersons {
             .withAddress("wall street")
             .withSubject("Science")
             .withUniqueId("000005")
-            .withExams(new HashSet<>(Set.of(HISTORY_EXAM_CARL)))
+            //.withExams(new HashSet<>(Set.of(HISTORY_EXAM_CARL)))
             .withPayment("0.0")
-            .withEmptyLogs()
             .build();
 
     public static final Person DANIEL = new PersonBuilder()
@@ -115,9 +109,8 @@ public class TypicalPersons {
             .withTags("friends")
             .withSubject("History")
             .withUniqueId("000006")
-            .withExams(new HashSet<>(Set.of(ENGLISH_QUIZ_DANIEL)))
+            //.withExams(new HashSet<>(Set.of(ENGLISH_QUIZ_DANIEL)))
             .withPayment("0.0")
-            .withEmptyLogs()
             .build();
 
     public static final Person ELLE = new PersonBuilder()
@@ -127,9 +120,9 @@ public class TypicalPersons {
             .withAddress("michegan ave")
             .withSubject("Geography")
             .withUniqueId("000007")
-            .withExams(new HashSet<>(Set.of(GEOGRAPHY_EXAM_ELLE)))
+            //.withExams(new HashSet<>(Set.of(GEOGRAPHY_EXAM_ELLE)))
+            //.withLogs()
             .withPayment("0.0")
-            .withEmptyLogs()
             .build();
 
     public static final Person FIONA = new PersonBuilder()
@@ -139,9 +132,8 @@ public class TypicalPersons {
             .withAddress("little tokyo")
             .withSubject("Art")
             .withUniqueId("000008")
-            .withExams(new HashSet<>(Set.of(ART_PROJECT_FIONA)))
+            //.withExams(new HashSet<>(Set.of(ART_PROJECT_FIONA)))
             .withPayment("0.0")
-            .withEmptyLogs()
             .build();
 
     public static final Person GEORGE = new PersonBuilder()
@@ -151,9 +143,8 @@ public class TypicalPersons {
             .withAddress("4th street")
             .withSubject("Physics")
             .withUniqueId("000009")
-            .withExams(new HashSet<>(Set.of(PHYSICS_LAB_GEORGE)))
+            //.withExams(new HashSet<>(Set.of(PHYSICS_LAB_GEORGE)))
             .withPayment("0.0")
-            .withEmptyLogs()
             .build();
 
     // Manually added
@@ -164,10 +155,9 @@ public class TypicalPersons {
             .withAddress("little india")
             .withSubject("Chemistry")
             .withUniqueId("000013")
-            .withExams(new HashSet<>(Set.of(CHEMISTRY_TEST_HOON)))
+            //.withExams(new HashSet<>(Set.of(CHEMISTRY_TEST_HOON)))
             .withPayment("0.0")
             .withTags("friends")
-            .withEmptyLogs()
             .build();
 
     public static final Person IDA = new PersonBuilder()
@@ -177,10 +167,9 @@ public class TypicalPersons {
             .withAddress("chicago ave")
             .withSubject("Biology")
             .withUniqueId("000011")
-            .withExams(new HashSet<>(Set.of(BIOLOGY_FINAL_IDA)))
+            //.withExams(new HashSet<>(Set.of(BIOLOGY_FINAL_IDA)))
             .withPayment("0.0")
             .withTags("friends")
-            .withEmptyLogs()
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
