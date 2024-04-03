@@ -49,3 +49,4 @@ public class ExamDisplayCard extends UiPart<Region> {
         daysUntilLabel.setText(exam.getDaysFromCurrentDate() + " Days from now");
     }
 }
+
