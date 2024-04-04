@@ -6,6 +6,9 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.AllExamsList;
+import seedu.address.model.person.Exam;
+import seedu.address.model.person.Log;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -16,6 +19,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final AllExamsList allExamsList = new AllExamsList();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -27,6 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
     }
+
 
     public AddressBook() {}
 
@@ -76,6 +81,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Adds an exam to the address book.
+     * The exam must not already exist in the address book.
+     */
+    public void addExam(Exam e) {
+        System.out.println("!addressbook add exam before: " + AllExamsList.getExams().size());
+        AllExamsList.addExamToList(e);
+        System.out.println("!addressbook add exam: " + AllExamsList.getExams().size());
+    }
+
+    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -108,6 +123,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    public ObservableList<Exam> getAllExamsList() {
+        System.out.println("in addressbook getall examslist: ALL: " + AllExamsList.getExams().size());
+        System.out.println("in addressbook getall examslist: all: " + allExamsList.getExams().size());
+        return allExamsList.getExams();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -128,6 +149,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.hashCode();
     }
 
+    /**
+     * Returns the total number of persons in the address book.
+     */
     public int getTotalPersons() {
         return persons.getTotalPersons();
     }
@@ -138,5 +162,13 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public void clearSummaryStats() {
         persons.clearSummaryStats();
+    }
+    /**
+     * Adds a log to the person.
+     */
+    public void addLogToPerson(Person target, Log log) {
+        requireNonNull(target);
+        requireNonNull(log);
+        target.addLog(log);
     }
 }

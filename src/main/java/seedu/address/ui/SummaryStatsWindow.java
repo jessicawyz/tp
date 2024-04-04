@@ -99,6 +99,7 @@ public class SummaryStatsWindow extends UiPart<Stage> {
      * Focuses on the help window.
      */
     public void focus() {
+        updateSummaryStats();
         getRoot().requestFocus();
     }
 

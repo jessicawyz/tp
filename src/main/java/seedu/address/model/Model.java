@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Exam;
+import seedu.address.model.person.Log;
 import seedu.address.model.person.Person;
 
 /**
@@ -106,4 +108,7 @@ public interface Model {
     void clearSummaryStats();
 
 
+    public ObservableList<Exam> getAllExamList();
+
+    void addLog(Person person, Log log);
 }

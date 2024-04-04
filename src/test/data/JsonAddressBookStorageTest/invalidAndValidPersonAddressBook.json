@@ -6,7 +6,19 @@
     "address": "4th street",
     "subject": "Math",
     "uniqueId" : "000000",
-    "payment": "0.0"
+    "exams": [
+      {
+        "name": "Math Final",
+        "date": "2024-12-15",
+        "time": {
+          "value":  "09:00:00"
+        },
+        "studentName": "Alice Pauline",
+        "uniqueId": "000001"
+      }
+    ],
+    "payment": "0.0",
+    "logs": []
   }, {
     "name": "Person With Invalid Phone Field",
     "phone": "948asdf2424",
@@ -14,6 +26,18 @@
     "address": "4th street",
     "subject": "Math",
     "uniqueId" : "000001",
-    "payment": "0.0"
+    "exams": [
+      {
+        "name": "Math Final",
+        "date": "2024-12-15",
+        "time": {
+          "value":  "09:00:00"
+        },
+        "studentName": "Alice Pauline",
+        "uniqueId": "000001"
+      }
+    ],
+    "payment": "0.0",
+    "logs": []
   } ]
 }

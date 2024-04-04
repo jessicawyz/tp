@@ -1,0 +1,12 @@
+#detailsMessage {
+    -fx-text-fill: white;
+}
+
+#studentDetailsContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-font-size: 14px;
+}
+
+#scrollContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}

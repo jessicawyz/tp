@@ -22,6 +22,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Exam;
+import seedu.address.model.person.Log;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -83,6 +85,8 @@ public class AddCommandTest {
     public void toStringMethod() {
         AddCommand addCommand = new AddCommand(ALICE);
         String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        System.out.println(addCommand.toString());
+        System.out.println(expected);
         assertEquals(expected, addCommand.toString());
     }
 
@@ -178,6 +182,7 @@ public class AddCommandTest {
 
         @Override
         public double getTotalOwings() {
+        public ObservableList<Exam> getAllExamList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -185,6 +190,10 @@ public class AddCommandTest {
         public void clearSummaryStats() {
             throw new AssertionError("This method should not be called.");
         }
+        public void addLog(Person person, Log log) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
