@@ -98,4 +98,10 @@ public class LogicManager implements Logic {
     public int getTotalPersons() {
         return model.getTotalPersons();
     }
+
+    @Override
+    public double getTotalOwings() {
+        return model.getTotalOwings();
+    }
+
 }

@@ -16,7 +16,9 @@ import seedu.address.logic.Logic;
  */
 public class SummaryStatsWindow extends UiPart<Stage> {
 
-    public static final String SUMMARYSTATS_MESSAGE = "The Total Student Count is";
+    public static final String SUMMARYSTATS_MESSAGE_COUNT = "The Total Student Count is";
+
+    public static final String SUMMARYSTATS_MESSAGE_OWING = "The Total Tuition fee owings by Students is $";
 
     private static final Logger logger = LogsCenter.getLogger(SummaryStatsWindow.class);
     private static final String FXML = "SummaryStatsWindow.fxml";
@@ -25,10 +27,15 @@ public class SummaryStatsWindow extends UiPart<Stage> {
     private Button copyButton;
 
     @FXML
-    private Label summaryMessage;
+    private Label summaryMessageCountLabel;
+
+    @FXML
+    private Label summaryMessageOwingsLabel;
 
     private Logic logic;
     private int totalPerson;
+
+    private double totalOwings;
 
     /**
      * Creates a new SummaryStatsWindow.
@@ -45,9 +52,7 @@ public class SummaryStatsWindow extends UiPart<Stage> {
     public SummaryStatsWindow(Logic logic) {
         this(new Stage());
         this.logic = logic;
-        totalPerson = logic.getTotalPersons();
-        String output = SUMMARYSTATS_MESSAGE + " " + Integer.toString(totalPerson);
-        summaryMessage.setText(output);
+        updateSummaryStats();
     }
 
     /**
@@ -70,9 +75,7 @@ public class SummaryStatsWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing total Student Count about the application.");
-        totalPerson = logic.getTotalPersons();
-        String output = SUMMARYSTATS_MESSAGE + " " + Integer.toString(totalPerson);
-        summaryMessage.setText(output);
+        updateSummaryStats();
         getRoot().show();
         getRoot().centerOnScreen();
     }
@@ -81,6 +84,7 @@ public class SummaryStatsWindow extends UiPart<Stage> {
      * Returns true if the help window is currently being shown.
      */
     public boolean isShowing() {
+        updateSummaryStats();
         return getRoot().isShowing();
     }
 
@@ -95,12 +99,26 @@ public class SummaryStatsWindow extends UiPart<Stage> {
      * Focuses on the help window.
      */
     public void focus() {
-        totalPerson = logic.getTotalPersons();
-        String output = SUMMARYSTATS_MESSAGE + " " + Integer.toString(totalPerson);
-        summaryMessage.setText(output);
+        updateSummaryStats();
         getRoot().requestFocus();
     }
 
+    private void updateTotalCountOfPersons() {
+        totalPerson = logic.getTotalPersons();
+        String output = SUMMARYSTATS_MESSAGE_COUNT + " " + Integer.toString(totalPerson);
+        summaryMessageCountLabel.setText(output);
+    }
+
+    private void updateTotalOwingsofPersons() {
+        totalOwings = logic.getTotalOwings();
+        String output = SUMMARYSTATS_MESSAGE_OWING + " " + Double.toString(totalOwings);
+        summaryMessageOwingsLabel.setText(output);
+    }
+
+    private void updateSummaryStats() {
+        updateTotalCountOfPersons();
+        updateTotalOwingsofPersons();
+    }
     /**
      * Copies the URL to the user guide to the clipboard.
      */

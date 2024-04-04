@@ -156,6 +156,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.getTotalPersons();
     }
 
+    public double getTotalOwings() {
+        return persons.getTotalOwings();
+    }
+
+    public void clearSummaryStats() {
+        persons.clearSummaryStats();
+    }
     /**
      * Adds a log to the person.
      */

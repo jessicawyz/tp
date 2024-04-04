@@ -54,5 +54,7 @@ public interface Logic {
      */
     int getTotalPersons();
 
+    double getTotalOwings();
+
     public ObservableList<Exam> getAllExamsList();
 }

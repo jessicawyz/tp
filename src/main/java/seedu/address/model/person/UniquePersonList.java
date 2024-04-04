@@ -24,6 +24,8 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  */
 public class UniquePersonList implements Iterable<Person> {
     private static int totalPersons = 0;
+
+    private static double totalOwings = 0.0;
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -67,6 +69,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
 
+        updateTotalOwings(target, editedPerson);
         internalList.set(index, editedPerson);
     }
 
@@ -94,7 +97,8 @@ public class UniquePersonList implements Iterable<Person> {
         return totalPersons;
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setPersons(UniquePersonList replacement) { // this method is called during paymentCommands
+
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -161,5 +165,21 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    private void updateTotalOwings(Person target, Person editedPerson) {
+        totalOwings = totalOwings - target.getPayment().getAmount() + editedPerson.getPayment().getAmount();
+    }
+
+    public double getTotalOwings() {
+        return totalOwings;
+    }
+
+    /**
+     * Clears the summary statistics.
+     */
+    public void clearSummaryStats() {
+        totalPersons = 0;
+        totalOwings = 0.0;
     }
 }

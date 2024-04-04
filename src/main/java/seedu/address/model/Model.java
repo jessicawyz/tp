@@ -92,6 +92,8 @@ public interface Model {
      */
     int getTotalPersons();
 
+    double getTotalOwings();
+
     /*
      * Returns the next unique ID for a person.
      */
@@ -106,6 +108,8 @@ public interface Model {
     ObservableList<Exam> getAllExamList();
 
     void addExam(Exam exam);
+
+    void clearSummaryStats();
 
     void addLog(Person person, Log log);
 }
