@@ -78,7 +78,7 @@ public class AddExamCommand extends Command {
         Exam newExam = new Exam(examName, examDate, examTime, personName, personUniqueId);
 
         updatedExams.add(newExam);
-        AllExamsList.addExamToList(newExam);
+        model.addExam(newExam);
 
         Person updatedPerson = new Person(personToUpdate.getName(), personToUpdate.getPhone(),
                 personToUpdate.getEmail(), personToUpdate.getAddress(), personToUpdate.getTags(),
