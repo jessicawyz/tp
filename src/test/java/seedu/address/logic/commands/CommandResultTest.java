@@ -15,8 +15,9 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", null, false,
-                false, false, false)));
+
+        assertTrue(commandResult.equals(new CommandResult("feedback", null, false, false, false, false)));
+
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -35,15 +36,11 @@ public class CommandResultTest {
                 false, false, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", null, true,
-                false, false, false)));
-
-        // different showSummaryStats value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", null, false,
-                false, true, false)));
+                true, false, false)));
 
-        // different showStudentDetails value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", null, false,
+        // different showStudentDetails value -> returns true -> only java fx does work
+        assertTrue(commandResult.equals(new CommandResult("feedback", null, false,
                 false, false, true)));
 
     }

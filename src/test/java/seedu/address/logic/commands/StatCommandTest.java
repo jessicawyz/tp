@@ -15,8 +15,10 @@ public class StatCommandTest {
     public void execute_statCommand_success() {
         StatCommand statCommand = new StatCommand();
         Model model = new ModelManager();
-        CommandResult expectedCommandResult = new CommandResult(StatCommand.MESSAGE_SUCCESS, null,
-                false, false, true, false);
+
+        CommandResult expectedCommandResult = new CommandResult(StatCommand.MESSAGE_SUCCESS,
+                null, false, false, true, false);
+
         assertCommandSuccess(statCommand, model, expectedCommandResult, model);
     }
 

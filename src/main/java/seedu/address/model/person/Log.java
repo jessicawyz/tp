@@ -21,11 +21,14 @@ public class Log {
      * @param lessonContent A valid lesson content.
      * @param notes A valid note.
      */
-    public Log(String learningStyle, String hours, String lessonContent, String notes) {
-        Date currentDate = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        date = dateFormat.format(currentDate);
+    public Log(String learningStyle, String hours, String lessonContent, String notes, String date) {
+        if (date == null) {
+            Date currentDate = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            date = dateFormat.format(currentDate);
+        }
 
+        this.date = date;
         this.learningStyle = learningStyle;
         this.hours = hours;
         this.lessonContent = lessonContent;
