@@ -103,7 +103,9 @@ public interface Model {
      */
     Person getPersonByUniqueId(String uniqueId);
 
-    public ObservableList<Exam> getAllExamList();
+    ObservableList<Exam> getAllExamList();
+
+    void addExam(Exam exam);
 
     void addLog(Person person, Log log);
 }

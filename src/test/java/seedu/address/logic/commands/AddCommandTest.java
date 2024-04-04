@@ -190,6 +190,11 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void addExam(Exam exam) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

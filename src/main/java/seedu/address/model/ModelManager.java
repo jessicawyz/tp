@@ -123,6 +123,12 @@ public class ModelManager implements Model {
         addressBook.addLogToPerson(person, log);
     }
 
+    @Override
+    public void addExam(Exam exam) {
+        requireNonNull(exam);
+        addressBook.addExam(exam);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
