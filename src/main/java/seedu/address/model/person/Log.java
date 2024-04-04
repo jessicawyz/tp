@@ -65,4 +65,22 @@ public class Log {
                 .append("Notes: " + notes + "\n");
         return builder.toString();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Log)) {
+            return false;
+        }
+
+        Log otherLog = (Log) other;
+        return otherLog.getDate().equals(getDate())
+                && otherLog.getLearningStyle().equals(getLearningStyle())
+                && otherLog.getHours().equals(getHours())
+                && otherLog.getLessonContent().equals(getLessonContent())
+                && otherLog.getNotes().equals(getNotes());
+    }
 }

@@ -105,10 +105,11 @@ public interface Model {
      */
     Person getPersonByUniqueId(String uniqueId);
 
+    ObservableList<Exam> getAllExamList();
+
+    void addExam(Exam exam);
+
     void clearSummaryStats();
-
-
-    public ObservableList<Exam> getAllExamList();
 
     void addLog(Person person, Log log);
 }

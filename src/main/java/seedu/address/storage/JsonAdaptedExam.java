@@ -18,6 +18,7 @@ import seedu.address.model.person.Id;
  */
 public class JsonAdaptedExam {
 
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Missing %s field in JSON data.";
     private final String name;
     private final Object date;
     private final Object time;

@@ -68,4 +68,20 @@ public class LogCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(logDetails)));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+
+        if (!(other instanceof LogCommand)) {
+            return false;
+        }
+
+        LogCommand otherCommand = (LogCommand) other;
+        return targetId == otherCommand.targetId
+                && (logDetails != null ? logDetails.equals(otherCommand.logDetails) : otherCommand.logDetails == null);
+    }
+
 }

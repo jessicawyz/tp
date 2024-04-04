@@ -107,6 +107,12 @@ public class Person {
         return this.uniqueId = uniqueId;
     }
 
+    /** Sets the exams of the person */
+    public void setExams(Set<Exam> exams) {
+        this.exams.clear();
+        this.exams.addAll(exams);
+    }
+
     /** Returns the exams of the person */
     public Set<Exam> getExams() {
         return Collections.unmodifiableSet(exams);

@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -129,4 +130,21 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
+
+    @Test
+    public void addLog_nullLog_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.addLog(ALICE, null));
+    }
+
+    @Test
+    public void getPersonByUniqueId_existingId_returnsCorrectPerson() {
+        modelManager.addPerson(ALICE);
+        assertEquals(ALICE, modelManager.getPersonByUniqueId(ALICE.getUniqueId().toString()));
+    }
+
+    @Test
+    public void getPersonByUniqueId_nonExistingId_returnsNull() {
+        assertNull(modelManager.getPersonByUniqueId("nonExistingId"));
+    }
+
 }
