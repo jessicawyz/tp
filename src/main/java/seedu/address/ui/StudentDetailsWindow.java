@@ -74,33 +74,23 @@ public class StudentDetailsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the Student details window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the help window.
+     * Hides the Student details window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the Student details window.
      */
     public void focus() {
         getRoot().requestFocus();
-    }
-
-    /**
-     * Copies the URL to the user guide to the clipboard.
-     */
-    @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        clipboard.setContent(url);
     }
 }

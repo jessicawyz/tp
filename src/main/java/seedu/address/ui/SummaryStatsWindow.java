@@ -5,8 +5,6 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
@@ -62,7 +60,7 @@ public class SummaryStatsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the stats window.
+     * Shows the SummaryStatsWindow window.
      * @throws IllegalStateException
      *     <ul>
      *         <li>
@@ -87,7 +85,7 @@ public class SummaryStatsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the SummaryStatsWindow window is currently being shown.
      */
     public boolean isShowing() {
         updateSummaryStats();
@@ -95,14 +93,14 @@ public class SummaryStatsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Hides the help window.
+     * Hides the SummaryStatsWindow window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the SummaryStatsWindow window.
      */
     public void focus() {
         updateSummaryStats();
@@ -131,14 +129,5 @@ public class SummaryStatsWindow extends UiPart<Stage> {
         updateTotalCountOfPersons();
         updateTotalOwingsofPersons();
         updateUpcomingMonthExams();
-    }
-    /**
-     * Copies the URL to the user guide to the clipboard.
-     */
-    @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        clipboard.setContent(url);
     }
 }
