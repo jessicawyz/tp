@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
  */
 public class AllExamsList {
     private static ObservableList<Exam> exams;
+    private static int upcomingMonthExamCount = 0;
 
     public AllExamsList() {
         exams = FXCollections.observableArrayList();
@@ -94,5 +95,23 @@ public class AllExamsList {
         };
 
         Collections.sort(exams, comparator); // Sort the exams list using the comparator
+    }
+
+    public int getUpcomingMonthExamCount() {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate nextMonthAndADay = currentDate.plusMonths(1).plusDays(1);
+
+        upcomingMonthExamCount = 0;
+        for (Exam exam : exams) {
+            LocalDate examDate = exam.date;
+            if (examDate.isAfter(currentDate) && examDate.isBefore(nextMonthAndADay) || examDate.isEqual(currentDate)) {
+                upcomingMonthExamCount++;
+            }
+        }
+        return upcomingMonthExamCount;
+    }
+
+    public void clearSummaryStats() {
+        upcomingMonthExamCount = 0;
     }
 }

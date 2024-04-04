@@ -20,6 +20,8 @@ public class SummaryStatsWindow extends UiPart<Stage> {
 
     public static final String SUMMARYSTATS_MESSAGE_OWING = "The Total Tuition fee owings by Students is $";
 
+    public static final String SUMMARYSTATS_MESSAGE_EXAM = "The number of Exams in the upcoming month is :";
+
     private static final Logger logger = LogsCenter.getLogger(SummaryStatsWindow.class);
     private static final String FXML = "SummaryStatsWindow.fxml";
 
@@ -32,8 +34,12 @@ public class SummaryStatsWindow extends UiPart<Stage> {
     @FXML
     private Label summaryMessageOwingsLabel;
 
+    @FXML
+    private Label summaryMessageUpcomingExamCountLabel;
+
     private Logic logic;
     private int totalPerson;
+    private int upcomingMonthExams;
 
     private double totalOwings;
 
@@ -56,7 +62,7 @@ public class SummaryStatsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the help window.
+     * Shows the stats window.
      * @throws IllegalStateException
      *     <ul>
      *         <li>
@@ -74,7 +80,7 @@ public class SummaryStatsWindow extends UiPart<Stage> {
      *     </ul>
      */
     public void show() {
-        logger.fine("Showing total Student Count about the application.");
+        logger.fine("Showing summary stats of students.");
         updateSummaryStats();
         getRoot().show();
         getRoot().centerOnScreen();
@@ -115,9 +121,16 @@ public class SummaryStatsWindow extends UiPart<Stage> {
         summaryMessageOwingsLabel.setText(output);
     }
 
+    private void updateUpcomingMonthExams() {
+        upcomingMonthExams = logic.getUpcomingMonthExamCount();
+        String output = SUMMARYSTATS_MESSAGE_EXAM + " " + Integer.toString(upcomingMonthExams);
+        summaryMessageUpcomingExamCountLabel.setText(output);
+    }
+
     private void updateSummaryStats() {
         updateTotalCountOfPersons();
         updateTotalOwingsofPersons();
+        updateUpcomingMonthExams();
     }
     /**
      * Copies the URL to the user guide to the clipboard.

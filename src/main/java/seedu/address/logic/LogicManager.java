@@ -104,4 +104,9 @@ public class LogicManager implements Logic {
         return model.getTotalOwings();
     }
 
+    @Override
+    public int getUpcomingMonthExamCount() {
+        return model.getUpcomingMonthExamCount();
+    }
+
 }

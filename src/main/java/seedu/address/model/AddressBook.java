@@ -156,12 +156,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.getTotalPersons();
     }
 
+    /**
+     * Returns the total amount of money owed by all persons in the address book.
+     */
     public double getTotalOwings() {
         return persons.getTotalOwings();
     }
 
+    /**
+     * Clear and resets the Summary Stats.
+     */
     public void clearSummaryStats() {
         persons.clearSummaryStats();
+        allExamsList.clearSummaryStats();
     }
     /**
      * Adds a log to the person.
@@ -170,5 +177,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(target);
         requireNonNull(log);
         target.addLog(log);
+    }
+
+    public int getUpcomingMonthExamCount() {
+        return allExamsList.getUpcomingMonthExamCount();
     }
 }

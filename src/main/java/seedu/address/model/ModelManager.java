@@ -214,4 +214,8 @@ public class ModelManager implements Model {
         return addressBook.getAllExamsList();
     }
 
+    public int getUpcomingMonthExamCount() {
+        return addressBook.getUpcomingMonthExamCount();
+    }
+
 }
