@@ -7,7 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.Logic;
 
 /**
  * Window to show the details of a student.
@@ -18,16 +17,12 @@ public class StudentDetailsWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(StudentDetailsWindow.class);
     private static final String FXML = "StudentDetailsWindow.fxml";
 
-    private static String content;
 
     @FXML
     private Button copyButton;
 
     @FXML
     private Label detailsMessage;
-
-    private Logic logic;
-    private int totalPerson;
 
     /**
      * Creates a new StudentDetailsWindow.
@@ -64,7 +59,7 @@ public class StudentDetailsWindow extends UiPart<Stage> {
      *     </ul>
      */
     public void show(String content) {
-        logger.fine("Showing total Student Count about the application.");
+        logger.fine("Showing Logs of Lessons.");
         getRoot().show();
         getRoot().centerOnScreen();
 
