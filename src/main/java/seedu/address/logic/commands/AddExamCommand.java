@@ -91,8 +91,6 @@ public class AddExamCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        assert other != null;
-        assert other instanceof AddExamCommand;
         if (this == other) {
             return true;
         }
