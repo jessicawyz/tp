@@ -5,8 +5,6 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
@@ -20,6 +18,8 @@ public class SummaryStatsWindow extends UiPart<Stage> {
 
     public static final String SUMMARYSTATS_MESSAGE_OWING = "The Total Tuition fee owings by Students is $";
 
+    public static final String SUMMARYSTATS_MESSAGE_EXAM = "The number of Exams in the upcoming month is :";
+
     private static final Logger logger = LogsCenter.getLogger(SummaryStatsWindow.class);
     private static final String FXML = "SummaryStatsWindow.fxml";
 
@@ -32,8 +32,12 @@ public class SummaryStatsWindow extends UiPart<Stage> {
     @FXML
     private Label summaryMessageOwingsLabel;
 
+    @FXML
+    private Label summaryMessageUpcomingExamCountLabel;
+
     private Logic logic;
     private int totalPerson;
+    private int upcomingMonthExams;
 
     private double totalOwings;
 
@@ -56,7 +60,7 @@ public class SummaryStatsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the help window.
+     * Shows the SummaryStatsWindow window.
      * @throws IllegalStateException
      *     <ul>
      *         <li>
@@ -74,14 +78,14 @@ public class SummaryStatsWindow extends UiPart<Stage> {
      *     </ul>
      */
     public void show() {
-        logger.fine("Showing total Student Count about the application.");
+        logger.fine("Showing summary stats of students.");
         updateSummaryStats();
         getRoot().show();
         getRoot().centerOnScreen();
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the SummaryStatsWindow window is currently being shown.
      */
     public boolean isShowing() {
         updateSummaryStats();
@@ -89,14 +93,14 @@ public class SummaryStatsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Hides the help window.
+     * Hides the SummaryStatsWindow window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the SummaryStatsWindow window.
      */
     public void focus() {
         updateSummaryStats();
@@ -115,17 +119,15 @@ public class SummaryStatsWindow extends UiPart<Stage> {
         summaryMessageOwingsLabel.setText(output);
     }
 
+    private void updateUpcomingMonthExams() {
+        upcomingMonthExams = logic.getUpcomingMonthExamCount();
+        String output = SUMMARYSTATS_MESSAGE_EXAM + " " + Integer.toString(upcomingMonthExams);
+        summaryMessageUpcomingExamCountLabel.setText(output);
+    }
+
     private void updateSummaryStats() {
         updateTotalCountOfPersons();
         updateTotalOwingsofPersons();
-    }
-    /**
-     * Copies the URL to the user guide to the clipboard.
-     */
-    @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        clipboard.setContent(url);
+        updateUpcomingMonthExams();
     }
 }

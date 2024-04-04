@@ -56,5 +56,7 @@ public interface Logic {
 
     double getTotalOwings();
 
+    int getUpcomingMonthExamCount();
+
     public ObservableList<Exam> getAllExamsList();
 }

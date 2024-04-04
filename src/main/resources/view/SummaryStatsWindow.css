@@ -1,9 +1,16 @@
 #summaryMessageCountLabel {
     -fx-text-fill: white;
+    -fx-text-alignment: left;
 }
 
 #summaryMessageOwingsLabel {
     -fx-text-fill: white;
+    -fx-text-alignment: left;
+}
+
+#summaryMessageUpcomingExamCountLabel {
+    -fx-text-fill: white;
+    -fx-text-alignment: left;
 }
 
 #summaryMessageContainer {

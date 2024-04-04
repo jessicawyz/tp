@@ -5,11 +5,8 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.Clipboard;
-import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.Logic;
 
 /**
  * Window to show the details of a student.
@@ -20,16 +17,12 @@ public class StudentDetailsWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(StudentDetailsWindow.class);
     private static final String FXML = "StudentDetailsWindow.fxml";
 
-    private static String content;
 
     @FXML
     private Button copyButton;
 
     @FXML
     private Label detailsMessage;
-
-    private Logic logic;
-    private int totalPerson;
 
     /**
      * Creates a new StudentDetailsWindow.
@@ -66,7 +59,7 @@ public class StudentDetailsWindow extends UiPart<Stage> {
      *     </ul>
      */
     public void show(String content) {
-        logger.fine("Showing total Student Count about the application.");
+        logger.fine("Showing Logs of Lessons.");
         getRoot().show();
         getRoot().centerOnScreen();
 
@@ -74,33 +67,23 @@ public class StudentDetailsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the Student details window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the help window.
+     * Hides the Student details window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the Student details window.
      */
     public void focus() {
         getRoot().requestFocus();
-    }
-
-    /**
-     * Copies the URL to the user guide to the clipboard.
-     */
-    @FXML
-    private void copyUrl() {
-        final Clipboard clipboard = Clipboard.getSystemClipboard();
-        final ClipboardContent url = new ClipboardContent();
-        clipboard.setContent(url);
     }
 }
