@@ -35,6 +35,9 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private SummaryStatsWindow summaryStatsWindow;
+    private ExamDisplayCard examDisplayCard;
+    private ExamListPanel examListPanel;
+    private StudentDetailsWindow studentDetailsWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -44,6 +47,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane examDisplayCardPlaceholder;
+
+    @FXML
+    private StackPane examListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -68,6 +77,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         summaryStatsWindow = new SummaryStatsWindow(logic);
+        studentDetailsWindow = new StudentDetailsWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -115,6 +125,10 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        //printed 0 here
+        examListPanel = new ExamListPanel(logic.getFilteredPersonList());
+        examListPanelPlaceholder.getChildren().add(examListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -161,6 +175,25 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Handles the display of student details.
+     * <p>
+     * If the student details window is not currently showing, this method will
+     * display the window with the given content. If the window is already visible,
+     * it will simply bring the window into focus.
+     *
+     * @param content The content to be displayed in the student details window.
+     *                This should include all relevant details about the student.
+     */
+    @FXML
+    public void handleStudentDetails(String content) {
+        if (!studentDetailsWindow.isShowing()) {
+            studentDetailsWindow.show(content);
+        } else {
+            studentDetailsWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -202,6 +235,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowSummaryStats()) {
                 handleSummaryStats();
+            }
+
+            if (commandResult.isShowStudentDetails()) {
+                handleStudentDetails(commandResult.getPopupDisplay());
             }
 
             return commandResult;

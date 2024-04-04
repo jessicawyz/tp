@@ -12,7 +12,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Id;
+import seedu.address.model.person.Log;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,6 +26,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    //private final ObservableList<Exam> allExamsList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,6 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        //allExamsList = AllExamsList.exams;
     }
 
     public ModelManager() {
@@ -114,6 +118,11 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void addLog(Person person, Log log) {
+        addressBook.addLogToPerson(person, log);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -180,6 +189,14 @@ public class ModelManager implements Model {
     @Override
     public int getTotalPersons() {
         return addressBook.getTotalPersons();
+    }
+
+
+    @Override
+    public ObservableList<Exam> getAllExamList() {
+        System.out.println("in model, we print exams: " + addressBook.getAllExamsList().size());
+        //got 0 here which is not right
+        return addressBook.getAllExamsList();
     }
 
 }

@@ -28,7 +28,7 @@ public class StatCommand extends ViewCommand {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        return new CommandResult(MESSAGE_SUCCESS, false, false, true);
+        return new CommandResult(MESSAGE_SUCCESS, null, false, false, true, false);
     }
 
 

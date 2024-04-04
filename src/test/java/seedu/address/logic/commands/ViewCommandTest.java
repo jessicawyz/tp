@@ -38,7 +38,7 @@ public class ViewCommandTest {
 
     @Test
     public void execute_viewById_success() {
-        Id id = new Id("12345");
+        Id id = new Id("000004");
         IsSameIdPredicate predicate = new IsSameIdPredicate(id);
         ViewCommand command = new ViewCommand(predicate);
 

@@ -12,7 +12,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Id;
+import seedu.address.model.person.Log;
+import seedu.address.model.person.LogList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
@@ -37,6 +40,8 @@ class JsonAdaptedPerson {
     private final String uniqueId;
     private final String payment;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedExam> exams = new ArrayList<>();
+    private final List<JsonAdaptedLog> logs = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -45,7 +50,10 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("subject") String subject,
-                             @JsonProperty("uniqueId") String uniqueId, @JsonProperty("payment") String payment) {
+                             @JsonProperty("uniqueId") String uniqueId,
+                             @JsonProperty("exams") List<JsonAdaptedExam> exams,
+                             @JsonProperty("payment") String payment,
+                             @JsonProperty("logs") List<JsonAdaptedLog> logs) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -55,6 +63,14 @@ class JsonAdaptedPerson {
         this.payment = payment;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+
+        if (exams != null) {
+            this.exams.addAll(exams);
+        }
+
+        if (logs != null) {
+            this.logs.addAll(logs);
         }
     }
 
@@ -71,8 +87,13 @@ class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
         subject = source.getSubject().value;
         uniqueId = source.getUniqueId().id;
+        exams.addAll(source.getExams().stream()
+                .map(JsonAdaptedExam::new)
+                .collect(Collectors.toList()));
         payment = source.getPayment().value;
-
+        logs.addAll(source.getLogs().getList().stream()
+                .map(JsonAdaptedLog::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -84,6 +105,16 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Exam> personExams = new ArrayList<>();
+        for (JsonAdaptedExam exam : exams) {
+            personExams.add(exam.toModelType());
+        }
+
+        final List<Log> personLogs = new ArrayList<>();
+        for (JsonAdaptedLog log : logs) {
+            personLogs.add(log.toModelType());
         }
 
         if (name == null) {
@@ -128,14 +159,15 @@ class JsonAdaptedPerson {
         if (payment == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Payment.class.getSimpleName()));
         }
-
         final Id modelId = new Id(uniqueId);
         final Subject modelSubject = new Subject(subject);
         final Address modelAddress = new Address(address);
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Exam> modelExams = new HashSet<>(personExams);
         final Payment modelPayment = new Payment(payment);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress,
-                modelTags, modelSubject, modelId, modelPayment);
-    }
+        final LogList modelLogs = new LogList(personLogs);
 
+        return new Person(modelName, modelPhone, modelEmail, modelAddress,
+                modelTags, modelSubject, modelId, modelExams, modelPayment, modelLogs);
+    }
 }

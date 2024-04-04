@@ -24,6 +24,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
@@ -116,10 +117,11 @@ public class EditCommand extends Command {
         Subject updatedSubjects = editPersonDescriptor.getSubject().orElse(personToEdit.getSubject());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Id uniqueID = editPersonDescriptor.getId().orElse(personToEdit.getUniqueId());
+        Set<Exam> updatedExams = editPersonDescriptor.getExams().orElse(personToEdit.getExams());
         Payment payment = personToEdit.getPayment(); // Payment is not editable
 
         return new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedTags, updatedSubjects, uniqueID, payment);
+                updatedAddress, updatedTags, updatedSubjects, uniqueID, updatedExams, payment, personToEdit.getLogs());
     }
 
     @Override
@@ -159,6 +161,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Subject subject;
         private Id uniqueID;
+        private Set<Exam> exams;
 
         public EditPersonDescriptor() {}
 
@@ -174,7 +177,9 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setSubject(toCopy.subject);
             setId(toCopy.uniqueID);
+            setExams(toCopy.exams);
         }
+
 
         /**
          * Returns true if at least one field is edited.
@@ -248,6 +253,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setExams(Set<Exam> exams) {
+            this.exams = (exams != null) ? new HashSet<>(exams) : null;
+        }
+
+        public Optional<Set<Exam>> getExams() {
+            return (exams != null) ? Optional.of(Collections.unmodifiableSet(exams)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -265,7 +278,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(subject, otherEditPersonDescriptor.subject)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(exams, otherEditPersonDescriptor.exams);
         }
 
         @Override
@@ -277,6 +291,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("subject", subject)
                     .add("tags", tags)
+                    .add("exams", exams)
                     .toString();
         }
     }

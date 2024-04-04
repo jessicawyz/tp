@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.person.Log;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,6 +20,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found";
+    public static final String MESSAGE_EXAM_NOT_FOUND = "Exam to delete cannot be found";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -49,6 +52,22 @@ public class Messages {
                 .append(person.getPayment());
         builder.append(" ; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code log} for display to the user.
+     */
+    public static String format(Log log) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(log.getDate())
+                .append("; Time: ")
+                .append(log.getHours())
+                .append("; Hours: ")
+                .append(log.getLearningStyle())
+                .append("; Learning Style: ")
+                .append(log.getNotes())
+                .append("; Notes:");
         return builder.toString();
     }
 
