@@ -94,7 +94,6 @@ public class JsonAdaptedExam {
         try {
             String timeString = time.toString();
             timeString = timeString.substring(timeString.indexOf('=') + 1, timeString.lastIndexOf('}'));
-            System.out.println(timeString);
             parsedTime = ParserUtil.parseTimeFromStorage(timeString);
         } catch (ParseException e) {
             throw new IllegalValueException(e.getMessage());
@@ -106,8 +105,6 @@ public class JsonAdaptedExam {
         Id parsedUniqueId = ParserUtil.parseId(uniqueId);
 
         Exam newExam = new Exam(parsedName, parsedDate, parsedTime, parsedStudentName, parsedUniqueId);
-        System.out.println("newExam: " + newExam);
-        System.out.println("newExam: " + parsedName);
 
         return newExam;
     }

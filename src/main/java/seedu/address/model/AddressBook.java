@@ -85,9 +85,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The exam must not already exist in the address book.
      */
     public void addExam(Exam e) {
-        System.out.println("!addressbook add exam before: " + AllExamsList.getExams().size());
         AllExamsList.addExamToList(e);
-        System.out.println("!addressbook add exam: " + AllExamsList.getExams().size());
     }
 
     /**
@@ -124,8 +122,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public ObservableList<Exam> getAllExamsList() {
-        System.out.println("in addressbook getall examslist: ALL: " + AllExamsList.getExams().size());
-        System.out.println("in addressbook getall examslist: all: " + allExamsList.getExams().size());
         return allExamsList.getExams();
     }
 
@@ -156,12 +152,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.getTotalPersons();
     }
 
+    /**
+     * Returns the total amount of money owed by all persons in the address book.
+     */
     public double getTotalOwings() {
         return persons.getTotalOwings();
     }
 
+    /**
+     * Clear and resets the Summary Stats.
+     */
     public void clearSummaryStats() {
         persons.clearSummaryStats();
+        allExamsList.clearSummaryStats();
     }
     /**
      * Adds a log to the person.
@@ -170,5 +173,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(target);
         requireNonNull(log);
         target.addLog(log);
+    }
+
+    public int getUpcomingMonthExamCount() {
+        return allExamsList.getUpcomingMonthExamCount();
     }
 }

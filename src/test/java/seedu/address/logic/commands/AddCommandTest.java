@@ -85,8 +85,6 @@ public class AddCommandTest {
     public void toStringMethod() {
         AddCommand addCommand = new AddCommand(ALICE);
         String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        System.out.println(addCommand.toString());
-        System.out.println(expected);
         assertEquals(expected, addCommand.toString());
     }
 
@@ -200,6 +198,11 @@ public class AddCommandTest {
 
         @Override
         public void addExam(Exam exam) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getUpcomingMonthExamCount() {
             throw new AssertionError("This method should not be called.");
         }
 

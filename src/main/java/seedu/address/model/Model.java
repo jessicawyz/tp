@@ -94,6 +94,8 @@ public interface Model {
 
     double getTotalOwings();
 
+    int getUpcomingMonthExamCount();
+
     /*
      * Returns the next unique ID for a person.
      */
@@ -112,4 +114,6 @@ public interface Model {
     void clearSummaryStats();
 
     void addLog(Person person, Log log);
+
+
 }
