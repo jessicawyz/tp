@@ -18,9 +18,10 @@ The system includes features for adding students, viewing student details, viewi
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed on your Computer.
 <box type="info" seamless>
-Note: If you do not have Java 11 installed in your computer, you can download it from [here](https://www.oracle.com/sg/java/technologies/javase-jdk11-downloads.html).
+Note: If you do not have Java 11 installed on your computer, you can download it from [here](https://www.oracle.com/sg/java/technologies/javase-jdk11-downloads.html).
+
 Note: For MacOS users, a compatible Java 11 version is available [here](https://www.azul.com/core-post-download/?endpoint=zulu&uuid=f3e69a90-5b80-4d6b-b14b-eb117b8ef0b4).
 </box>
 
@@ -29,7 +30,7 @@ Note: For MacOS users, a compatible Java 11 version is available [here](https://
 3. Copy the file to your desired home folder.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tuteetally.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -53,7 +54,7 @@ Note: For MacOS users, a compatible Java 11 version is available [here](https://
 **Notes about the command format:**<br>
 
 * Words in `{UPPER_CASE}` are the parameters to be supplied by the user.<br>
-  e.g. in `-name/{NAME}`, `NAME` is a parameter which can be used as `add -name John Doe`.
+  e.g. in `-name/{NAME}`, `NAME` is a parameter that can be used as `add -name John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-name {NAME} -address {ADDRESS}`, `-address {ADDRESS} -name {NAME}` is also acceptable.
@@ -64,13 +65,13 @@ Note: For MacOS users, a compatible Java 11 version is available [here](https://
 
 ### Adding a student: `add`
 
-Adds a student particulars into address book.
+Adds a student's particulars into the address book.
 
 Format: `add -name {NAME} -phone {NUMBER} -email {EMAIL} -address {ADDRESS} -subject {SUBJECT} t/{tag}`
 
 <box type="tip" seamless>
 Tip:<br>
-If addition is successful, the new student record will be shown at the top of the list.
+If the addition is successful, the new student record will be shown at the top of the list.
 </box>
 <box type="info" seamless>
 Note:<br>
@@ -80,7 +81,7 @@ The `t/{tag}` field is optional and can be used to add a tag to the student reco
 Examples:
 * `add -name Xiao Ming -address 13, Computing Dr, 117417 -phone 88888888 -subject Math`
 
-### Deleting a student : `delete`
+### Deleting a student: `delete`
 
 Deletes the specified student from the address book.
 
@@ -96,12 +97,12 @@ Examples:
 This would display the total number of students and the total amount owed by students.
 Format: `view -statistics`
 
-### View student summary at home page: `View`
+### View student summary on the home page: `View`
 This would display a summary of student particulars on the homepage.
 Format: `view -all`
 
 ### View student particular by name: `View`
-This will display a specific student particular by searching its name
+This will display a specific student by searching their name
 Format: `view -name {NAME}`
 Examples:
 * `view -name Xiao Ming` would display the student particular of Xiao Ming if existed
@@ -110,22 +111,22 @@ Examples:
 This will display a specific particular by searching for its id
 Format: `view -id {ID}`
 Examples;
-* `view -id 88888` would display the student particular for student whose id is 88888 if it exists.
+* `view -id 88888` would display the student particular for the student whose id is 88888 if it exists.
 
-### Add payment for student by id: `AddPayment`
-This will add a payment to a student by searching for its id
+### Add payment for the student by id: `AddPayment`
+This will add a payment to a student by searching for their `id`
 Format: `addpayment -id {ID} -payment {AMOUNT}`
 Examples;
 * `addpayment -id 88888 -payment 100` would add a payment of 100 to the student whose id is 88888 if it exists.
 
 ### Mark student's payment as paid by id: `MarkPaid`
-This will mark a student's payment as paid by searching for its id
+This will mark a student's payment as paid by searching for their `id`
 Format: `markpayment -id {ID} -payment {AMOUNT}`
 Examples;
 * `markpayment -id 88888 -payment 100` would mark a payment of 100 as paid for the student whose id is 88888 if it exists.
 
 ### Reset student's payment by id: `ResetPayment`
-This will reset a student's payment by searching for its id
+This will reset a student's payment by searching for their `id`
 Format: `resetpayments -id {ID}`
 Examples;
 * `resetpayments -id 88888` would reset the payment for the student whose id is 88888 if it exists.
@@ -139,7 +140,10 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
+**Q**: What are the system requirements for TuteeTally?<br>
+**A**: TuteeTally requires Java 11 or above to run. It is compatible with Windows, MacOS, and Linux operating systems.
 
 **Q**: What are the system requirements for TuteeTally?<br>
 **A**: TuteeTally requires Java 11 or above to run. It is compatible with Windows, MacOS, and Linux operating systems.
