@@ -85,9 +85,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The exam must not already exist in the address book.
      */
     public void addExam(Exam e) {
-        System.out.println("!addressbook add exam before: " + AllExamsList.getExams().size());
         AllExamsList.addExamToList(e);
-        System.out.println("!addressbook add exam: " + AllExamsList.getExams().size());
     }
 
     /**
@@ -124,8 +122,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public ObservableList<Exam> getAllExamsList() {
-        System.out.println("in addressbook getall examslist: ALL: " + AllExamsList.getExams().size());
-        System.out.println("in addressbook getall examslist: all: " + allExamsList.getExams().size());
         return allExamsList.getExams();
     }
 

@@ -39,9 +39,6 @@ public class AllExamsList {
      * @param exam The exam to be added.
      */
     public static void addExamToList(Exam exam) {
-        if (exam == null) {
-            System.out.println("exam is null before adding to allexamlist");
-        }
         exams.add(exam);
         getSortedByDate(exams);
     }

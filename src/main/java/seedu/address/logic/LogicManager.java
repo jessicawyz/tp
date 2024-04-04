@@ -74,8 +74,6 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<Exam> getAllExamsList() {
-        System.out.println("in logic size of exams: " + model.getAllExamList().size());
-        //0
         return model.getAllExamList();
     }
 
