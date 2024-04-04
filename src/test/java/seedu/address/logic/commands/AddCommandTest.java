@@ -181,11 +181,19 @@ public class AddCommandTest {
         }
 
         @Override
+        public double getTotalOwings() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Exam> getAllExamList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+        public void clearSummaryStats() {
+            throw new AssertionError("This method should not be called.");
+        }
         public void addLog(Person person, Log log) {
             throw new AssertionError("This method should not be called.");
         }

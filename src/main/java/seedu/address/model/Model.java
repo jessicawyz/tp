@@ -92,6 +92,8 @@ public interface Model {
      */
     int getTotalPersons();
 
+    double getTotalOwings();
+
     /*
      * Returns the next unique ID for a person.
      */
@@ -102,6 +104,9 @@ public interface Model {
      * Returns null if the person does not exist.
      */
     Person getPersonByUniqueId(String uniqueId);
+
+    void clearSummaryStats();
+
 
     public ObservableList<Exam> getAllExamList();
 

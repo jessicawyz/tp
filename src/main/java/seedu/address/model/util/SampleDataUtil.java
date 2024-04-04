@@ -33,7 +33,7 @@ public class SampleDataUtil {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
                     getTagSet("friends"), new Subject("test"),
-                    new Id("000000"), getSampleExams(),
+                    new Id("000001"), getSampleExams(),
                     new Payment(0.0), new LogList(new ArrayList<>()))
         };
     }

@@ -1,4 +1,8 @@
-#summaryMessage {
+#summaryMessageCountLabel {
+    -fx-text-fill: white;
+}
+
+#summaryMessageOwingsLabel {
     -fx-text-fill: white;
 }
 
