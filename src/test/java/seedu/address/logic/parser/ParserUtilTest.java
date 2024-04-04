@@ -3,12 +3,18 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.parseDate;
+import static seedu.address.logic.parser.ParserUtil.parsePayment;
+import static seedu.address.logic.parser.ParserUtil.parseTime;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -16,9 +22,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Id;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
+
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -193,4 +203,139 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseDate_validDate_returnsLocalDate() throws Exception {
+        LocalDate expectedDate = LocalDate.of(2024, 1, 1);
+        assertEquals(expectedDate, parseDate("2024-01-01"));
+    }
+
+    @Test
+    public void parseDate_invalidDate_throwsParseException() {
+        assertThrows(ParseException.class, () -> parseDate("2024-13-01"));
+    }
+
+    @Test
+    public void parseTime_validTime_returnsOptionalLocalTime() throws Exception {
+        Optional<LocalTime> expectedTime = Optional.of(LocalTime.of(14, 30));
+        assertEquals(expectedTime, parseTime("14:30"));
+    }
+
+    @Test
+    public void parseTime_invalidTime_throwsParseException() {
+        assertThrows(ParseException.class, () -> parseTime("25:30"));
+    }
+
+    @Test
+    public void parseTime_emptyString_returnsEmptyOptional() throws Exception {
+        assertEquals(Optional.empty(), parseTime(""));
+    }
+
+    @Test
+    public void parseExamName_emptyString_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseExamName(""));
+    }
+
+    @Test
+    public void parseDate_invalidFormat_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate("2023/12/31"));
+    }
+
+    @Test
+    public void parseTime_nonExistingTime_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTime("25:00"));
+    }
+
+    @Test
+    public void parseTimeFromStorage_validTimeWithSeconds_returnsTime() throws Exception {
+        assertEquals(Optional.of(LocalTime.of(14, 30)), ParserUtil.parseTimeFromStorage("14:30:00"));
+    }
+
+    @Test
+    public void parseTimeFromStorage_nullTime_returnsEmpty() throws Exception {
+        assertEquals(Optional.empty(), ParserUtil.parseTimeFromStorage("null"));
+    }
+
+    @Test
+    public void parsePayment_validPayment_returnsPayment() throws Exception {
+        Payment expectedPayment = new Payment(100.00);
+        assertEquals(expectedPayment, parsePayment(Optional.of("100.00")));
+    }
+
+    @Test
+    public void parsePayment_invalidPayment_throwsParseException() {
+        assertThrows(ParseException.class, () -> parsePayment(Optional.of("abc")));
+    }
+
+    @Test
+    public void parsePayment_emptyOptional_returnsDefaultPayment() throws Exception {
+        Payment expectedPayment = new Payment(0.0);
+        assertEquals(expectedPayment, parsePayment(Optional.empty()));
+    }
+
+    @Test
+    public void parsePayment_negativeValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePayment(Optional.of("-100")));
+    }
+
+    @Test
+    public void parsePayment_nonNumericValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePayment(Optional.of("abc")));
+    }
+
+    @Test
+    public void parseSubject_whitespace_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSubject(" "));
+    }
+
+    @Test
+    public void parseSubject_validSubjectWithWhitespace_returnsSubject() throws Exception {
+        Subject expectedSubject = new Subject("Mathematics");
+        assertEquals(expectedSubject, ParserUtil.parseSubject(" Mathematics "));
+    }
+
+    @Test
+    public void parseId_validIdNoLeadingZeros_success() throws ParseException {
+        String validId = "123";
+        Id expectedId = new Id("123");
+        assertEquals(expectedId, ParserUtil.parseId(validId));
+    }
+
+    @Test
+    public void parseId_validIdWithLeadingZeros_success() throws ParseException {
+        String validId = "00123";
+        Id expectedId = new Id("00123");
+        assertEquals(expectedId, ParserUtil.parseId(validId));
+    }
+
+    @Test
+    public void parseId_emptyString_throwsParseException() {
+        String emptyId = "";
+        assertThrows(ParseException.class, () -> ParserUtil.parseId(emptyId));
+    }
+
+    @Test
+    public void parseId_whitespaceOnly_throwsParseException() {
+        String whitespaceId = "    ";
+        assertThrows(ParseException.class, () -> ParserUtil.parseId(whitespaceId));
+    }
+
+    @Test
+    public void parseId_nonNumeric_throwsParseException() {
+        String nonNumericId = "a123";
+        assertThrows(ParseException.class, () -> ParserUtil.parseId(nonNumericId));
+    }
+
+    @Test
+    public void parseId_containsSpecialCharacters_throwsParseException() {
+        String specialCharId = "123#";
+        assertThrows(ParseException.class, () -> ParserUtil.parseId(specialCharId));
+    }
+
+    @Test
+    public void parseId_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseId(null));
+    }
+
+
 }

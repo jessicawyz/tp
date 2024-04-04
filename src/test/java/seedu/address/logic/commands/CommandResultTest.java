@@ -72,4 +72,47 @@ public class CommandResultTest {
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
     }
+
+    @Test
+    public void equals_sameValues_returnsTrue() {
+        CommandResult commandResult = new CommandResult("feedback", "popupDisplay", true, true, true, true);
+        CommandResult commandResultCopy = new CommandResult("feedback", "popupDisplay", true, true, true, true);
+
+        // Same values -> returns true
+        assertEquals(commandResult, commandResultCopy);
+    }
+
+    @Test
+    public void equals_differentValues_returnsFalse() {
+        CommandResult commandResult = new CommandResult("feedback", null, false, false, false, false);
+        CommandResult differentCommandResult = new CommandResult("different feedback", null, true, true, true, true);
+
+        // Different values -> returns false
+        assertNotEquals(commandResult, differentCommandResult);
+    }
+
+    @Test
+    public void equals_null_returnsFalse() {
+        CommandResult commandResult = new CommandResult("feedback");
+
+        // Null -> returns false
+        assertFalse(commandResult.equals(null));
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        CommandResult commandResult = new CommandResult("feedback");
+
+        // Different type -> returns false
+        assertFalse(commandResult.equals(0.5f));
+    }
+
+    @Test
+    public void hashCode_test() {
+        CommandResult commandResult = new CommandResult("feedback", "popupDisplay", true, false, true, true);
+        CommandResult sameValuesCommandResult = new CommandResult("feedback", "popupDisplay", true, false, true, true);
+
+        assertEquals(commandResult.hashCode(), sameValuesCommandResult.hashCode());
+    }
+
 }
