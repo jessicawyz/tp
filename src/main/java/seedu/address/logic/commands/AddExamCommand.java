@@ -15,7 +15,6 @@ import java.util.Set;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.AllExamsList;
 import seedu.address.model.person.Exam;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Person;
@@ -78,7 +77,7 @@ public class AddExamCommand extends Command {
         Exam newExam = new Exam(examName, examDate, examTime, personName, personUniqueId);
 
         updatedExams.add(newExam);
-        AllExamsList.addExamToList(newExam);
+        model.addExam(newExam);
 
         Person updatedPerson = new Person(personToUpdate.getName(), personToUpdate.getPhone(),
                 personToUpdate.getEmail(), personToUpdate.getAddress(), personToUpdate.getTags(),

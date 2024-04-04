@@ -33,8 +33,14 @@ public class SampleDataUtil {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
                     getTagSet("friends"), new Subject("test"),
-                    new Id("000001"), getSampleExams(),
-                    new Payment(0.0), new LogList(new ArrayList<>()))
+                    new Id("000001"),
+                    Set.of(new Exam("AMath Paper 1", // paper Name
+                            LocalDate.of(2024, 12, 13), // LocalDate
+                            Optional.of(LocalTime.of(13, 0)), // LocalTime
+                            "Alex Yeoh", // Student Name
+                            new Id("000001"))), //Student ID
+                    new Payment(0.0),
+                    new LogList(new ArrayList<>()))
         };
     }
 
