@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.Messages;
 
 /**
  * Represents the list of all exams in the address book.
@@ -38,9 +39,13 @@ public class AllExamsList {
      *
      * @param exam The exam to be added.
      */
-    public static void addExamToList(Exam exam) {
-        exams.add(exam);
-        getSortedByDate(exams);
+    public static void addExamToList(Exam exam) throws IllegalArgumentException {
+        if (!exams.contains(exam)) {
+            exams.add(exam);
+            getSortedByDate(exams);
+        } else {
+            throw new IllegalArgumentException(Messages.MESSAGE_EXAM_ALREADY_EXIST);
+        }
     }
 
     /**

@@ -70,7 +70,6 @@ public class DeleteExamCommand extends Command {
 
         if (personToUpdate.getExams() != null) {
             updatedExams.addAll(personToUpdate.getExams());
-            System.out.println(updatedExams);
         }
 
         // Find the exam to delete
@@ -80,7 +79,6 @@ public class DeleteExamCommand extends Command {
                     && exam.getExamDate().equals(examDate)
                     && exam.getExamTime().equals(examTime)) {
                 examToDelete = exam;
-                System.out.println(examToDelete);
                 break;
             }
         }
