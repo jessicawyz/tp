@@ -65,7 +65,7 @@ public class AllExamsList {
             Exam exam = iterator.next();
             if (exam.equals(examToDelete)) {
                 iterator.remove();
-                break;
+                return;
             }
         }
     }
