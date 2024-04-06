@@ -6,8 +6,12 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.AllExamsList;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Person;
+
+import java.util.Set;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -41,8 +45,16 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = model.getPersonByUniqueId(targetUniqueId.toString());
 
+        // Retrieve the person's exams
+        Set<Exam> examsToDelete = personToDelete.getExams();
+
         if (personToDelete == null) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        }
+
+        // Delete all exams associated with the person from AllExamsList
+        for (Exam exam : examsToDelete) {
+            AllExamsList.deleteAllExamFromList(exam);
         }
 
         model.deletePerson(personToDelete);

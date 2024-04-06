@@ -128,7 +128,11 @@ public class Exam {
             return false;
         }
         Exam otherExam = (Exam) other;
-        return date.equals(otherExam.date) && time.equals(otherExam.time);
+        return date.equals(otherExam.date)
+                && time.equals(otherExam.time)
+                && name.equals(otherExam.name)
+                && studentName.equals(otherExam.studentName)
+                && uniqueId.equals(otherExam.uniqueId);
     }
 
     @Override

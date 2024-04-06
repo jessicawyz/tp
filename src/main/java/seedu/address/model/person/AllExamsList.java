@@ -48,6 +48,17 @@ public class AllExamsList {
      *
      * @param examToDelete The exam to delete.
      */
+    public static void deleteAllExamFromList(Exam examToDelete) {
+        Iterator<Exam> iterator = exams.iterator();
+        while (iterator.hasNext()) {
+            Exam exam = iterator.next();
+            if (exam.equals(examToDelete)) {
+                iterator.remove();
+                break;
+            }
+        }
+    }
+
     public static void deleteExamFromList(Exam examToDelete) {
         Iterator<Exam> iterator = exams.iterator();
         while (iterator.hasNext()) {
