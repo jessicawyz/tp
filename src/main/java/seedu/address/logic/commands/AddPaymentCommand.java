@@ -43,6 +43,7 @@ public class AddPaymentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Person personToUpdate = model.getPersonByUniqueId(uniqueId.toString());
+        System.out.println(personToUpdate.getUniqueId());
 
         if (personToUpdate == null) {
             throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);

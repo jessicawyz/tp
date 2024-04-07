@@ -160,6 +160,7 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && subject.equals(otherPerson.subject)
+                && uniqueId.equals(otherPerson.uniqueId)
                 && tags.equals(otherPerson.tags)
                 && exams.equals(otherPerson.exams)
                 && payment.equals(otherPerson.payment);
