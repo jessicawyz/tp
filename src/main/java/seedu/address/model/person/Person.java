@@ -154,7 +154,12 @@ public class Person {
             return false;
         }
 
+
         Person otherPerson = (Person) other;
+        System.out.println(uniqueId.equals(otherPerson.uniqueId) + "in perrsons");
+        System.out.println(uniqueId + " Unique id");
+        System.out.println(otherPerson.uniqueId + " Other unique id");
+        System.out.println(name + "my name and his" + otherPerson.name);
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)

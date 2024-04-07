@@ -185,6 +185,12 @@ public class ModelManager implements Model {
         if (!(other instanceof ModelManager)) {
             return false;
         }
+        boolean isSame = addressBook.equals(((ModelManager) other).addressBook);
+        boolean isSamePrefs = userPrefs.equals(((ModelManager) other).userPrefs);
+        boolean isSameFiltered = filteredPersons.equals(((ModelManager) other).filteredPersons);
+        System.out.println(isSame);
+        System.out.println(isSamePrefs);
+        System.out.println(isSameFiltered);
 
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
