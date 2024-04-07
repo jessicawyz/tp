@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Set;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -10,8 +12,6 @@ import seedu.address.model.person.AllExamsList;
 import seedu.address.model.person.Exam;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Person;
-
-import java.util.Set;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
