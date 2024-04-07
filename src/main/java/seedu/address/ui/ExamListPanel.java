@@ -22,41 +22,6 @@ public class ExamListPanel extends UiPart<Region> {
     @FXML
     private ListView<Exam> examListView;
 
-    /*public ExamListPanel(ObservableList<Exam> exams) {
-        super(FXML);
-        this.exams = exams;
-        initializeListView();
-    }
-
-    private void initializeListView() {
-        examListView.setItems(exams);
-        System.out.println("this is the exams in initialize:" + exams.size());
-        //i got 0 why
-        examListView.setCellFactory(listView -> new ExamListViewCell());
-        System.out.println("hi this is initialize list view");
-    }
-
-    /**
-     * Custom ListCell that displays the graphics of an exam using an ExamDisplayCard.
-     */
-    /*public class ExamListViewCell extends ListCell<Exam> {
-        @Override
-        protected void updateItem(Exam exam, boolean empty) {
-            System.out.println("before exam update item");
-            super.updateItem(exam, empty);
-
-            if (empty || exam == null) {
-                System.out.println("hi this is before the call to exam display card but exam == null?");
-                setGraphic(null);
-                setText(null);
-            } else {
-                // Display each exam using ExamDisplayCard
-                System.out.println("hi this is before the call to exam display card");
-                setGraphic(new ExamDisplayCard(exam).getRoot());
-            }
-        }
-    }*/
-
     /**
      * Creates a {@code ExamListPanel} with the given {@code ObservableList}.
      */

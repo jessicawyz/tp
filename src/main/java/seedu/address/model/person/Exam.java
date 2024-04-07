@@ -18,7 +18,7 @@ import java.util.Optional;
 public class Exam {
 
     public static final String MESSAGE_CONSTRAINTS_EXAM_NAME = "Exam name cannot be blank";
-    public static final String MESSAGE_CONSTRAINTS_DATE = "Exam date must be a valid date in the format dd-MM-yyyy";
+    public static final String MESSAGE_CONSTRAINTS_DATE = "Exam date must be a valid date in the format dd-MM-yyyy. A valid Exam Date cannot be in the past";
     public static final String MESSAGE_CONSTRAINTS_TIME = "Exam time must be a valid time in the format HH:mm";
 
     public final LocalDate date;
@@ -82,9 +82,16 @@ public class Exam {
     /**
      * Returns true if a given date is a valid exam date (from today onwards).
      */
-    public static boolean isValidExamDate(LocalDate test) {
+    public static boolean isValidExamDate(LocalDate test) throws IllegalArgumentException{
         LocalDate currentDate = LocalDate.now();
-        return !test.isBefore(currentDate);
+        try {
+            if (test.isBefore(currentDate)) {
+                throw new IllegalArgumentException("Invalid exam date. Date cannot be before the current date.");
+            }
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+        return true;
     }
 
     /**
