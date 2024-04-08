@@ -191,7 +191,7 @@ This will display a specific student by searching for their id, this also pops u
 Format: `view -id {ID}`
 
 Examples:
-* `view -id 000003` would display the student particular for the student whose ID is #000003 if it exists. <br>
+* `view -id 000003` would display the student particular for the student with ID #000003 if it exists. <br>
 
 After entering the command, the interface will update as shown below:
 
@@ -208,7 +208,7 @@ Record new payments easily with the `addpayment` command, keeping track of what 
 Format: `addpayment -id {ID} -payment {AMOUNT}`
 
 Example: 
-* `addpayment -id 000001 -payment 150` or `addpayment -id 1 -payment 150` would add a payment of 150 to the student whose ID is '#000001' if it exists. <br>
+* `addpayment -id 000001 -payment 150` or `addpayment -id 1 -payment 150` would add a payment of 150 to the student with ID #000001 if it exists. <br>
 If the student has no outstanding payments, a 'No payment owed' message will be displayed. <br>
 Following the command, the display will update to show "Payment owed: $150". <br>
 After entering the command, the interface will update as shown below:
@@ -229,7 +229,7 @@ The `markpayment` command allows you to update the status of a student's payment
 Format: `markpayment -id {ID} -payment {AMOUNT}`
 
 Example:
-* `markpayment -id 000001 -payment 100` or `markpayment -id 1 -payment 100` whose ID is '#000001' if it exists. <br>
+* `markpayment -id 000001 -payment 100` or `markpayment -id 1 -payment 100` with ID #000001 if it exists. <br>
 If the student had $150 of outstanding payments, the display will update to show "Payment owed: $50". <br>
 After entering the command, the interface will update as shown below: <br>
 
@@ -256,7 +256,7 @@ Use the `resetpayments` command to clear a student's outstanding payment amount,
 Format: `resetpayments -id {ID}`
 
 Example: 
-* `resetpayments -id 000001` or `resetpayments -id 1` would reset the payment for the student whose id is '#000001' if it exists. <br>
+* `resetpayments -id 000001` or `resetpayments -id 1` would reset the payment for the student with ID #000001 if it exists. <br>
 After entering the command, the interface will update as shown below: <br>
 
 ![Reset Payments Update Display](images/payment/reset_payments.jpg) _The display showing "No payment owed" after resetting payments, with $50 owed previously._
@@ -297,7 +297,7 @@ After entering the command, the interface will update as shown below: <br>
 This will log the lessons of a student. The time field of the log entry will be the system time when the log was added.
 Format `log -id {ID} -hours {HOURS} -content {CONTENT} -style {LEARNING STYLE} -notes {NOTES}
 Examples:
-* `log -id 000001 -hours 2 -content English Comprehension -style Visual -notes Great improvement!`. would log a lesson for the student with ID #00001 noting that it had great improvement in English Comprehension, it also logs the learning style of the student. <br>
+* `log -id 000001 -hours 2 -content English Comprehension -style Visual -notes Great improvement!`. would log a lesson for the student with ID #000001 noting that it had great improvement in English Comprehension, it also logs the learning style of the student. <br>
 After entering the command, the interface will update as shown below: <br>
 
 ![Log Update Display](images/log/log.jpg) _The display reflects the successful logging for the student with ID #000001._
