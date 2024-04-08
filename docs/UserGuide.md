@@ -6,9 +6,11 @@ pageNav: 3
 
 # TuteeTally User Guide
 
-TuteeTally is a **desktop app for managing student contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TuteeTally can make student management much easier and faster than traditional GUI apps.
+TuteeTally is a **desktop app for managing student contacts for private tutors, optimized for use via a Command Line Interface** (CLI) 
+while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TuteeTally can make student 
+management much easier and faster than traditional GUI apps. 
 
-The system includes features for adding students, viewing student details, viewing summary statistics, and deleting student entries. All inputs are case-insensitive, enhancing user accessibility.
+The system includes features for adding students, viewing student details, viewing summary statistics, and deleting student entries. All inputs are case-sensitive.
 
 
 <!-- * Table of Contents -->
@@ -81,6 +83,16 @@ e.g. `07:00` is a valid time input and refers to 7am, but not `7:00`
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+** Notes on Fields for the students **
+
+| Field       | Prefix    | Required | Caveats                                                                                                                                                                                                                                                                                                                                                                               |
+|-------------|-----------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Name**    | `-name`   | Yes      | Names should only contain alphanumeric characters and spaces, it cannot contain special character, do note that long names might cause the Id field to be blocked, in this case you are able to drag the middle portion of the UI to reveal the ID, the upper limit of this workaround would be if the name is 220 characters long. In this case do proceed to use nicknames instead. |
+| **Phone**   | `-phone`  | Yes      | Phone numbers should only contain numbers, and it should be at least 3 digits long <br/> There is no limit on the length of the phone number to be accepted worldwide.                                                                                                                                                                                                                |
+| **Email**   | `-email`  | Yes      | Emails does not require top level domain, it just require an @, for example user@com                                                                                                                                                                                                                                                                                                  |
+| **Address** | `-address` | Yes      | Addresses can take any values, and it should not be blank                                                                                                                                                                                                                                                                                                                             |
+| **Subject** | `-subject` | Yes      | Subject can take any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                              |
+| **Tag**     | `t/`      | Nope     | Tags names should be alphanumeric and not contain any special character.                                                                                                                                                                                                                                                                                                              | 
 
 ### Adding a student: `add`
 
@@ -92,8 +104,12 @@ Format: `add -name {NAME} -phone {NUMBER} -email {EMAIL} -address {ADDRESS} -sub
 Tip:<br>
 If the addition is successful, the new student record will be shown at the bottom of the list.
 </box>
+
+There is no duplicate dectection feature, this is under planned enhancements
+
 <box type="info" seamless>
 Note:<br>
+
 The `t/{tag}` field is optional and can be used to add a tag to the student record and no spaces are allowed in the {tag}.
 </box>
 
@@ -117,7 +133,7 @@ At least one editable fields must be present. Not all editable values need to be
 Format: `edit {ID} -<Insert Field to Edit> {Value}`
 
 Example: 
-* `edit 1 -phone91234567 -emailjohndoe@example.com -nameJohnDoo`
+* `edit 1 -phone 91234567 -email johndoe@example.com -name JohnDoo`
 
 ### Deleting a student: `delete`
 
@@ -133,8 +149,14 @@ Examples:
 ### View student statistics: `view`
 This would display the following in a pop-up window 
 - the total number of students 
-- the total amount owed by students
-- the number of upcoming exams in the following month
+- the total amount owed by students (Currently shows the exact amount)
+- the number of upcoming exams in following 1 month period (from today up to the same day of the next month)
+
+<box type="tip" seamless>
+Tip:<br>
+Use ths feature to track the total amount of students you're teaching, how much is owed by all of them
+and how plan your schedule based on the number of upcoming exams that will come in the next month
+</box>
 
 ![StatsWindow](images/StatsWindow.png)
 
@@ -219,7 +241,16 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **View -Stats Command**, Currently the total fee owing by students can precision more than 2 decimal points
+3. **When inputting long names**, the Id number of the students will be blocked
+--------------------------------------------------------------------------------------------------------------------
+## Glossary
 
+| Term     | Explanation |
+|----------|-------------|
+| **CLI**  | ``          |
+| **GUI**  | <br/>       |
+| **Exam** |             |
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
