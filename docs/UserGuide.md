@@ -253,7 +253,7 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **View -Stats Command**, Currently the total fee owing by students can precision more than 2 decimal points
-3. **When inputting long names**, the Id number of the students will be blocked
+3. **When inputting long names above 220 character**, the Id number of the students will be blocked even after the work around
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
