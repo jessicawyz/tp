@@ -209,6 +209,13 @@ After entering the command, the interface will update as shown below:
 
 TuteeTally's payment management commands are designed to streamline the financial interactions between tutors and students, ensuring accuracy and transparency. Below are detailed explanations of each command's purpose and benefits:
 
+<box type="info" seamless>
+
+**Note:** <br>
+* Displayed payment amounts are rounded to the nearest $0.01. However, TuteeTally accurately tracks the exact amounts entered, without rounding. <br>
+
+</box>
+
 ### Adding a Payment: `addpayment`
 
 Record new payments easily with the `addpayment` command, keeping track of what each student owes. This command simplifies the maintenance of financial records, ensuring you never overlook an outstanding payment.
@@ -218,19 +225,9 @@ Format: `addpayment -id {ID} -payment {AMOUNT}`
 Example: 
 * `addpayment -id 000001 -payment 150` or `addpayment -id 1 -payment 150` would add a payment of 150 to the student with ID #000001 if it exists. <br>
 
-
-If the student has no outstanding payments, a 'No payment owed' message will be displayed. <br>
-
 After entering the command, the interface will update as shown below:
 
 ![Add Payment Update Display](images/payment/add_payment.jpg) _The display showing "Payment owed: $150" after adding a payment._
-
-<box type="info" seamless>
-
-**Note:** <br>
-* Only the **FIRST** payment added will be rounded off to the nearest $0.01. The rest will be rounded down to $0.00. <br>
-
-</box>
 
 ### Marking Payment of the student: `markpayment`
 
@@ -240,8 +237,7 @@ Format: `markpayment -id {ID} -payment {AMOUNT}`
 
 Example:
 * `markpayment -id 000001 -payment 100` or `markpayment -id 1 -payment 100` with ID #000001 if it exists. <br>
-<br>
-If the student had $150 of outstanding payments, the display will update to show "Payment owed: $50". <br>
+
 After entering the command, the interface will update as shown below: <br>
 
 ![Mark Payment Update Display](images/payment/mark_payment.jpg) _The display showing "Payment owed: $50" after marking a payment of $100, with $150 owed initially._
@@ -251,7 +247,6 @@ After entering the command, the interface will update as shown below: <br>
 **Note:** <br>
 * If the amount marked as paid exceeds the total outstanding payment, the total outstanding payment will be set to 0. <br>
 * If the amount owed by student is already 0, you are still allowed to enter the command, but there will be no changes. <br>
-* All payments added will be rounded off to the nearest $0.01.
 
 </box>
 
@@ -344,6 +339,9 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+
+
+4. **When using the payment commands**, the display will round the payment amounts to the nearest $0.01. So if you enter a payment of $0.001, it will be displayed as $0.00. However, the application will accurately track the exact amounts entered, without rounding.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
