@@ -112,7 +112,7 @@ Examples:
 Edit the specific student detail from TuteeTally using the *INDEX* of the student. <br>
 The index of the student refers to the position of student counting from the top of current displayed list, with the first student being index 1.
 <br>
-Parameters: INDEX (must be a positive integer) [-nameNAME] [-phonePHONE] [-emailEMAIL] [-addressADDRESS] [t/TAG]... 
+Parameters: INDEX (must be a positive integer) [-name NAME] [-phone PHONE] [-email EMAIL] [-address ADDRESS] [t/TAG]... 
 Editable Fields
 - `Name`
 - `Phone`
