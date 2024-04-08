@@ -108,7 +108,4 @@ public class AllExamsList {
         return upcomingMonthExamCount;
     }
 
-    public void clearSummaryStats() {
-        upcomingMonthExamCount = 0;
-    }
 }
