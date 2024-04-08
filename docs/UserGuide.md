@@ -56,6 +56,14 @@ Note: For MacOS users, a compatible Java 11 version is available <a href="https:
 6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+## Glossary
+
+| Term     | Explanation |
+|----------|-------|
+| **CLI**  | ``    |
+| **GUI**  |       |
+| **Exam** |       |
+--------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
@@ -85,14 +93,14 @@ e.g. `07:00` is a valid time input and refers to 7am, but not `7:00`
 
 ** Notes on Fields for the students **
 
-| Field       | Prefix    | Required | Caveats                                                                                                                                                                                                                                                                                                                                                                               |
-|-------------|-----------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Name**    | `-name`   | Yes      | Names should only contain alphanumeric characters and spaces, it cannot contain special character, do note that long names might cause the Id field to be blocked, in this case you are able to drag the middle portion of the UI to reveal the ID, the upper limit of this workaround would be if the name is 220 characters long. In this case do proceed to use nicknames instead. |
-| **Phone**   | `-phone`  | Yes      | Phone numbers should only contain numbers, and it should be at least 3 digits long <br/> There is no limit on the length of the phone number to be accepted worldwide.                                                                                                                                                                                                                |
-| **Email**   | `-email`  | Yes      | Emails does not require top level domain, it just require an @, for example user@com                                                                                                                                                                                                                                                                                                  |
-| **Address** | `-address` | Yes      | Addresses can take any values, and it should not be blank                                                                                                                                                                                                                                                                                                                             |
-| **Subject** | `-subject` | Yes      | Subject can take any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                              |
-| **Tag**     | `t/`      | Nope     | Tags names should be alphanumeric and not contain any special character.                                                                                                                                                                                                                                                                                                              | 
+| Field       | Prefix    | Required | Caveats                                                                                                                                                                                                                                                                                                                                                                                                |
+|-------------|-----------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Name**    | `-name`   | Yes      | Names should only contain alphanumeric characters and spaces, it cannot contain special characters. |
+| **Phone**   | `-phone`  | Yes      | Phone numbers should only contain numbers, and it should be at least 3 digits long <br/> There is no limit on the length of the phone number to accommodate worldwide phone numbers.                                                                                                                                                                                                                   |
+| **Email**   | `-email`  | Yes      | Emails does not require top level domain, it only requires `@`, for example admin@example. More info on valid email formatting can be found  on this wikipedia article<a href="https://en.wikipedia.org/wiki/Email_address#Examples"> here</a>.                                                                                                                                                        |
+| **Address** | `-address` | Yes      | Addresses can take any values, and it should not be blank                                                                                                                                                                                                                                                                                                                                              |
+| **Subject** | `-subject` | Yes      | Subjects can take any values, and it should not be blank.                                                                                                                                                                                                                                                                                                                                              |
+| **Tag**     | `t/`      | Nope     | Tags names should be alphanumeric and not contain any special characters.                                                                                                                                                                                                                                                                                                                              | 
 
 ### Adding a student: `add`
 
@@ -103,9 +111,12 @@ Format: `add -name {NAME} -phone {NUMBER} -email {EMAIL} -address {ADDRESS} -sub
 <box type="tip" seamless>
 Tip:<br>
 If the addition is successful, the new student record will be shown at the bottom of the list.
+Long names might also cause the Id field to be blocked. In this case, you can opt to drag the middle portion of the UI to 
+reveal the ID. However, the upper limit of this workaround is 220 characters long. If a student's name exceeds 220 characters,
+it is advisable to use nicknames instead.
 </box>
 
-There is no duplicate dectection feature, this is under planned enhancements
+There is currently no detection for duplicates, this is under planned enhancements. 
 
 <box type="info" seamless>
 Note:<br>
@@ -243,14 +254,6 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **View -Stats Command**, Currently the total fee owing by students can precision more than 2 decimal points
 3. **When inputting long names**, the Id number of the students will be blocked
---------------------------------------------------------------------------------------------------------------------
-## Glossary
-
-| Term     | Explanation |
-|----------|-------------|
-| **CLI**  | ``          |
-| **GUI**  | <br/>       |
-| **Exam** |             |
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
