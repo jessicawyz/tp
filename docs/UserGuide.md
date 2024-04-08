@@ -69,7 +69,7 @@ All commands are case-sensitive.
 | **GUI**      | `A graphical user interface (GUI) is a digital interface in which a user interacts with graphical components such as icons, buttons, and menus.`   |
 | **Exam**     | `An Exam is any assessment or Test that the tutor choose to keep track of a student`                                                               |
 | **Index**    | `The index of the student refers to the position of student counting from the top of current displayed list, with the first student being index 1` |
-| **UniqueID** | `The UniqueID of a student refers to a uniquely generated identify that is assigned to a student when is he added to TuteeTally.`                   |
+| **UniqueID** | `The UniqueID of a student refers to a uniquely generated identity that is assigned to a student when is he added to TuteeTally.`                  |
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
