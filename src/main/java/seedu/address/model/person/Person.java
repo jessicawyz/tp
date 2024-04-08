@@ -191,4 +191,7 @@ public class Person {
                 .toString();
     }
 
+    public void removeExam(Exam exam) {
+        exams.remove(exam);
+    }
 }

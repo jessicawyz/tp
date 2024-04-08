@@ -173,7 +173,7 @@ TuteeTally's payment management commands are designed to streamline the financia
 Record new payments easily with the `addpayment` command, keeping track of what each student owes. This command simplifies the maintenance of financial records, ensuring you never overlook an outstanding payment.
 
 **Format:** `addpayment -id {ID} -payment {AMOUNT}`
-**Example:** `addpayment -id 000001 -payment 150` or `addpayment -id 1 -payment 150` would add a payment of 100 to the student whose ID is '#000001' if it exists. <br>
+**Example:** `addpayment -id 000001 -payment 150` or `addpayment -id 1 -payment 150` would add a payment of 150 to the student whose ID is '#000001' if it exists. <br>
 If the student has no outstanding payments, a 'No payment owed' message will be displayed. <br>
 Following the command, the display will update to show "Payment owed: $150".
 After entering the command, the interface will update as shown below:
@@ -202,8 +202,12 @@ After entering the command, the interface will update as shown below: <br>
 </box>
 
 ### Resetting Payments: `resetpayments`
+<box type="info" seamless>
 
-Use the `resetpayments` command to clear a student's outstanding payment amount, useful for starting anew or correcting mistakes. This command ensures your financial records remain accurate and up-to-date.
+**Note:** The command `resetpayments` intentionally includes an 's' after `payment` because it is designed to reset all owed payments for a student. <br>
+</box>
+
+Use the `resetpayments` command to clear a student's outstanding payment amount, useful for starting anew or correcting mistakes. This command ensures your financial records remain accurate and up-to-date.<br>
 
 **Format:** `resetpayments -id {ID}`
 **Example:** `resetpayments -id 000001` or `resetpayments -id 1` would reset the payment for the student whose id is '#000001' if it exists. <br>

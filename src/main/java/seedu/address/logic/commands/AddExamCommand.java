@@ -34,8 +34,8 @@ public class AddExamCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_ID + "000001 "
             + PREFIX_EXAM_NAME + "Math "
-            + PREFIX_DATE + "2024-04-10 "
-            + PREFIX_TIME + "14:00";
+            + PREFIX_DATE + "2024-05-27 "
+            + PREFIX_TIME + "09:00";
 
     public static final String MESSAGE_SUCCESS = "Added exam to person with ID: %1$s";
 
@@ -76,8 +76,12 @@ public class AddExamCommand extends Command {
         Id personUniqueId = personToUpdate.getUniqueId();
         Exam newExam = new Exam(examName, examDate, examTime, personName, personUniqueId);
 
-        updatedExams.add(newExam);
-        model.addExam(newExam);
+        try {
+            model.addExam(newExam);
+            updatedExams.add(newExam);
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(e.getMessage());
+        }
 
         Person updatedPerson = new Person(personToUpdate.getName(), personToUpdate.getPhone(),
                 personToUpdate.getEmail(), personToUpdate.getAddress(), personToUpdate.getTags(),
