@@ -10,7 +10,8 @@ TuteeTally is a **desktop app for managing student contacts, optimized for use v
 
 The system includes features for adding students, viewing student details, viewing summary statistics, and deleting student entries. <br>
 <box type="info" seamless>
-**Note**: All commands are case-sensitive.
+**Note**: <br>
+All commands are case-sensitive.
 </box>
 
 
@@ -168,56 +169,72 @@ Examples:
 
 TuteeTally's payment management commands are designed to streamline the financial interactions between tutors and students, ensuring accuracy and transparency. Below are detailed explanations of each command's purpose and benefits:
 
-### Adding Payments: `addpayment`
+### Adding a Payment: `addpayment`
 
 Record new payments easily with the `addpayment` command, keeping track of what each student owes. This command simplifies the maintenance of financial records, ensuring you never overlook an outstanding payment.
 
-**Format:** `addpayment -id {ID} -payment {AMOUNT}`
-**Example:** `addpayment -id 000001 -payment 150` or `addpayment -id 1 -payment 150` would add a payment of 150 to the student whose ID is '#000001' if it exists. <br>
+Format: `addpayment -id {ID} -payment {AMOUNT}`
+
+Example: 
+* `addpayment -id 000001 -payment 150` or `addpayment -id 1 -payment 150` would add a payment of 150 to the student whose ID is '#000001' if it exists. <br>
 If the student has no outstanding payments, a 'No payment owed' message will be displayed. <br>
-Following the command, the display will update to show "Payment owed: $150".
+Following the command, the display will update to show "Payment owed: $150". <br>
 After entering the command, the interface will update as shown below:
 
 ![Add Payment Update Display](images/payment/add_payment.png) _The display showing "Payment owed: $150" after adding a payment._
 
 <box type="info" seamless>
+
+**Note:** <br>
 * All payments added will be rounded off to the nearest $0.01.
+
 </box>
 
-### Marking Payments as Paid: `markpayment`
+### Marking Payment of the student: `markpayment`
 
-The `markpayment` command allows you to update the status of a student's payment to reflect payments that have been made. This feature helps maintain a clear record of completed transactions, building trust and transparency.
+The `markpayment` command allows you to update the status of a student's payment to reflect payments that have been made. This feature helps maintain a clear record of completed transactions, building trust and transparency. <br>
 
-**Format:** `markpayment -id {ID} -payment {AMOUNT}`
-**Example:** `markpayment -id 000001 -payment 100` or `markpayment -id 000001 -payment 100` whose ID is '#000001' if it exists. <br>
+Format: `markpayment -id {ID} -payment {AMOUNT}`
+
+Example:
+* `markpayment -id 000001 -payment 100` or `markpayment -id 000001 -payment 100` whose ID is '#000001' if it exists. <br>
 If the student had $150 of outstanding payments, the display will update to show "Payment owed: $50". <br>
 After entering the command, the interface will update as shown below: <br>
 
 ![Mark Payment Update Display](images/payment/mark_payment.png) _The display showing "Payment owed: $50" after marking a payment of $100, with $150 owed initially._
 
 <box type="info" seamless>
+
+**Note:** <br>
 * If the amount marked as paid exceeds the total outstanding payment, the total outstanding payment will be set to 0. <br>
 * If the amount owed by student is already 0, you are still allowed to enter the command, but there will be no changes. <br>
 * All payments added will be rounded off to the nearest $0.01.
+
 </box>
 
-### Resetting Payments: `resetpayments`
+### Resetting all Payments of the student: `resetpayments`
 <box type="info" seamless>
 
-**Note:** The command `resetpayments` intentionally includes an 's' after `payment` because it is designed to reset all owed payments for a student. <br>
+**Note:** <br>
+The command `resetpayments` intentionally includes an 's' after `payment` because it is designed to reset all owed payments for a student. <br>
 </box>
 
 Use the `resetpayments` command to clear a student's outstanding payment amount, useful for starting anew or correcting mistakes. This command ensures your financial records remain accurate and up-to-date.<br>
 
-**Format:** `resetpayments -id {ID}`
-**Example:** `resetpayments -id 000001` or `resetpayments -id 1` would reset the payment for the student whose id is '#000001' if it exists. <br>
+Format: `resetpayments -id {ID}`
+
+Example: 
+* `resetpayments -id 000001` or `resetpayments -id 1` would reset the payment for the student whose id is '#000001' if it exists. <br>
 After entering the command, the interface will update as shown below: <br>
 
 ![Reset Payments Update Display](images/payment/reset_payments.png) _The display showing "No payment owed" after resetting payments, with $50 owed previously._
 
 <box type="info" seamless>
+
+**Note:** <br>
 * If the amount marked as paid exceeds the total outstanding payment, the total outstanding payment will be set to 0. <br>
 * If the amount owed by student is already 0, you are still allowed to enter the command, but there will be no changes. <br>
+
 </box>
 
 Each of these features contributes to a comprehensive financial management system within TuteeTally, enabling tutors to manage their tutoring finances more effectively and efficiently.
