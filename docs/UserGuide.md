@@ -268,7 +268,8 @@ Use the `resetpayments` command to clear a student's outstanding payment amount,
 Format: `resetpayments -id {ID}`
 
 Example: 
-* `resetpayments -id 000001` or `resetpayments -id 1` would reset the payment for the student with ID #000001 if it exists. <br>
+* `resetpayments -id 000001` or `resetpayments -id 1` would reset the payment for the student with ID #000001 if it exists.
+
 After entering the command, the interface will update as shown below: <br>
 
 ![Reset Payments Update Display](images/payment/reset_payments.jpg) _The display showing "No payment owed" after resetting payments, with $50 owed previously._
