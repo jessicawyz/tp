@@ -45,12 +45,12 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = model.getPersonByUniqueId(targetUniqueId.toString());
 
-        // Retrieve the person's exams
-        Set<Exam> examsToDelete = personToDelete.getExams();
-
         if (personToDelete == null) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
         }
+
+        // Retrieve the person's exams
+        Set<Exam> examsToDelete = personToDelete.getExams();
 
         // Delete all exams associated with the person from AllExamsList
         for (Exam exam : examsToDelete) {

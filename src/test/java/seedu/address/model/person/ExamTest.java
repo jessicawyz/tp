@@ -63,11 +63,12 @@ public class ExamTest {
     }
 
     @Test
-    public void equals_sameAttributes_true() {
+    public void equals_sameExamAndStudentAttributes_true() {
+        Id studentId = new Id("000002");
         Exam exam1 = new Exam("Math Final", LocalDate.of(2024, 10, 10),
-                Optional.of(LocalTime.of(10, 0)));
+                Optional.of(LocalTime.of(10, 0)), "Amy Bee", studentId);
         Exam exam2 = new Exam("Math Final", LocalDate.of(2024, 10, 10),
-                Optional.of(LocalTime.of(10, 0)));
+                Optional.of(LocalTime.of(10, 0)), "Amy Bee", studentId);
 
         assertTrue(exam1.equals(exam2));
     }
