@@ -76,8 +76,12 @@ public class AddExamCommand extends Command {
         Id personUniqueId = personToUpdate.getUniqueId();
         Exam newExam = new Exam(examName, examDate, examTime, personName, personUniqueId);
 
-        updatedExams.add(newExam);
-        model.addExam(newExam);
+        try {
+            model.addExam(newExam);
+            updatedExams.add(newExam);
+        } catch (IllegalArgumentException e) {
+            throw new CommandException(e.getMessage());
+        }
 
         Person updatedPerson = new Person(personToUpdate.getName(), personToUpdate.getPhone(),
                 personToUpdate.getEmail(), personToUpdate.getAddress(), personToUpdate.getTags(),

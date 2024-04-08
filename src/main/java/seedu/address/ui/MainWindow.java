@@ -46,6 +46,9 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private MenuItem summaryStatsItem;
+
+    @FXML
     private StackPane personListPanelPlaceholder;
 
     @FXML
@@ -86,6 +89,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(summaryStatsItem, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -125,7 +129,6 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        //printed 0 here
         examListPanel = new ExamListPanel(logic.getFilteredPersonList());
         examListPanelPlaceholder.getChildren().add(examListPanel.getRoot());
 

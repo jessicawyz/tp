@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.Messages;
 
 /**
  * Represents the list of all exams in the address book.
@@ -38,9 +39,29 @@ public class AllExamsList {
      *
      * @param exam The exam to be added.
      */
-    public static void addExamToList(Exam exam) {
-        exams.add(exam);
-        getSortedByDate(exams);
+    public static void addExamToList(Exam exam) throws IllegalArgumentException {
+        if (!exams.contains(exam)) {
+            exams.add(exam);
+            getSortedByDate(exams);
+        } else {
+            throw new IllegalArgumentException(Messages.MESSAGE_EXAM_ALREADY_EXIST);
+        }
+    }
+
+    /**
+     * Deletes all matching exams from the list.
+     *
+     * @param examToDelete The exam to delete.
+     */
+    public static void deleteAllExamFromList(Exam examToDelete) {
+        Iterator<Exam> iterator = exams.iterator();
+        while (iterator.hasNext()) {
+            Exam exam = iterator.next();
+            if (exam.equals(examToDelete)) {
+                iterator.remove();
+                break;
+            }
+        }
     }
 
     /**
@@ -54,7 +75,7 @@ public class AllExamsList {
             Exam exam = iterator.next();
             if (exam.equals(examToDelete)) {
                 iterator.remove();
-                break;
+                return;
             }
         }
     }
@@ -65,8 +86,11 @@ public class AllExamsList {
      * @param exams The list of exams to be sorted.
      */
     public static void getSortedByDate(List<Exam> exams) {
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+
         Comparator<Exam> comparator = (exam1, exam2) -> {
-            LocalDate currentDate = LocalDate.now();
+
             LocalDate examDate1 = exam1.date;
             LocalDate examDate2 = exam2.date;
             int dateComparison = Long.compare(Math.abs(ChronoUnit.DAYS.between(currentDate, examDate1)),
@@ -108,7 +132,4 @@ public class AllExamsList {
         return upcomingMonthExamCount;
     }
 
-    public void clearSummaryStats() {
-        upcomingMonthExamCount = 0;
-    }
 }

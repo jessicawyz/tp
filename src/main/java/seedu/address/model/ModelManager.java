@@ -203,11 +203,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void clearSummaryStats() {
-        addressBook.clearSummaryStats();
-    }
-
-    @Override
     public ObservableList<Exam> getAllExamList() {
         return addressBook.getAllExamsList();
     }
