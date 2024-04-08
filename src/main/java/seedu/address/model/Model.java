@@ -111,8 +111,6 @@ public interface Model {
 
     void addExam(Exam exam);
 
-    void clearSummaryStats();
-
     void addLog(Person person, Log log);
 
 

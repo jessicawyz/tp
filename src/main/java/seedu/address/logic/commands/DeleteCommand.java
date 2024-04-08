@@ -2,10 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Set;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.AllExamsList;
+import seedu.address.model.person.Exam;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Person;
 
@@ -43,6 +47,14 @@ public class DeleteCommand extends Command {
 
         if (personToDelete == null) {
             throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        }
+
+        // Retrieve the person's exams
+        Set<Exam> examsToDelete = personToDelete.getExams();
+
+        // Delete all exams associated with the person from AllExamsList
+        for (Exam exam : examsToDelete) {
+            AllExamsList.deleteAllExamFromList(exam);
         }
 
         model.deletePerson(personToDelete);

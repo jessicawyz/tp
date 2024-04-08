@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_PAST_DATE;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM_NAME;
@@ -27,13 +28,13 @@ public class AddExamCommandParser implements Parser<AddExamCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_DATE) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExamCommand.MESSAGE_USAGE));
         }
-        assert argMultimap.getValue(PREFIX_ID).isPresent() : "Prefix ID value is missing";
-        assert argMultimap.getValue(PREFIX_EXAM_NAME).isPresent() : "Prefix Exam Name value is missing";
-        assert argMultimap.getValue(PREFIX_DATE).isPresent() : "Prefix Date value is missing";
 
         String uniqueId = argMultimap.getValue(PREFIX_ID).get();
         String examName = ParserUtil.parseExamName(argMultimap.getValue(PREFIX_EXAM_NAME).get());
         LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        if (date.isBefore(LocalDate.now())) {
+            throw new ParseException(MESSAGE_CONSTRAINTS_PAST_DATE);
+        }
         Optional<String> timeValue = argMultimap.getValue(PREFIX_TIME);
         Optional<LocalTime> time;
         if (timeValue.isPresent()) {
