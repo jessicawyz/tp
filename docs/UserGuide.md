@@ -67,6 +67,10 @@ Note: For MacOS users, a compatible Java 11 version is available [here](https://
 * All id inputs in commands labelled `{ID}` can omit any leading 0s.<br>
 e.g. `1`, `01`, `000001` are all valid id inputs for the id `#000001`
 
+* All `{ID}` are by default *6 digits*. Any id that exceeds a 6 digit number (e.g. 1234567) may cause errors.
+
+* The maximum number of students that can be stored in TuteeTally is 999999. 
+
 * Date inputs must be in the format `yyyy-MM-dd` format. <br>
 e.g. `2024-04-01` is a valid input for date, but not `2024-4-01` or `2024-04-1`
 
@@ -97,9 +101,10 @@ Examples:
 
 ### Editing a student: `edit`
 
-Edit the specific student detail from TuteeTally using the ID.
-
-Parameters: INDEX (must be a positive integer) [-nameNAME] [-phonePHONE] [-emailEMAIL] [-addressADDRESS] [-subjectSUBJECT] [t/TAG]... 
+Edit the specific student detail from TuteeTally using the *INDEX* of the student. <br>
+The index of the student refers to the position of student counting from the top of current displayed list, with the first student being index 1.
+<br>
+Parameters: INDEX (must be a positive integer) [-nameNAME] [-phonePHONE] [-emailEMAIL] [-addressADDRESS] [t/TAG]... 
 Editable Fields
 - `Name`
 - `Phone`
@@ -155,19 +160,19 @@ Examples:
 This will add a payment to a student by searching for their `id`
 Format: `addpayment -id {ID} -payment {AMOUNT}`
 Examples:
-* `addpayment -id 88888 -payment 100` would add a payment of 100 to the student whose id is 88888 if it exists.
+* `addpayment -id 888888 -payment 100` would add a payment of 100 to the student whose id is 88888 if it exists.
 
 ### Mark student's payment as paid by id: `markpayment`
 This will mark a specified amount of a student's payment as paid. The command searches for their `id`, and reduces the total outstanding payment amount of the student by `{AMOUNT}`.
 Format: `markpayment -id {ID} -payment {AMOUNT}`
 Examples:
-* `markpayment -id 88888 -payment 100` would mark a payment of 100 as paid for the student whose id is 88888 if it exists. If the student had $150 of outstanding payments, the display will now show $50.
+* `markpayment -id 888888 -payment 100` would mark a payment of 100 as paid for the student whose id is 88888 if it exists. If the student had $150 of outstanding payments, the display will now show $50.
 
 ### Reset student's payment by id: `resetpayment`
 This will reset a student's payment to 0 by searching for their `id`. 
 Format: `resetpayments -id {ID}`
 Examples:
-* `resetpayments -id 88888` would reset the payment for the student whose id is 88888 if it exists.
+* `resetpayments -id 888888` would reset the payment for the student whose id is 88888 if it exists.
 
 ### Add student's exam by id: `addexam`
 This will add an exam to a student by searching for their `id`. Time is an optional field.
@@ -184,11 +189,18 @@ Examples:
 * `deleteexam -id 888888 -exam Computing -date 2024-04-27 -time 09:00` would delete an exam of Computing with date of 2024-04-27 and time of 09:00 from a student whose id is 888888 if the student exists.
 
 ### Logging the Lessons of a student: `log`
-This will log the lessons of a student. The time field of the log entry will be the system time when the log was added.
-Format `log -id {ID} -hours {HOURS} -content {CONTENT} -style {LEARNING STYLE} -notes {NOTES}
+This will add a log to the lessons of a student. The time field of the log entry will be the *system time* when the log was added.
+Format: `log -id {ID} -hours {HOURS} -content {CONTENT} -style {LEARNING STYLE} -notes {NOTES}`
+<box type="info" seamless>
+Note: Hours need not be an integer input. Values like `2 hours 45 mins`, `2+ hours` are valid as well.
+</box>
 Examples:
-* `log -id 1 -hours 2 -content English Comprehension -style Visual -notes Great improvement!`. would log a lesson for ID 1 noting that it had great improvement in English Comprehension, it also logs the learning style of the student
+* `log -id 000001 -hours 2 -content English Comprehension -style Visual -notes Great improvement!`. would log a lesson for ID 1 noting that it had great improvement in English Comprehension, it also logs the learning style of the student
 
+<box type="tip" seamless>
+Tip:<br>
+After successful addition, you can check your updated log list using the `view -id {ID}` command!
+</box>
 
 ### More features `[coming in v1.4]`
 
