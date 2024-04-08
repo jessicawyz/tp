@@ -12,6 +12,7 @@ management much easier and faster than traditional GUI apps.
 
 The system includes features for adding students, viewing student details, viewing summary statistics, and deleting student entries. <br>
 <box type="info" seamless>
+
 **Note**: <br>
 All commands are case-sensitive.
 </box>
@@ -52,11 +53,6 @@ All commands are case-sensitive.
    * `addexam` - adding exam to student
    * `deleteexam` - deleting exam from student
    * `log` - logging a session's content, hours, learning styles and comments (notes) for each session
-   
-   <box type="info" seamless>
-     Note: We noticed an existing bug that causes the exams of a student to disappear when we add a new payment.
-     Will be fixed in V1.4.
-   </box>
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -88,6 +84,10 @@ All commands are case-sensitive.
 
 * All id inputs in commands labelled `{ID}` can omit any leading 0s.<br>
 e.g. `1`, `01`, `000001` are all valid id inputs for the id `#000001`
+
+* All `{ID}` are by default *6 digits*. Any id that exceeds a 6 digit number (e.g. 1234567) may cause errors.
+
+* The maximum number of students that can be stored in TuteeTally is 999999. 
 
 * Date inputs must be in the format `yyyy-MM-dd` format. <br>
 e.g. `2024-04-01` is a valid input for date, but not `2024-4-01` or `2024-04-1`
@@ -134,11 +134,16 @@ The `t/{tag}` field is optional and can be used to add a tag to the student reco
 Examples:
 * `add -name Xiao Ming -address 13, Computing Dr, 117417 -email xiaoming@email.com -phone 88888888 -subject Math`
 
+After entering the command, the interface will update as shown below:
+
+![Add Student Display](images/add/add.jpg) _The display showing *ALL* the students after a new student gets added._
+
 ### Editing a student: `edit`
 
-Edit the specific student detail from TuteeTally using the ID.
-
-Parameters: INDEX (must be a positive integer) [-nameNAME] [-phonePHONE] [-emailEMAIL] [-addressADDRESS] [-subjectSUBJECT] [t/TAG]... 
+Edit the specific student detail from TuteeTally using the *INDEX* of the student. <br>
+The index of the student refers to the position of student counting from the top of current displayed list, with the first student being index 1.
+<br>
+Parameters: INDEX (must be a positive integer) [-name NAME] [-phone PHONE] [-email EMAIL] [-address ADDRESS] [t/TAG]... 
 Editable Fields
 - `Name`
 - `Phone`
@@ -151,7 +156,11 @@ At least one editable fields must be present. Not all editable values need to be
 Format: `edit {ID} -<Insert Field to Edit> {Value}`
 
 Example: 
-* `edit 1 -phone 91234567 -email johndoe@example.com -name JohnDoo`
+* `edit 1 -phone91234567 -emailjohndoe@example.com -nameJohnDoo`
+
+After entering the command, the interface will update as shown below:
+
+![Edit Student Display](images/edit/edit.jpg) _The display showing the edited student with the INDEX 1._
 
 ### Deleting a student: `delete`
 
@@ -162,7 +171,11 @@ Format: `delete -id {ID}`
 * Deletes the person at the specified `id`.
 
 Examples:
-* `delete -id 000001` or `delete -id 1` deletes the student with the id 000001
+* `delete -id 000001` or `delete -id 1` deletes the student with the ID #000001
+
+After entering the command, the interface will update as shown below:
+
+![Delete ID Display](images/delete/delete.jpg) _The display showing *ALL* the students after the student with the ID #000001 gets deleted._
 
 ## View student details: `view`
 
@@ -174,8 +187,9 @@ These student details can be found in the `test.json` file that we have included
 
 <box type="tip" seamless>
 
-**Note:** <br>
-To match the results shown in the illustrations within our User Guide, we recommend replacing the contents of the data/addressbook.json file with the data from the data/test.json file. This will ensure your outputs align with the examples provided in our guide. <br>
+**Tip:** <br>
+To match the results shown in the illustrations within our User Guide, we recommend replacing the contents of the `data/addressbook.json` file with the data from the `data/test.json` file. <br>
+This will ensure your outputs align with the examples provided in our guide. <br>
 
 </box>
 
@@ -190,8 +204,6 @@ Tip:<br>
 Use ths feature to track the total amount of students you're teaching, how much is owed by all of them
 and how plan your schedule based on the number of upcoming exams that will come in the next month
 </box>
-
-![StatsWindow](images/StatsWindow.png)
 
 Press `F2` on the keyboard to access the `stats` view or type the below commands
 
@@ -237,6 +249,13 @@ After entering the command, the interface will update as shown below:
 
 TuteeTally's payment management commands are designed to streamline the financial interactions between tutors and students, ensuring accuracy and transparency. Below are detailed explanations of each command's purpose and benefits:
 
+<box type="info" seamless>
+
+**Note:** <br>
+* Displayed payment amounts are rounded to the nearest $0.01. However, TuteeTally accurately tracks the exact amounts entered, without rounding. <br>
+
+</box>
+
 ### Adding a Payment: `addpayment`
 
 Record new payments easily with the `addpayment` command, keeping track of what each student owes. This command simplifies the maintenance of financial records, ensuring you never overlook an outstanding payment.
@@ -245,18 +264,10 @@ Format: `addpayment -id {ID} -payment {AMOUNT}`
 
 Example: 
 * `addpayment -id 000001 -payment 150` or `addpayment -id 1 -payment 150` would add a payment of 150 to the student with ID #000001 if it exists. <br>
-If the student has no outstanding payments, a 'No payment owed' message will be displayed. <br>
-Following the command, the display will update to show "Payment owed: $150". <br>
+
 After entering the command, the interface will update as shown below:
 
 ![Add Payment Update Display](images/payment/add_payment.jpg) _The display showing "Payment owed: $150" after adding a payment._
-
-<box type="info" seamless>
-
-**Note:** <br>
-* All payments added will be rounded off to the nearest $0.01.
-
-</box>
 
 ### Marking Payment of the student: `markpayment`
 
@@ -266,7 +277,7 @@ Format: `markpayment -id {ID} -payment {AMOUNT}`
 
 Example:
 * `markpayment -id 000001 -payment 100` or `markpayment -id 1 -payment 100` with ID #000001 if it exists. <br>
-If the student had $150 of outstanding payments, the display will update to show "Payment owed: $50". <br>
+
 After entering the command, the interface will update as shown below: <br>
 
 ![Mark Payment Update Display](images/payment/mark_payment.jpg) _The display showing "Payment owed: $50" after marking a payment of $100, with $150 owed initially._
@@ -276,7 +287,6 @@ After entering the command, the interface will update as shown below: <br>
 **Note:** <br>
 * If the amount marked as paid exceeds the total outstanding payment, the total outstanding payment will be set to 0. <br>
 * If the amount owed by student is already 0, you are still allowed to enter the command, but there will be no changes. <br>
-* All payments added will be rounded off to the nearest $0.01.
 
 </box>
 
@@ -292,7 +302,8 @@ Use the `resetpayments` command to clear a student's outstanding payment amount,
 Format: `resetpayments -id {ID}`
 
 Example: 
-* `resetpayments -id 000001` or `resetpayments -id 1` would reset the payment for the student with ID #000001 if it exists. <br>
+* `resetpayments -id 000001` or `resetpayments -id 1` would reset the payment for the student with ID #000001 if it exists.
+
 After entering the command, the interface will update as shown below: <br>
 
 ![Reset Payments Update Display](images/payment/reset_payments.jpg) _The display showing "No payment owed" after resetting payments, with $50 owed previously._
@@ -308,18 +319,28 @@ After entering the command, the interface will update as shown below: <br>
 Each of these features contributes to a comprehensive financial management system within TuteeTally, enabling tutors to manage their tutoring finances more effectively and efficiently.
 
 ### Add student's exam by id: `addexam`
-This will add an exam to a student by searching for their `id`. Time is an optional field.
+This will add an exam to a student by searching for their `id`. Time is an optional field. Do note that only exams from the current date onwards can be added.
+
 Format 1: `addexam -id {ID} -exam {EXAMNAME} -date {DATE}`
 Format 2: `addexam -id {ID} -exam {EXAMNAME} -date {DATE} -time {TIME}`
+
 Examples:
 * `addexam -id 000001 -exam Computing -date 2024-04-27 -time 09:00` would add an exam of Computing with date of 2024-04-27 and time of 09:00 to a student whose id is 888888 if the student exists.
 After entering the command, the interface will update as shown below: <br>
 
 ![Add Exam Update Display](images/exam/add_exam.jpg) _The display showing a new `COMPUTING` exam of the student with ID #000001 after being added._
 
+<box type="info" seamless>
+
+**Note:** <br>
+* This feature support adding an exam that is on current date but with a past time to allow for tracking exams happening on the same day.
+* If the entered date is yyyy-02-29 in non leap year, 29th will be automatically converted to 28th. Exam of yyyy-02-28 will be added.
+  
+</box>
 
 ### Delete student's exam by id: `deleteexam`
 This will delete an exam from a student by searching for their `id`. Fields should follow exactly from the exam from the exam list that you wish to delete.
+
 Format 1: `deleteexam -id {ID} -exam {EXAMNAME} -date {DATE}`
 Format 2: `deleteexam -id {ID} -exam {EXAMNAME} -date {DATE} -time {TIME}`
 Examples:
@@ -328,20 +349,32 @@ After entering the command, the interface will update as shown below: <br>
 
 ![Delete Exam Update Display](images/exam/delete_exam.jpg) _The display, after the COMPUTING exam for the student with ID #000001 has been deleted, shows the updated status, confirming the successful removal of the exam._
 
+<box type="info" seamless>
+
+**Note:** <br>
+* Past exams specified below will be automatically removed when the user opens TuteeTally at the current date.
+   - Exam of past date and past time
+   - Exam of past date
+   - Exam of current date and past time
+* To update the change to storage, user should use the command `exit` to exit the app.
+
+</box>
 
 ### Logging the Lessons of a student: `log`
-This will log the lessons of a student. The time field of the log entry will be the system time when the log was added.
-Format `log -id {ID} -hours {HOURS} -content {CONTENT} -style {LEARNING STYLE} -notes {NOTES}
+This will add a log to the lessons of a student. The time field of the log entry will be the *system time* when the log was added.
+Format: `log -id {ID} -hours {HOURS} -content {CONTENT} -style {LEARNING STYLE} -notes {NOTES}`
+<box type="info" seamless>
+Note: Hours need not be an integer input. Values like `2 hours 45 mins`, `2+ hours` are valid as well.
+</box>
 Examples:
 * `log -id 000001 -hours 2 -content English Comprehension -style Visual -notes Great improvement!`. would log a lesson for the student with ID #000001 noting that it had great improvement in English Comprehension, it also logs the learning style of the student. <br>
 After entering the command, the interface will update as shown below: <br>
 
 ![Log Update Display](images/log/log.jpg) _The display reflects the successful logging for the student with ID #000001._
 
-<box type="info" seamless>
-
-**Note:** <br>
-Please enter the command `view -id 000001` or `view -id 1` to view the logs of the student with ID #000001. <br>
+<box type="tip" seamless>
+Tip:<br>
+After successful addition, you can check your updated log list using the `view -id {ID}` command!
 </box>
 
 After entering the `view -id 000001` command, the interface will update as shown below: <br>
@@ -371,6 +404,8 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **view -stats Command**, Currently the total fee owing by students can precision more than 2 decimal points
 3. **When inputting long names above 220 characters**, the Id number of the students will be blocked even after the work around ontop[in add command](#adding-a-student-add)
+4. **When using the payment commands**, the display will round the payment amounts to the nearest $0.01. So if you enter a payment of $0.001, it will be displayed as $0.00. However, the application will accurately track the exact amounts entered, without rounding.
+
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
