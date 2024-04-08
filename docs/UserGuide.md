@@ -136,7 +136,7 @@ Examples:
 
 After entering the command, the interface will update as shown below:
 
-![Add Student Display](images/add/add.jpg) _The display showing *ALL* the students after a new student gets added._
+![Add Student Display](images/add/add.png) _The display showing *ALL* the students after a new student gets added._
 
 ### Editing a student: `edit`
 
