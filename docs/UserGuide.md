@@ -198,7 +198,7 @@ The `markpayment` command allows you to update the status of a student's payment
 Format: `markpayment -id {ID} -payment {AMOUNT}`
 
 Example:
-* `markpayment -id 000001 -payment 100` or `markpayment -id 000001 -payment 100` whose ID is '#000001' if it exists. <br>
+* `markpayment -id 000001 -payment 100` or `markpayment -id 1 -payment 100` whose ID is '#000001' if it exists. <br>
 If the student had $150 of outstanding payments, the display will update to show "Payment owed: $50". <br>
 After entering the command, the interface will update as shown below: <br>
 
