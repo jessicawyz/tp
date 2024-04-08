@@ -156,7 +156,7 @@ At least one editable fields must be present. Not all editable values need to be
 Format: `edit {ID} -<Insert Field to Edit> {Value}`
 
 Example: 
-* `edit 1 -phone91234567 -emailjohndoe@example.com -nameJohnDoo`
+* `edit 1 -phone 91234567 -email johndoe@example.com -name JohnDoo`
 
 After entering the command, the interface will update as shown below:
 
