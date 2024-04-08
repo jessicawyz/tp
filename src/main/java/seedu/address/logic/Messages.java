@@ -21,6 +21,10 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found";
     public static final String MESSAGE_EXAM_NOT_FOUND = "Exam to delete cannot be found";
+    public static final String MESSAGE_EXAM_ALREADY_EXIST =
+            "Exam cannot be added because exam to be added already exists";
+    public static final String MESSAGE_CONSTRAINTS_PAST_DATE = "Exam date in the past is invalid. "
+            + "Please input exam dates from today onwards";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
