@@ -135,6 +135,20 @@ Format: `delete -id {ID}`
 Examples:
 * `delete -id 000001` or `delete -id 1` deletes the student with the id 000001
 
+## View student details: `view`
+
+View the details of a student by searching for their `id`, `name`, or view all students. <br>
+
+For this feature, we have added more students in the list to demonstrate the different views available. <br>
+
+These student details can be found in the `test.json` file that we have included in the `data` folder. <br>
+
+<box type="tip" seamless>
+
+**Note:** <br>
+To match the results shown in the illustrations within our User Guide, we recommend replacing the contents of the data/addressbook.json file with the data from the data/test.json file. This will ensure your outputs align with the examples provided in our guide. <br>
+</box>
+
 ### View student statistics: `view`
 This would display the following in a pop-up window 
 - the total number of students 
@@ -146,25 +160,42 @@ This would display the following in a pop-up window
 Press `F2` on the keyboard to access the `stats` view or type the below commands
 
 Format 1: `view -statistics`
-Format 2: `view -stats`
+Format 2: `view -stats` <br>
+
+After entering the command, the interface will update as shown below:
+
+![View STATS Display](images/view/view_stats.jpg) _The display showing the stats of *ALL* the students._
 
 ### View full student list on the home page: `view`
 This would display all students currently added to the list. Each student's contact information and subject information will be displayed with this command.
-Format: `view -all`
+Format: `view -all` <br>
+
+After entering the command, the interface will update as shown below:
+
+![View ALL Display](images/view/view_all.jpg) _The display showing *ALL* the students._
 
 ### View student particular by name: `view`
 This will display students whose name matches any single word in the `{NAME}` search field.
 * i.e. `view -name alex tan` will retrieve any student with the word `alex` or `tan` in their name. `Alex Yeo` and `James Tan` are both valid students to display in this case.
 Format: `view -name {NAME}`
 Examples:
-* `view -name Xiao Ming` would display the student particular of Xiao Ming if existed
+* `view -name Benson Meier` would display the student particular of Benson Meier if existed or any student with the word `Benson` or `Meier` in their name. <br>
+
+After entering the command, the interface will update as shown below:
+
+![View name Display](images/view/view_name.jpg) _The display showing *ALL* the students with the word `Benson` or `Meier` in their name._
+
 
 ### View student particular by id: `view`
 This will display a specific student by searching for their id, this also pops up the lesson logs of the student.
 Format: `view -id {ID}`
 
 Examples:
-* `view -id 88888` would display the student particular for the student whose id is 88888 if it exists.
+* `view -id 000003` would display the student particular for the student whose ID is #000003 if it exists. <br>
+
+After entering the command, the interface will update as shown below:
+
+![View ID Display](images/view/view_id.jpg) _The display showing the student with the ID #000003._
 
 ## Enhanced Payment Management
 
@@ -182,7 +213,7 @@ If the student has no outstanding payments, a 'No payment owed' message will be 
 Following the command, the display will update to show "Payment owed: $150". <br>
 After entering the command, the interface will update as shown below:
 
-![Add Payment Update Display](images/payment/add_payment.png) _The display showing "Payment owed: $150" after adding a payment._
+![Add Payment Update Display](images/payment/add_payment.jpg) _The display showing "Payment owed: $150" after adding a payment._
 
 <box type="info" seamless>
 
@@ -202,7 +233,7 @@ Example:
 If the student had $150 of outstanding payments, the display will update to show "Payment owed: $50". <br>
 After entering the command, the interface will update as shown below: <br>
 
-![Mark Payment Update Display](images/payment/mark_payment.png) _The display showing "Payment owed: $50" after marking a payment of $100, with $150 owed initially._
+![Mark Payment Update Display](images/payment/mark_payment.jpg) _The display showing "Payment owed: $50" after marking a payment of $100, with $150 owed initially._
 
 <box type="info" seamless>
 
@@ -228,7 +259,7 @@ Example:
 * `resetpayments -id 000001` or `resetpayments -id 1` would reset the payment for the student whose id is '#000001' if it exists. <br>
 After entering the command, the interface will update as shown below: <br>
 
-![Reset Payments Update Display](images/payment/reset_payments.png) _The display showing "No payment owed" after resetting payments, with $50 owed previously._
+![Reset Payments Update Display](images/payment/reset_payments.jpg) _The display showing "No payment owed" after resetting payments, with $50 owed previously._
 
 <box type="info" seamless>
 
@@ -245,20 +276,42 @@ This will add an exam to a student by searching for their `id`. Time is an optio
 Format 1: `addexam -id {ID} -exam {EXAMNAME} -date {DATE}`
 Format 2: `addexam -id {ID} -exam {EXAMNAME} -date {DATE} -time {TIME}`
 Examples:
-* `addexam -id 888888 -exam Computing -date 2024-04-27 -time 09:00` would add an exam of Computing with date of 2024-04-27 and time of 09:00 to a student whose id is 888888 if the student exists.
+* `addexam -id 000001 -exam Computing -date 2024-04-27 -time 09:00` would add an exam of Computing with date of 2024-04-27 and time of 09:00 to a student whose id is 888888 if the student exists.
+After entering the command, the interface will update as shown below: <br>
+
+![Add Exam Update Display](images/exam/add_exam.jpg) _The display showing a new `COMPUTING` exam of the student with ID #000001 after being added._
+
 
 ### Delete student's exam by id: `deleteexam`
 This will delete an exam from a student by searching for their `id`. Fields should follow exactly from the exam from the exam list that you wish to delete.
 Format 1: `deleteexam -id {ID} -exam {EXAMNAME} -date {DATE}`
 Format 2: `deleteexam -id {ID} -exam {EXAMNAME} -date {DATE} -time {TIME}`
 Examples:
-* `deleteexam -id 888888 -exam Computing -date 2024-04-27 -time 09:00` would delete an exam of Computing with date of 2024-04-27 and time of 09:00 from a student whose id is 888888 if the student exists.
+* `deleteexam -id 000001 -exam Computing -date 2024-04-27 -time 09:00` would delete an exam of Computing with date of 2024-04-27 and time of 09:00 from a student whose id is 888888 if the student exists.
+After entering the command, the interface will update as shown below: <br>
+
+![Delete Exam Update Display](images/exam/delete_exam.jpg) _The display, after the COMPUTING exam for the student with ID #000001 has been deleted, shows the updated status, confirming the successful removal of the exam._
+
 
 ### Logging the Lessons of a student: `log`
 This will log the lessons of a student. The time field of the log entry will be the system time when the log was added.
 Format `log -id {ID} -hours {HOURS} -content {CONTENT} -style {LEARNING STYLE} -notes {NOTES}
 Examples:
-* `log -id 1 -hours 2 -content English Comprehension -style Visual -notes Great improvement!`. would log a lesson for ID 1 noting that it had great improvement in English Comprehension, it also logs the learning style of the student
+* `log -id 000001 -hours 2 -content English Comprehension -style Visual -notes Great improvement!`. would log a lesson for the student with ID #00001 noting that it had great improvement in English Comprehension, it also logs the learning style of the student. <br>
+After entering the command, the interface will update as shown below: <br>
+
+![Log Update Display](images/log/log.jpg) _The display reflects the successful logging for the student with ID #000001._
+
+<box type="info" seamless>
+
+**Note:** <br>
+Please enter the command `view -id 000001` or `view -id 1` to view the logs of the student with ID #000001. <br>
+</box>
+
+After entering the `view -id 000001` command, the interface will update as shown below: <br>
+
+![Log Update Display](images/log/log_view.jpg) <br>
+_The display reflects the updated log entries for the student with ID #000001._
 
 
 ### More features `[coming in v1.4]`
