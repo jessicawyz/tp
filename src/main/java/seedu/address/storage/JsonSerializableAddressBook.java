@@ -54,6 +54,15 @@ class JsonSerializableAddressBook {
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
+
+            // Check for overdue exams and remove them from the person
+            Set<Exam> examsToRemove = person.getExams().stream()
+                    .filter(exam -> exam.isExamOverdue(exam))
+                    .collect(Collectors.toSet());
+            for (Exam exam : examsToRemove) {
+                person.removeExam(exam);
+            }
+
             addressBook.addPerson(person);
             Set<Exam> exams = person.getExams();
             for (Exam exam : exams) {

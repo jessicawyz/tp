@@ -18,7 +18,8 @@ import java.util.Optional;
 public class Exam {
 
     public static final String MESSAGE_CONSTRAINTS_EXAM_NAME = "Exam name cannot be blank";
-    public static final String MESSAGE_CONSTRAINTS_DATE = "Exam date must be a valid date in the format dd-MM-yyyy";
+    public static final String MESSAGE_CONSTRAINTS_DATE =
+            "Exam date must be a valid date in the format dd-MM-yyyy. A valid Exam Date cannot be in the past";
     public static final String MESSAGE_CONSTRAINTS_TIME = "Exam time must be a valid time in the format HH:mm";
 
     public final LocalDate date;
@@ -82,9 +83,16 @@ public class Exam {
     /**
      * Returns true if a given date is a valid exam date (from today onwards).
      */
-    public static boolean isValidExamDate(LocalDate test) {
+    public static boolean isValidExamDate(LocalDate test) throws IllegalArgumentException {
         LocalDate currentDate = LocalDate.now();
-        return !test.isBefore(currentDate);
+        try {
+            if (test.isBefore(currentDate)) {
+                throw new IllegalArgumentException("Invalid exam date. Date cannot be before the current date.");
+            }
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -102,6 +110,33 @@ public class Exam {
         } catch (DateTimeParseException e) {
             return false;
         }
+    }
+
+    /**
+     * Checks if the given exam is overdue based on the current date and time.
+     * An exam is considered overdue if its date is before the current date or
+     * if its date is today and its time is before the current time.
+     *
+     * @param exam The Exam object representing the exam to be checked.
+     * @return True if the exam is overdue, false otherwise.
+     */
+    public boolean isExamOverdue(Exam exam) {
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+        LocalDate examDate = exam.date;
+        Optional<LocalTime> examTime = exam.time;
+
+        // Check if exam date is before current date
+        if (examDate.isBefore(currentDate)) {
+            return true;
+        }
+
+        // Check if exam date is today and time is before current time
+        if (examDate.isEqual(currentDate) && examTime.isPresent() && examTime.get().isBefore(currentTime)) {
+            return true;
+        }
+
+        return false;
     }
 
     public long getDaysFromCurrentDate() {
@@ -128,7 +163,11 @@ public class Exam {
             return false;
         }
         Exam otherExam = (Exam) other;
-        return date.equals(otherExam.date) && time.equals(otherExam.time);
+        return date.equals(otherExam.date)
+                && time.equals(otherExam.time)
+                && name.equals(otherExam.name)
+                && studentName.equals(otherExam.studentName)
+                && uniqueId.equals(otherExam.uniqueId);
     }
 
     @Override
