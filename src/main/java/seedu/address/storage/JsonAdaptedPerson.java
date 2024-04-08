@@ -112,7 +112,7 @@ class JsonAdaptedPerson {
         for (JsonAdaptedExam exam : exams) {
             if (!exam.isExamOverdue(exam)) {
                 personExams.add(exam.toModelType());
-            } 
+            }
         }
 
         final List<Log> personLogs = new ArrayList<>();
