@@ -120,16 +120,13 @@ public class JsonAdaptedExam {
     public boolean isExamOverdue(JsonAdaptedExam exam) {
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
-        System.out.println("below are current date and time");
-        System.out.println(currentDate);
-        System.out.println(currentTime);
 
         // Parse date
         LocalDate parsedDate;
         try {
             parsedDate = ParserUtil.parseDate(date.toString());
         } catch (ParseException e) {
-            return false; // Unable to parse date, return false
+            return false;
         }
 
         // Check if date is before current date
@@ -144,7 +141,7 @@ public class JsonAdaptedExam {
             timeString = timeString.substring(timeString.indexOf('=') + 1, timeString.lastIndexOf('}'));
             parsedTime = ParserUtil.parseTimeFromStorage(timeString);
         } catch (ParseException e) {
-            return false; // Unable to parse time, return false
+            return false;
         }
 
         // Check if date is today and time is before current time

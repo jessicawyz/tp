@@ -110,9 +110,6 @@ class JsonAdaptedPerson {
 
         final List<Exam> personExams = new ArrayList<>();
         for (JsonAdaptedExam exam : exams) {
-            System.out.println(exam.isExamOverdue(exam));
-            System.out.println(exam.getDate());
-            System.out.println(exam.getTime());
             if (!exam.isExamOverdue(exam)) {
                 personExams.add(exam.toModelType());
             } else {
