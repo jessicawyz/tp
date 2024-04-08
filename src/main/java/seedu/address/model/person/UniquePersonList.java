@@ -175,11 +175,4 @@ public class UniquePersonList implements Iterable<Person> {
         return totalOwings;
     }
 
-    /**
-     * Clears the summary statistics.
-     */
-    public void clearSummaryStats() {
-        totalPersons = 0;
-        totalOwings = 0.0;
-    }
 }

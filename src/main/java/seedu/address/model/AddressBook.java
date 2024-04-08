@@ -160,13 +160,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Clear and resets the Summary Stats.
-     */
-    public void clearSummaryStats() {
-        persons.clearSummaryStats();
-        allExamsList.clearSummaryStats();
-    }
-    /**
      * Adds a log to the person.
      */
     public void addLogToPerson(Person target, Log log) {
