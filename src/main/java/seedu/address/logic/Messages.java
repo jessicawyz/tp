@@ -24,6 +24,7 @@ public class Messages {
     public static final String MESSAGE_EXAM_ALREADY_EXIST =
             "Exam cannot be added because exam to be added already exists";
     public static final String MESSAGE_CONSTRAINTS_PAST_DATE = "Exam date in the past is invalid.";
+    public static final String MESSAGE_CONSTRAINTS_PAST_TIME = "Exam time on current date in the past is invalid";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

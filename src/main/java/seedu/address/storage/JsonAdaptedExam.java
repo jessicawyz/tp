@@ -109,4 +109,49 @@ public class JsonAdaptedExam {
         return newExam;
     }
 
+    /**
+     * Checks if the given exam is overdue based on the current date and time.
+     * If the exam's date is before the current date or if the exam's date is today
+     * and its time is before the current time, then the exam is considered overdue.
+     *
+     * @param exam The JsonAdaptedExam object representing the exam to be checked.
+     * @return true if the exam is overdue, false otherwise.
+     */
+    public boolean isExamOverdue(JsonAdaptedExam exam) {
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+        System.out.println("below are current date and time");
+        System.out.println(currentDate);
+        System.out.println(currentTime);
+
+        // Parse date
+        LocalDate parsedDate;
+        try {
+            parsedDate = ParserUtil.parseDate(date.toString());
+        } catch (ParseException e) {
+            return false; // Unable to parse date, return false
+        }
+
+        // Check if date is before current date
+        if (parsedDate.isBefore(currentDate)) {
+            return true;
+        }
+
+        // Parse optional time
+        Optional<LocalTime> parsedTime;
+        try {
+            String timeString = time.toString();
+            timeString = timeString.substring(timeString.indexOf('=') + 1, timeString.lastIndexOf('}'));
+            parsedTime = ParserUtil.parseTimeFromStorage(timeString);
+        } catch (ParseException e) {
+            return false; // Unable to parse time, return false
+        }
+
+        // Check if date is today and time is before current time
+        if (parsedDate.isEqual(currentDate) && parsedTime.isPresent() && parsedTime.get().isBefore(currentTime)) {
+            return true;
+        }
+
+        return false;
+    }
 }

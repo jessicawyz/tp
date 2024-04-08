@@ -112,6 +112,33 @@ public class Exam {
         }
     }
 
+    /**
+     * Checks if the given exam is overdue based on the current date and time.
+     * An exam is considered overdue if its date is before the current date or
+     * if its date is today and its time is before the current time.
+     *
+     * @param exam The Exam object representing the exam to be checked.
+     * @return True if the exam is overdue, false otherwise.
+     */
+    public boolean isExamOverdue(Exam exam) {
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+        LocalDate examDate = exam.date;
+        Optional<LocalTime> examTime = exam.time;
+
+        // Check if exam date is before current date
+        if (examDate.isBefore(currentDate)) {
+            return true;
+        }
+
+        // Check if exam date is today and time is before current time
+        if (examDate.isEqual(currentDate) && examTime.isPresent() && examTime.get().isBefore(currentTime)) {
+            return true;
+        }
+
+        return false;
+    }
+
     public long getDaysFromCurrentDate() {
         LocalDate currentDate = LocalDate.now();
         return Math.abs(ChronoUnit.DAYS.between(currentDate, date));

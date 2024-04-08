@@ -107,9 +107,17 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
+
         final List<Exam> personExams = new ArrayList<>();
         for (JsonAdaptedExam exam : exams) {
-            personExams.add(exam.toModelType());
+            System.out.println(exam.isExamOverdue(exam));
+            System.out.println(exam.getDate());
+            System.out.println(exam.getTime());
+            if (!exam.isExamOverdue(exam)) {
+                personExams.add(exam.toModelType());
+            } else {
+                System.out.println("removed past exams: " + exam);
+            }
         }
 
         final List<Log> personLogs = new ArrayList<>();
