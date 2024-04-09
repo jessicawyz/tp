@@ -37,3 +37,4 @@ While the payment commands feature was inspired by general best practices in fin
   - Added documentation for the new payment commands, including detailed instructions on how to use them effectively.
   - Added all the diagrams and screenshots needed to illustrate the entire TuteeTally management process.
 - Developer Guide: [Developer Guide](https://ay2324s2-cs2103t-f10-2.github.io/tp/index.html)
+
