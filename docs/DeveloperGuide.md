@@ -1,7 +1,7 @@
 ---
-  layout: default.md
-  title: "Developer Guide"
-  pageNav: 3
+layout: default.md
+title: "Developer Guide"
+pageNav: 3
 ---
 
 # AB-3 Developer Guide
@@ -244,6 +244,59 @@ It gets it's info from the `logic` interface
 ** to add in v1.4**
 #### Implementation
 ** to add in v1.4**
+
+# Student Payment Management System
+
+## Introduction
+
+This section of the developer guide covers the functionalities provided for managing student payments. It includes adding payments, marking payments as paid, and resetting payment statuses for students. These features are integral to maintaining accurate and up-to-date financial records for each student.
+
+### Features Overview
+
+- **Add Payment**: Allows the addition of payment records to student accounts using unique identifiers.
+- **Mark Payment**: Marks payments as completed for students, indicating that a payment has been made.
+- **Reset Payments**: Resets the payment status of students, useful in scenarios where the total payment amount is fulfilled or adjustments are needed.
+
+## Add Payment Feature
+
+The `AddPaymentCommand` enables users to add payment records to students by specifying a unique student ID and the payment amount.
+<puml src="diagrams/AddPaymentSequenceDiagram.puml" alt="AddPaymentSequenceDiagram" />
+
+
+### Implementation
+
+1. The user inputs a command with the `-addpayment` flag, followed by the student's `uniqueId` and the amount.
+2. The system parses this command, extracting the necessary details.
+3. A new payment record is created and added to the student's account in the system.
+
+## Mark Payment Feature
+
+The `MarkPaymentCommand` allows marking a student's payment as completed. This is typically used once a payment has been processed or received.
+<puml src="diagrams/MarkPaymentSequenceDiagram.puml" alt="MarkPaymentSequenceDiagram" />
+
+
+### Implementation
+
+1. The user inputs a command with the `-markpayment` flag, followed by the student's `uniqueId`.
+2. The system identifies the corresponding student record and updates the payment status to reflect that it has been paid.
+3. A confirmation is returned to the user upon successful update.
+
+## Reset Payments Feature
+
+This feature enables the system to reset the payment status of students, which is useful when a student has fully paid their dues or when adjustments to their payment records are needed.
+<puml src="diagrams/ResetPaymentsSequenceDiagram.puml" alt="ResetPaymentsSequenceDiagram" />
+
+
+### Implementation
+
+1. A specific command with the `-resetpayments` flag and the student's `uniqueId` is issued by the user.
+2. The system locates the student's record and resets the payment information, clearing any completed payments or dues.
+3. A success message is sent to the user, confirming the reset.
+
+## Conclusion
+
+This guide provides a concise overview of the payment management functionalities within the system, designed to assist developers in understanding and utilizing these features effectively. For further details or clarification, please refer to the system documentation or contact the development team.
+
 
 ### Add Exam feature
 This feature allow users to add exams to students by uniqueId. Exams added will contain exam name, 
