@@ -268,6 +268,7 @@ The `AddPaymentCommand` enables users to add payment records to students by spec
 1. The user inputs a command with the `-addpayment` flag, followed by the student's `uniqueId` and the amount.
 2. The system parses this command, extracting the necessary details.
 3. A new payment record is created and added to the student's account in the system.
+<puml src="diagrams/AddPaymentActivityDiagram.puml" alt="AddPaymentActivityDiagram" />
 
 ## Mark Payment Feature
 
@@ -280,6 +281,8 @@ The `MarkPaymentCommand` allows marking a student's payment as completed. This i
 1. The user inputs a command with the `-markpayment` flag, followed by the student's `uniqueId`.
 2. The system identifies the corresponding student record and updates the payment status to reflect that it has been paid.
 3. A confirmation is returned to the user upon successful update.
+<puml src="diagrams/MarkPaymentActivityDiagram.puml" alt="MarkPaymentActivityDiagram" />
+
 
 ## Reset Payments Feature
 
@@ -292,6 +295,7 @@ This feature enables the system to reset the payment status of students, which i
 1. A specific command with the `-resetpayments` flag and the student's `uniqueId` is issued by the user.
 2. The system locates the student's record and resets the payment information, clearing any completed payments or dues.
 3. A success message is sent to the user, confirming the reset.
+<puml src="diagrams/ResetPaymentsActivityDiagram.puml" alt="ResetPaymentsActivityDiagram" />
 
 ## Conclusion
 
