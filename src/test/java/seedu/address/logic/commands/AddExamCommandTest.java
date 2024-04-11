@@ -30,7 +30,7 @@ public class AddExamCommandTest {
         Id idOfPersonToAddExam = personToAddExam.getUniqueId();
 
         String examName = "Math";
-        LocalDate examDate = LocalDate.of(2024, 4, 10);
+        LocalDate examDate = LocalDate.of(2024, 5, 10);
         LocalTime examTime = LocalTime.of(14, 0);
 
         AddExamCommand addExamCommand = new AddExamCommand(idOfPersonToAddExam.toString(), examName, examDate,
