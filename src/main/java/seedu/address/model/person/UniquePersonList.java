@@ -47,8 +47,11 @@ public class UniquePersonList implements Iterable<Person> {
         if (contains(toAdd)) {
             throw new DuplicatePersonException();
         }
+
+        Payment toAddPayment = toAdd.getPayment();
         internalList.add(toAdd);
         incrementTotalPersons();
+        incrementPayment(toAddPayment); // this is for loading from storage
     }
 
 
@@ -85,6 +88,10 @@ public class UniquePersonList implements Iterable<Person> {
         decrementTotalPersons();
     }
 
+    private void incrementPayment(Payment payment) {
+        double paymentAmount = payment.getAmount();
+        totalOwings += paymentAmount;
+    }
     private void incrementTotalPersons() {
         totalPersons++;
     }
