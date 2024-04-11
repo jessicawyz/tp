@@ -115,7 +115,7 @@ public class SummaryStatsWindow extends UiPart<Stage> {
 
     private void updateTotalOwingsofPersons() {
         totalOwings = logic.getTotalOwings();
-        String output = SUMMARYSTATS_MESSAGE_OWING + " " + Double.toString(totalOwings);
+        String output = String.format(SUMMARYSTATS_MESSAGE_OWING + "%.2f ", totalOwings);
         summaryMessageOwingsLabel.setText(output);
     }
 
