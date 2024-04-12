@@ -202,7 +202,7 @@ These student details can be found in the `test.json` file that we have included
 <box type="tip" seamless>
 
 **Tip:** <br>
-To match the results shown in the illustrations within our User Guide, we recommend replacing the contents of the `data/addressbook.json` file with the data from the `data/test.json` file. <br>
+To match the results shown in the illustrations within our User Guide, we recommend replacing the contents of the `data/addressbook.json` file in your directory where `TuteeTally.jar` is saved with the data from [here](https://github.com/AY2324S2-CS2103T-F10-2/tp/tree/master/DummyData/dummydata.json). <br>
 This will ensure your outputs align with the examples provided in our guide. <br>
 
 </box>
