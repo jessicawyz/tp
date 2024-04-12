@@ -30,7 +30,7 @@ public class DeleteExamCommandTest {
         model.addPerson(person);
 
         String examName = "Math";
-        LocalDate examDate = LocalDate.of(2024, 4, 10);
+        LocalDate examDate = LocalDate.of(2024, 5, 10);
         Optional<LocalTime> examTime = Optional.of(LocalTime.of(14, 0));
         Exam exam = new Exam(examName, examDate, examTime, person.getName().fullName, person.getUniqueId());
 
