@@ -61,7 +61,7 @@ public class AddExamCommandTest {
     public void equals() {
         Id idOfPerson = new Id("000001");
         String examName = "Math";
-        LocalDate examDate = LocalDate.of(2024, 4, 10);
+        LocalDate examDate = LocalDate.of(2024, 5, 10);
         LocalTime examTime = LocalTime.of(14, 0);
 
         AddExamCommand addExamToPersonCommand = new AddExamCommand(idOfPerson.toString(), examName, examDate,

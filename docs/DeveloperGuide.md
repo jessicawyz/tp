@@ -524,6 +524,7 @@ Use case ends.
 ### Planned Enhancements
 1. Improve Tuteetally such that automatic past exam removal information is updated at real time to storage.
    Users need not use the command `exit` to save the automatic past exam removal to storage.
+2. Check the validity of ID in tuteetally.json and loads a empty data file if it's invalid.
 
 ### Non-Functional Requirements
 
