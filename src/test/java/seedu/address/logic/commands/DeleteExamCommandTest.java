@@ -25,7 +25,7 @@ public class DeleteExamCommandTest {
     private Model model = new ModelManager();
 
     @Test
-    public void execute_examDeletedSuccessfully() throws CommandException {
+    public void execute_examDeletedSuccessfully_allFields() throws CommandException {
         Person person = new PersonBuilder().withUniqueId("000001").build();
         model.addPerson(person);
 
@@ -47,12 +47,55 @@ public class DeleteExamCommandTest {
     }
 
     @Test
+    public void execute_examDeletedSuccessfully_compulsoryFields() throws CommandException {
+        Person person = new PersonBuilder().withUniqueId("000001").build();
+        model.addPerson(person);
+
+        String examName = "Math";
+        LocalDate examDate = LocalDate.of(2024, 5, 10);
+        Optional<LocalTime> examTime = Optional.empty();
+        Exam exam = new Exam(examName, examDate, examTime, person.getName().fullName, person.getUniqueId());
+
+        Set<Exam> newExams = new HashSet<>(person.getExams());
+        newExams.add(exam);
+        person.setExams(newExams);
+
+        DeleteExamCommand deleteExamCommand = new DeleteExamCommand(person.getUniqueId().toString(), examName,
+                examDate, examTime);
+
+        CommandResult commandResult = deleteExamCommand.execute(model);
+        assertEquals(String.format(DeleteExamCommand.MESSAGE_SUCCESS, person.getUniqueId()),
+                commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_invalidId_throwsCommandException() {
+        Person person = new PersonBuilder().withUniqueId("000001").build();
+        model.addPerson(person);
+
+        String examName = "Math";
+        LocalDate examDate = LocalDate.of(2024, 5, 10);
+        Optional<LocalTime> examTime = Optional.empty();
+        Exam exam = new Exam(examName, examDate, examTime, person.getName().fullName, person.getUniqueId());
+
+        Set<Exam> newExams = new HashSet<>(person.getExams());
+        newExams.add(exam);
+        person.setExams(newExams);
+
+        DeleteExamCommand deleteExamCommand = new DeleteExamCommand("asdfh", examName,
+                examDate, examTime);
+
+        assertThrows(CommandException.class,
+                Messages.MESSAGE_PERSON_NOT_FOUND, () -> deleteExamCommand.execute(model));
+    }
+
+    @Test
     public void execute_examNotFound_throwsCommandException() {
         Person person = new PersonBuilder().withUniqueId("000002").build();
         model.addPerson(person);
 
         String examName = "Science";
-        LocalDate examDate = LocalDate.of(2024, 5, 15);
+        LocalDate examDate = LocalDate.of(2025, 5, 15);
         Optional<LocalTime> examTime = Optional.of(LocalTime.of(10, 30));
 
         DeleteExamCommand deleteExamCommand = new DeleteExamCommand(person.getUniqueId().toString(), examName,
