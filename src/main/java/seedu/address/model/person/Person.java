@@ -139,6 +139,10 @@ public class Person {
         return otherPerson != null && otherPerson.getUniqueId().equals(this.uniqueId);
     }
 
+    public boolean isSamePersonById(int id) {
+        return id == this.uniqueId.getInt();
+    }
+
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
@@ -154,12 +158,14 @@ public class Person {
             return false;
         }
 
+
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && subject.equals(otherPerson.subject)
+                && uniqueId.equals(otherPerson.uniqueId)
                 && tags.equals(otherPerson.tags)
                 && exams.equals(otherPerson.exams)
                 && payment.equals(otherPerson.payment);

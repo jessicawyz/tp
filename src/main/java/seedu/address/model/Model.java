@@ -59,6 +59,8 @@ public interface Model {
      */
     boolean hasPerson(Person person);
 
+    boolean hasPersonById(int id);
+
     /**
      * Deletes the given person.
      * The person must exist in the address book.
