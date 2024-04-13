@@ -139,6 +139,10 @@ public class Person {
         return otherPerson != null && otherPerson.getUniqueId().equals(this.uniqueId);
     }
 
+    public boolean isSamePersonById(int id) {
+        return id == this.uniqueId.getInt();
+    }
+
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
