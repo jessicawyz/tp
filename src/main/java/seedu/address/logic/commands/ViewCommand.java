@@ -25,9 +25,9 @@ public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the specific student using their ID or name\n"
-            + "Parameters: NAME or ID\n"
-            + "Example: " + COMMAND_WORD + " -name John OR " + COMMAND_WORD + " -id 12345";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views student related details\n"
+            + "Prefixes available: -all, -name, -id, -stats\n"
+            + "Example: " + COMMAND_WORD + " -name John OR " + COMMAND_WORD + " -id 12345 OR " + COMMAND_WORD + " -all OR " + COMMAND_WORD + " -stats";
 
     private final NameContainsKeywordsPredicate namePredicate;
     private final IsSameIdPredicate idPredicate;
