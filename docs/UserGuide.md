@@ -390,7 +390,7 @@ This will add a log to the lessons of a student. The time field of the log entry
 
 **Format:** `log -id {ID} -hours {HOURS} -content {CONTENT} -style {LEARNING STYLE} -notes {NOTES}`
 <box type="info" seamless>
-  
+
 **Notes on Fields for log command**
 
 | Field              | Prefix     | Required | Caveats                                                                                                                             |
@@ -399,7 +399,7 @@ This will add a log to the lessons of a student. The time field of the log entry
 | **Hours**          | `-hours`   | Yes      | Hours need not be an integer input to give you more flexibility. Values like `2 hours 45 mins`, `2+ hours` are valid as well.       |
 | **Content**        | `-content` | Yes      | Content should be a string, special characters are allowed                                                                          |
 | **Learning Style** | `-style`   | Yes      | Learning style should be a string, special characters are allowed                                                                   |
-| **Notes**          | `-notes`   | Yes      | Notes should be a string, special characters are allowed.                                                                           |                                                          | 
+| **Notes**          | `-notes`   | Yes      | Notes should be a string, special characters are allowed.                                                                           | 
 
 **Note:** <br>
 Hours need not be an integer input. Values like `2 hours 45 mins`, `2+ hours` are valid as well.
