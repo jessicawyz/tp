@@ -8,7 +8,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class Id {
     public static final String MESSAGE_CONSTRAINTS =
-            "Ids should only contain numbers and should have the value"
+            "ID should only contain numbers and should have the value"
             + "between the range of 1 and 999999 (both inclusive)";
 
     public static final String VALIDATION_REGEX = "[#]";
