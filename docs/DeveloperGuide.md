@@ -521,11 +521,11 @@ Use case ends.
       Use case ends.
 
 ### Planned Enhancements
-1. Update Edit command to use ID instead of index. 
-2. Remove all white spaces from the UI 
-3. Learning styles can be tagged to Person so that it doesn't need to be logged every lesson. 
+1. Update Edit command to use ID instead of index.
+2. Remove all white spaces from the UI.
+3. Learning styles can be tagged to Person so that it doesn't need to be logged every lesson.
 4. Logging of a lesson will automatically update the payment info.
-5. View -id or -name should automatically filter and show the exams of the person on the right
+5. View -id or -name should automatically filter and show the exams of the person on the right.
 
 ### Non-Functional Requirements
 

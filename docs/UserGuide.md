@@ -203,8 +203,8 @@ This will ensure your outputs align with the examples provided in our guide. <br
 </box>
 
 ### View student statistics: `view -stats`
-This would display the following in a pop-up window 
-- the total number of students 
+This would display the following in a pop-up window
+- the total number of students
 - the total amount owed by students (Currently shows the exact amount)
 - the number of upcoming exams in following 1 month period (from today up to the same day of the next month)
 
@@ -397,9 +397,9 @@ This will add a log to the lessons of a student. The time field of the log entry
 |--------------------|------------|----------|-------------------------------------------------------------------------------------------------------------------------------------|
 | **uniqueId**       | `-id`      | Yes      | Maximum 6 digits allowed but you can omit any leading 0s.<br> e.g. `1`, `01`, `000001` are all valid id inputs for the id `#000001` |
 | **Hours**          | `-hours`   | Yes      | Hours need not be an integer input to give you more flexibility. Values like `2 hours 45 mins`, `2+ hours` are valid as well.       |
-| **Content**        | `-content` | Yes      | Content should be a string, special characters are allowed                                                                          |
-| **Learning Style** | `-style`   | Yes      | Learning style should be a string, special characters are allowed                                                                   |
-| **Notes**          | `-notes`   | Yes      | Notes should be a string, special characters are allowed.                                                                           | 
+| **Content**        | `-content` | Yes      | Content should be a string, special characters are allowed.                                                                         |
+| **Learning Style** | `-style`   | Yes      | Learning style should be a string, special characters are allowed.                                                                  |
+| **Notes**          | `-notes`   | Yes      | Notes should be a string, special characters are allowed.                                                                           |
 
 **Note:** <br>
 Hours need not be an integer input. Values like `2 hours 45 mins`, `2+ hours` are valid as well.
