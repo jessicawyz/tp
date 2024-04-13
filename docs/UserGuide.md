@@ -188,7 +188,7 @@ These student details can be found in the `test.json` file that we have included
 <box type="tip" seamless>
 
 **Tip:** <br>
-To match the results shown in the illustrations within our User Guide, we recommend replacing the contents of the `data/addressbook.json` file with the data from the `data/test.json` file. <br>
+To match the results shown in the illustrations within our User Guide, we recommend replacing the contents of the `data/tuteetally.json` file with the data from the `data/test.json` file. <br>
 This will ensure your outputs align with the examples provided in our guide. <br>
 
 </box>
