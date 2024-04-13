@@ -96,7 +96,7 @@ All commands are case-sensitive.
 * All id inputs in commands labelled `{ID}` can omit any leading 0s.<br>
 e.g. `1`, `01`, `000000001` are all valid id inputs for the id `#000001`
 
-* All `{ID}` are by default a positive integer of *6 digits*. Any ID that exceeds a positive 6 digit integer number (e.g. 1234567) may cause errors.
+* All `{ID}` are by default a positive integer of maximum *6 digits*. Any ID that exceeds a positive 6 digit integer number (e.g. 1234567) may cause errors.
 
 * The maximum number of students that can be stored in TuteeTally is 999999.
 
