@@ -71,6 +71,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(person);
         return persons.contains(person);
     }
+    public boolean hasPersonById(int id) {
+        return persons.contains(id);
+    }
 
     /**
      * Adds a person to the address book.

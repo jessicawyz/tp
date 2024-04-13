@@ -12,6 +12,10 @@ public class IsSameIdPredicate implements Predicate<Person> {
         this.testId = Integer.parseInt(testId.id);
     }
 
+    public int getTestId() {
+        return testId;
+    }
+
     @Override
     public boolean test(Person person) {
         int personId = Integer.parseInt(person.getUniqueId().id);

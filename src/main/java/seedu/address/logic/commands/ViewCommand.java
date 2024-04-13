@@ -25,9 +25,12 @@ public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the specific student using their ID or name\n"
-            + "Parameters: NAME or ID\n"
-            + "Example: " + COMMAND_WORD + " John OR " + COMMAND_WORD + " 12345";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views student related details\n"
+            + "Prefixes available: -all, -name, -id, -stats\n"
+            + "Example: " + COMMAND_WORD + " -name John OR "
+            + COMMAND_WORD + " -id 12345 OR "
+            + COMMAND_WORD + " -all OR "
+            + COMMAND_WORD + " -stats";
 
     private final NameContainsKeywordsPredicate namePredicate;
     private final IsSameIdPredicate idPredicate;
@@ -63,11 +66,18 @@ public class ViewCommand extends Command {
         requireNonNull(model);
         if (namePredicate != null) {
             model.updateFilteredPersonList(namePredicate);
+            if (model.getFilteredPersonList().size() == 0) {
+                return new CommandResult(Messages.MESSAGE_PERSON_NOT_FOUND);
+            }
             return new CommandResult(
                     String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
                     null,
                     false, false, false, false);
         } else if (idPredicate != null) {
+            if (!model.hasPersonById(idPredicate.getTestId())) {
+                return new CommandResult(
+                        Messages.MESSAGE_PERSON_NOT_FOUND);
+            }
             model.updateFilteredPersonList(idPredicate);
             Person person = model.getFilteredPersonList().get(0);
             return new CommandResult(

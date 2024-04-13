@@ -103,7 +103,7 @@ public class AddExamCommand extends Command {
         }
 
         AddExamCommand otherCommand = (AddExamCommand) other;
-        return uniqueId == otherCommand.uniqueId
+        return uniqueId.equals(otherCommand.uniqueId)
                 && examName.equals(otherCommand.examName)
                 && examDate.equals(otherCommand.examDate)
                 && examTime.equals(otherCommand.examTime);
