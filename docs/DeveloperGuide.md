@@ -417,6 +417,8 @@ Use case ends.
 Users need not use the command `exit` to save the automatic past exam removal to storage.
 2. Update Edit command to use ID instead of index.
 3. Remove all white spaces from the UI
+4. Learning styles can be tagged to Person so that it doesn't need to be logged every lesson.
+5. Logging of a lesson will automatically update the payment info.
 
 ### Non-Functional Requirements
 
