@@ -339,12 +339,12 @@ This will add an exam to a student by searching for their `ID`. Time is an optio
 
 **Notes on Fields for add exam command**
 
-| Field       | Prefix   | Required | Caveats                                                                                                                                                                                                                                                         |
-|-------------|----------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Unique ID** | `-id`    | Yes      | Unique ID must be a positive integer with a maximum length of 6 digits. <br> Leading zeros are optional. For example, `1`, `01`, and `000001` are all valid representations for the ID #000001. IDs between `1` and `999999` (inclusive) are considered valid.  |
-| **Exam**    | `-exam`  | Yes      | Exam should be a string, special characters are allowed.                                                                                                                                                                                                        |
-| **Date**    | `-date`  | Yes      | Date inputs must be in the format yyyy-MM-dd format. Date must be from current date onwards. <br> e.g. 2024-04-01 is a valid input for date, but not 2024-4-01 or 2024-04-1                                                                                     |
-| **Time**    | `-time`  | Nope     | Time inputs are in the 24-hour format in the form HH:mm. <br> e.g. 07:00 is a valid time input and refers to 7am, but not 7:00                                                                                                                                  |
+| Field       | Prefix   | Required | Caveats                                                                                                                                                                                                                                                           |
+|-------------|----------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Unique ID** | `-id`    | Yes      | Unique ID must be a positive integer with a maximum length of 6 digits excluding leading zeros. <br> Leading zeros are optional. For example, `1`, `01`, and `000000001` are all valid representations for the ID #000001. IDs between `1` and `999999` (inclusive) are considered valid. |
+| **Exam**    | `-exam`  | Yes      | Exam should be a string, special characters are allowed.                                                                                                                                                                                                          |
+| **Date**    | `-date`  | Yes      | Date inputs must be in the format yyyy-MM-dd format. Date must be from current date onwards. <br> e.g. 2024-04-01 is a valid input for date, but not 2024-4-01 or 2024-04-1                                                                                       |
+| **Time**    | `-time`  | Nope     | Time inputs are in the 24-hour format in the form HH:mm. <br> e.g. 07:00 is a valid time input and refers to 7am, but not 7:00                                                                                                                                    |
 
 **Examples:**
 * `addexam -id 000001 -exam Computing -date 2024-04-27 -time 09:00` would add an exam of Computing with date of 2024-04-27 and time of 09:00 to a student whose ID is #000001 if the student exists.
@@ -393,13 +393,13 @@ This will add a log to the lessons of a student. The time field of the log entry
 
 **Notes on Fields for log command**
 
-| Field              | Prefix     | Required | Caveats                                                                                                                             |
-|--------------------|------------|----------|-------------------------------------------------------------------------------------------------------------------------------------|
-| **Unique ID**      | `-id`      | Yes      | Unique ID must be a positive integer with a maximum length of 6 digits. <br> Leading zeros are optional. For example, `1`, `01`, and `000001` are all valid representations for the ID #000001. IDs between `1` and `999999` (inclusive) are considered valid.  |
-| **Hours**          | `-hours`   | Yes      | Hours need not be an integer input to give you more flexibility. Values like `2 hours 45 mins`, `2+ hours` are valid as well.       |
-| **Content**        | `-content` | Yes      | Content should be a string, special characters are allowed.                                                                         |
-| **Learning Style** | `-style`   | Yes      | Learning style should be a string, special characters are allowed.                                                                  |
-| **Notes**          | `-notes`   | Yes      | Notes should be a string, special characters are allowed.                                                                           |
+| Field              | Prefix     | Required | Caveats                                                                                                                                                                                                                                                                                   |
+|--------------------|------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Unique ID**      | `-id`      | Yes      | Unique ID must be a positive integer with a maximum length of 6 digits excluding leading zeros. <br> Leading zeros are optional. For example, `1`, `01`, and `000000001` are all valid representations for the ID #000001. IDs between `1` and `999999` (inclusive) are considered valid. |
+| **Hours**          | `-hours`   | Yes      | Hours need not be an integer input to give you more flexibility. Values like `2 hours 45 mins`, `2+ hours` are valid as well.                                                                                                                                                             |
+| **Content**        | `-content` | Yes      | Content should be a string, special characters are allowed.                                                                                                                                                                                                                               |
+| **Learning Style** | `-style`   | Yes      | Learning style should be a string, special characters are allowed.                                                                                                                                                                                                                        |
+| **Notes**          | `-notes`   | Yes      | Notes should be a string, special characters are allowed.                                                                                                                                                                                                                                 |
 
 </box>
 
