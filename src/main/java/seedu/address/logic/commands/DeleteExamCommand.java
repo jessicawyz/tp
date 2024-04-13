@@ -111,7 +111,7 @@ public class DeleteExamCommand extends Command {
         }
 
         DeleteExamCommand otherCommand = (DeleteExamCommand) other;
-        return uniqueId == otherCommand.uniqueId
+        return uniqueId.equals(otherCommand.uniqueId)
                 && examName.equals(otherCommand.examName)
                 && examDate.equals(otherCommand.examDate)
                 && examTime.equals(otherCommand.examTime);
