@@ -135,7 +135,6 @@ public class Exam {
         if (examDate.isEqual(currentDate) && examTime.isPresent() && examTime.get().isBefore(currentTime)) {
             return true;
         }
-
         return false;
     }
 

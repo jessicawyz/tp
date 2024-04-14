@@ -87,10 +87,8 @@ public class AllExamsList {
      */
     public static void getSortedByDateTime(List<Exam> exams) {
         LocalDate currentDate = LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
 
         Comparator<Exam> comparator = (exam1, exam2) -> {
-
             LocalDate examDate1 = exam1.date;
             LocalDate examDate2 = exam2.date;
             int dateComparison = Long.compare(Math.abs(ChronoUnit.DAYS.between(currentDate, examDate1)),
@@ -114,7 +112,6 @@ public class AllExamsList {
             }
             return dateComparison;
         };
-
         Collections.sort(exams, comparator); // Sort the exams list using the comparator
     }
 

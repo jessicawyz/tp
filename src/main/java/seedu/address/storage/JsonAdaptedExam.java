@@ -80,7 +80,6 @@ public class JsonAdaptedExam {
     public Exam toModelType() throws IllegalValueException {
         // Parse name
         String parsedName = name;
-
         // Parse date
         LocalDate parsedDate;
         try {
@@ -88,7 +87,6 @@ public class JsonAdaptedExam {
         } catch (ParseException e) {
             throw new IllegalValueException(e.getMessage());
         }
-
         // Parse optional time
         Optional<LocalTime> parsedTime;
         try {
@@ -98,14 +96,12 @@ public class JsonAdaptedExam {
         } catch (ParseException e) {
             throw new IllegalValueException(e.getMessage());
         }
-
         // Parse student name
         String parsedStudentName = studentName;
-
+        // Pase unique ID
         Id parsedUniqueId = ParserUtil.parseId(uniqueId);
 
         Exam newExam = new Exam(parsedName, parsedDate, parsedTime, parsedStudentName, parsedUniqueId);
-
         return newExam;
     }
 
@@ -128,12 +124,10 @@ public class JsonAdaptedExam {
         } catch (ParseException e) {
             return false;
         }
-
         // Check if date is before current date
         if (parsedDate.isBefore(currentDate)) {
             return true;
         }
-
         // Parse optional time
         Optional<LocalTime> parsedTime;
         try {
@@ -143,12 +137,10 @@ public class JsonAdaptedExam {
         } catch (ParseException e) {
             return false;
         }
-
         // Check if date is today and time is before current time
         if (parsedDate.isEqual(currentDate) && parsedTime.isPresent() && parsedTime.get().isBefore(currentTime)) {
             return true;
         }
-
         return false;
     }
 }

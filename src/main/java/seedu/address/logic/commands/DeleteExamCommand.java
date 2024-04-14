@@ -100,7 +100,6 @@ public class DeleteExamCommand extends Command {
         return new HashSet<>(personToUpdate.getExams());
     }
 
-
     /**
      * Finds and returns the exam to be deleted from the provided set of exams.
      * Throws a CommandException if the exam with the specified details is not found.
@@ -132,6 +131,14 @@ public class DeleteExamCommand extends Command {
         AllExamsList.deleteExamFromList(examToDelete);
     }
 
+    /**
+     * Updates the provided model with the updated person object containing the updated set of exams.
+     * The original person in the model is replaced with the updated person.
+     *
+     * @param model          The model to update.
+     * @param originalPerson The original person object to be updated.
+     * @param updatedExams   The updated set of exams for the person.
+     */
     private void updateModelWithUpdatedPerson(Model model, Person originalPerson, Set<Exam> updatedExams) {
         Person updatedPerson = new Person(originalPerson.getName(), originalPerson.getPhone(),
                 originalPerson.getEmail(), originalPerson.getAddress(), originalPerson.getTags(),
