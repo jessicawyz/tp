@@ -41,7 +41,7 @@ public class StudentDetailsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the help window.
+     * Shows the student logs window.
      * @throws IllegalStateException
      *     <ul>
      *         <li>
@@ -62,7 +62,10 @@ public class StudentDetailsWindow extends UiPart<Stage> {
         logger.fine("Showing Logs of Lessons.");
         getRoot().show();
         getRoot().centerOnScreen();
+        updateDetailsContent(content);
+    }
 
+    private void updateDetailsContent(String content) {
         detailsMessage.setText(content);
     }
 
@@ -83,7 +86,8 @@ public class StudentDetailsWindow extends UiPart<Stage> {
     /**
      * Focuses on the Student details window.
      */
-    public void focus() {
+    public void focus(String content) {
         getRoot().requestFocus();
+        updateDetailsContent(content);
     }
 }
