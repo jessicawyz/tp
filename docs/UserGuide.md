@@ -463,7 +463,7 @@ TuteeTally's data is saved automatically as a JSON file at `[JAR file location]/
 2. **When using the payment commands**, the display will round the payment amounts to the nearest $0.01. So if you enter a payment of $0.001, it will be displayed as $0.00. However, the application will accurately track the exact amounts entered, without rounding.
 3. **Empty white block when maximised**, currently there is an empty white block in the bottom when the app is maximised
 4. **Empty white block in log when viewing students details**, currently there is an empty white block when viewing a student with no logs.
-5.* *Summary Stats Window**, currently it shows the exact value. 
+5. **Summary Stats Window**, currently it shows the exact value instead of showing only 2 decimal place. For example, a payment of $100.50 owed by the students is shown as `$100.500000`.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
