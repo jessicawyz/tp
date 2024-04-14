@@ -175,11 +175,11 @@ Utility classes that provide helper functions and shared functionalities used by
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+# **Implementation**
 
-# Student Details Retrieval System
+## Student Details Retrieval System
 
-## Introduction
+### Introduction
 
 This section of the developer guide covers the functionalities provided for retrieving student related details. This includes finding a student with a specific id or name, adding and checking past logs of a student, and retrieving summary statistics of all students.
 
@@ -230,10 +230,6 @@ The `ViewCommandParser` uses ``ViewCommandParser#arePrefixesPresent`` to check f
 The ``LogicManager`` then executes ``StatCommand`` which returns a  ``CommandResult`` with the ``isStatsCommand`` set to true.
 <puml src="diagrams/ViewParserSequenceDiagram2.puml" />
 
-For the prefixes ``-name`` and ``-id``, a filtered list containing the search results will be returned.
-Both variants utilize a similar logic to of passing in a ``prefix`` to ``model#updateFilteredPersonList`` to adjust the entries displayed by the GUI.
-<puml src="diagrams/ViewIdSequenceDiagram.puml" />
-
 ### View all feature
 This feature allows the user to see all current students stored in the app.
 #### Implementation
@@ -256,14 +252,17 @@ Below is a sequence diagram of how view all interacts with multiple classes.
     * Pros: Easy to implement, less merge conflicts.
     * Cons: More files and parsers needed, might be difficult to navigate.
 
+### Filtering for students using view
+For the prefixes ``-name`` and ``-id``, a filtered list containing the search results will be returned.
+Both variants utilize a similar logic to of passing in a ``prefix`` to ``model#updateFilteredPersonList`` to adjust the entries displayed by the GUI.
+<puml src="diagrams/ViewNameSequenceDiagram.puml" alt="ViewNameSequenceDiagram" />
 ### View Name
 This feature allows the user to find all students with at least one matching keyword in their name.
 #### Implementation
 This mechanism is similar to the `find` command in `AddressBook`. Parser checks for the `-name` flag using the sequence above and places the keywords into a `NameContainsKeywordsPredicate`.<br>
 This command will display any student with at least **one keyword** fully matching with a part of the name. (e.g. `John` keyword will display `John Lim` but not `Joh Ng`). If there are no such students, an empty list will be displayed.<br>
-Below is a sequence diagram of how `view -name` interacts with multiple classes.
 #### Design considerations:
-**Aspect: How view name executes:**
+**Aspect: How view name finds students to display:**
 * **Alternative 1 (current choice):** Returns students only if a part of their name **fully** matches a keyword.
     * Pros: Easy to implement, only needs to check for equality of Strings.
     * Cons: Prone to typos by the user.
@@ -271,19 +270,13 @@ Below is a sequence diagram of how `view -name` interacts with multiple classes.
 * **Alternative 2:** Returns students as long as their name contains **all the characters** of any keyword, and they appear in the **right order**.
     * Pros: Enables more extensive searching, will allow room for typos.
     * Cons: Harder to implement, user need to look through redundant names. (e.g. User wants to find student called `John`, but has to first scroll through `Jo` `Jon` and even `James Ong`)
-### Add Log feature
-This command is has a similar mechanism to the `add` feature, but targets a specific student instead. <br>
-This feature enables tutors to log session specific details for record to a specific student. Each log entry includes the total hours of the lesson, lesson content, the learning style of the student, as well as any additional notes. The date of the log entry is recorded as the system time when the user added the log.
-#### Implementation 
-The parser first checks if the there exists a student with the `ID` specified using the `-id` in current records. Then, the app adds the log entry to the end of the log list attached as a field to the student.
-Below is the sequence diagram of how the `log` command interacts with multiple classes.
-### View ID Feature
+### View student and their logs by ID Feature
 This feature allows the user to search for a specific student with the corresponding ID. The list of all logs of the target student will also be displayed in a popup.
 #### Implementation
 Parser checks for the `-id` flag using the sequence above and checks if the id is a valid id. Then, it passes the id into a `IsSameIdPredicate` to filter for the student. <br>
 This command will display the student with the matching id, and open a popup containing their log information. If such a student does not exist, a prompt will be given to the user to retry.
 Below is the activity diagram of how `view -id` executes.
-Below is a sequence diagram of how `view -id` interacts with multiple classes.
+<puml src="diagrams/ViewIdActivityDiagram.puml">
 
 ### View Stats feature
 This feature supports the viewing of summary statistics, it currently shows the total number of students, the total amount
@@ -294,10 +287,30 @@ Its mechanism is similar to the `help` feature where a popout window is shown wh
 
 It gets its info from the `logic` interface
 
+### Add Log feature
+This command is has a similar mechanism to the `add` feature, but targets a specific student instead. <br>
+This feature enables tutors to log session specific details for record to a specific student. Each log entry includes the total hours of the lesson, lesson content, the learning style of the student, as well as any additional notes. The date of the log entry is recorded as the system time when the user added the log.
+#### Implementation
+The parser first checks if the there exists a student with the `ID` specified using the `-id` in current records. Then, the app adds the log entry to the end of the log list attached as a field to the student.
+Below is the sequence diagram of how the `log` command interacts with multiple classes.
+<puml src="diagrams/LogSequenceDiagram.puml">
+#### Design Considerations
+**Aspect: Whether all fields in log should be compulsory**
+* **Alternative 1 (current choice):** All fields are compulsory
+    * Pros: Reminds user of all possible fields, gives structure to the display format of the log entries.
+    * Cons: Troublesome for user to enter all fields, mandates some content even if they deem it unnecessary
+* **Alternative 2:** Only some fields like hours are compulsory
+    * Pros: Allows flexibility in user input, saves time for user
+    * Cons: Log entries will not be structured. Tutor may also accidentally forget important information to log, such as a change in learning style or lesson content covered.
+      As we are currently in the early stage of development and have yet to carry out user testing for what fields should be compulsory, we chose to mandate every field so tutors are reminded of all possibly important aspects to record.
+      **Aspect: Restrictions on log feature fields' contents**
+* **Alternative 1 (current choice):** All fields are strings, and can be empty
+    * Pros: Easy to implement, flexible, allowing customised inputs like `45 minutes` for hours instead of restricting to an integer. Allowing empty fields partially mitigates aforementioned con of being forced to enter content even if the user deems it unnecessary, all while still providing a reminder to possibly important fields.
+    * Cons: Prone to user errors, which can make the log entry messy.
 
-# Student Payment Management System
+## Student Payment Management System
 
-## Introduction
+### Introduction
 
 This section of the developer guide covers the functionalities provided for managing student payments. It includes adding payments, marking payments as paid, and resetting payment statuses for students. These features are integral to maintaining accurate and up-to-date financial records for each student.
 
@@ -307,26 +320,26 @@ This section of the developer guide covers the functionalities provided for mana
 - **Mark Payment**: Marks payments as completed for students, indicating that a payment has been made.
 - **Reset Payments**: Resets the payment status of students, useful in scenarios where the total payment amount is fulfilled or adjustments are needed.
 
-## Add Payment Feature
+### Add Payment Feature
 
 The `AddPaymentCommand` enables users to add payment records to students by specifying a unique student ID and the payment amount.
 <puml src="diagrams/AddPaymentSequenceDiagram.puml" alt="AddPaymentSequenceDiagram" />
 
 
-### Implementation
+#### Implementation
 
 1. The user inputs a command with the `-addpayment` flag, followed by the student's `uniqueId` and the amount.
 2. The system parses this command, extracting the necessary details.
 3. A new payment record is created and added to the student's account in the system.
    <puml src="diagrams/AddPaymentActivityDiagram.puml" alt="AddPaymentActivityDiagram" />
 
-## Mark Payment Feature
+### Mark Payment Feature
 
 The `MarkPaymentCommand` allows marking a student's payment as completed. This is typically used once a payment has been processed or received.
 <puml src="diagrams/MarkPaymentSequenceDiagram.puml" alt="MarkPaymentSequenceDiagram" />
 
 
-### Implementation
+#### Implementation
 
 1. The user inputs a command with the `-markpayment` flag, followed by the student's `uniqueId`.
 2. The system identifies the corresponding student record and updates the payment status to reflect that it has been paid.
@@ -334,20 +347,20 @@ The `MarkPaymentCommand` allows marking a student's payment as completed. This i
    <puml src="diagrams/MarkPaymentActivityDiagram.puml" alt="MarkPaymentActivityDiagram" />
 
 
-## Reset Payments Feature
+### Reset Payments Feature
 
 This feature enables the system to reset the payment status of students, which is useful when a student has fully paid their dues or when adjustments to their payment records are needed.
 <puml src="diagrams/ResetPaymentsSequenceDiagram.puml" alt="ResetPaymentsSequenceDiagram" />
 
 
-### Implementation
+#### Implementation
 
 1. A specific command with the `-resetpayments` flag and the student's `uniqueId` is issued by the user.
 2. The system locates the student's record and resets the payment information, clearing any completed payments or dues.
 3. A success message is sent to the user, confirming the reset.
    <puml src="diagrams/ResetPaymentsActivityDiagram.puml" alt="ResetPaymentsActivityDiagram" />
 
-## Conclusion
+### Conclusion
 
 This guide provides a concise overview of the payment management functionalities within the system, designed to assist developers in understanding and utilizing these features effectively. For further details or clarification, please refer to the system documentation or contact the development team.
 
@@ -357,7 +370,7 @@ This guide provides a concise overview of the payment management functionalities
 
 This section covers the exam management system including add exam and delete exam.
 
-#### Features Overview
+### Features Overview
 
 Add Exam: Allows the addition of exam records to student accounts using unique identifiers.
 Delete Exam: Enables the deletion of exam records from student accounts.
