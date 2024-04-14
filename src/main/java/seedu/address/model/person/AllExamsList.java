@@ -42,7 +42,7 @@ public class AllExamsList {
     public static void addExamToList(Exam exam) throws IllegalArgumentException {
         if (!exams.contains(exam)) {
             exams.add(exam);
-            getSortedByDate(exams);
+            getSortedByDateTime(exams);
         } else {
             throw new IllegalArgumentException(Messages.MESSAGE_EXAM_ALREADY_EXIST);
         }
@@ -81,11 +81,11 @@ public class AllExamsList {
     }
 
     /**
-     * Sorts exams by date.
+     * Sorts exams by date and time.
      *
      * @param exams The list of exams to be sorted.
      */
-    public static void getSortedByDate(List<Exam> exams) {
+    public static void getSortedByDateTime(List<Exam> exams) {
         LocalDate currentDate = LocalDate.now();
         LocalTime currentTime = LocalTime.now();
 
@@ -118,6 +118,11 @@ public class AllExamsList {
         Collections.sort(exams, comparator); // Sort the exams list using the comparator
     }
 
+    /**
+     * Calculates and returns the count of exams scheduled for the upcoming month from the current date.
+     * The count includes exams scheduled for the entire upcoming month, including today.
+     * @return The count of exams scheduled for the upcoming month.
+     */
     public int getUpcomingMonthExamCount() {
         LocalDate currentDate = LocalDate.now();
         LocalDate nextMonthAndADay = currentDate.plusMonths(1).plusDays(1);

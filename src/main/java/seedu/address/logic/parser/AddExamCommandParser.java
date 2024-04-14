@@ -32,18 +32,37 @@ public class AddExamCommandParser implements Parser<AddExamCommand> {
         String uniqueId = argMultimap.getValue(PREFIX_ID).get();
         String examName = ParserUtil.parseExamName(argMultimap.getValue(PREFIX_EXAM_NAME).get());
         LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        validateDate(date);
+        Optional<String> timeValue = argMultimap.getValue(PREFIX_TIME);
+        Optional<LocalTime> time = validateTime(timeValue);
+
+        return new AddExamCommand(uniqueId, examName, date, time);
+    }
+
+    /**
+     * Validates that the given date is not in the past.
+     * @param date The date to be validated.
+     * @throws ParseException If the given date is in the past.
+     */
+    private void validateDate(LocalDate date) throws ParseException {
         if (date.isBefore(LocalDate.now())) {
             throw new ParseException(MESSAGE_CONSTRAINTS_PAST_DATE);
         }
-        Optional<String> timeValue = argMultimap.getValue(PREFIX_TIME);
-        Optional<LocalTime> time;
-        if (timeValue.isPresent()) {
-            time = ParserUtil.parseTime(timeValue.get());
-        } else {
-            time = Optional.empty();
-        }
+    }
 
-        return new AddExamCommand(uniqueId, examName, date, time);
+    /**
+     * Validates that the given time is not null.
+     * @param time The time to be validated.
+     * @throws ParseException If the given time is null.
+     */
+    private Optional<LocalTime> validateTime(Optional<String> time) throws ParseException {
+        Optional<LocalTime> parsedTime;
+        if (time.isPresent()) {
+            parsedTime = ParserUtil.parseTime(time.get());
+        } else {
+            parsedTime = Optional.empty();
+        }
+        return parsedTime;
     }
 
     /**

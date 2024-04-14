@@ -139,6 +139,12 @@ public class Exam {
         return false;
     }
 
+    /**
+     * Calculates the number of days between the current date and the specified date.
+     * The absolute difference is returned to ensure a positive value.
+     *
+     * @return The number of days between the current date and the specified date.
+     */
     public long getDaysFromCurrentDate() {
         LocalDate currentDate = LocalDate.now();
         return Math.abs(ChronoUnit.DAYS.between(currentDate, date));
