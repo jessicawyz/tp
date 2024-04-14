@@ -36,14 +36,24 @@ public class DeleteExamCommandParser implements Parser<DeleteExamCommand> {
         String examName = argMultimap.getValue(PREFIX_EXAM_NAME).get();
         LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Optional<String> timeValue = argMultimap.getValue(PREFIX_TIME);
-        Optional<LocalTime> time;
-        if (timeValue.isPresent()) {
-            time = ParserUtil.parseTime(timeValue.get());
-        } else {
-            time = Optional.empty();
-        }
+        Optional<LocalTime> time = validateTime(timeValue);
 
         return new DeleteExamCommand(uniqueId, examName, date, time);
+    }
+
+    /**
+     * Validates that the given time is not null.
+     * @param time The time to be validated.
+     * @throws ParseException If the given time is null.
+     */
+    private Optional<LocalTime> validateTime(Optional<String> time) throws ParseException {
+        Optional<LocalTime> parsedTime;
+        if (time.isPresent()) {
+            parsedTime = ParserUtil.parseTime(time.get());
+        } else {
+            parsedTime = Optional.empty();
+        }
+        return parsedTime;
     }
 
     /**

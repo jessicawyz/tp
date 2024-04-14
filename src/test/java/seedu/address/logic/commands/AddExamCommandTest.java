@@ -30,7 +30,7 @@ public class AddExamCommandTest {
         Id idOfPersonToAddExam = personToAddExam.getUniqueId();
 
         String examName = "Math";
-        LocalDate examDate = LocalDate.of(2024, 5, 10);
+        LocalDate examDate = LocalDate.of(2025, 5, 10);
         LocalTime examTime = LocalTime.of(14, 0);
 
         AddExamCommand addExamCommand = new AddExamCommand(idOfPersonToAddExam.toString(), examName, examDate,
@@ -51,17 +51,18 @@ public class AddExamCommandTest {
     public void execute_personNotFound_throwsCommandException() {
         Id invalidId = new Id("nonExistentId");
         AddExamCommand addExamCommand = new AddExamCommand(invalidId.toString(), "Math",
-                LocalDate.of(2024, 4, 10), Optional.of(LocalTime.of(14, 0)));
+                LocalDate.of(2025, 4, 10), Optional.of(LocalTime.of(14, 0)));
 
         assertThrows(CommandException.class,
                 Messages.MESSAGE_PERSON_NOT_FOUND, () -> addExamCommand.execute(model));
     }
 
+
     @Test
     public void equals() {
         Id idOfPerson = new Id("000001");
         String examName = "Math";
-        LocalDate examDate = LocalDate.of(2024, 4, 10);
+        LocalDate examDate = LocalDate.of(2025, 5, 10);
         LocalTime examTime = LocalTime.of(14, 0);
 
         AddExamCommand addExamToPersonCommand = new AddExamCommand(idOfPerson.toString(), examName, examDate,

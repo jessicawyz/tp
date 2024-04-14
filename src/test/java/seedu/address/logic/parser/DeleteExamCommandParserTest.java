@@ -47,18 +47,18 @@ class DeleteExamCommandParserTest {
     @Test
     public void parse_invalidValue_throwsParseException() {
         // Invalid date format
-        final String userInputWrongDate = " -id 123 -examName Maths -date 04-13-2023 -time 14:00";
+        final String userInputWrongDate = " -id 123 -exam Maths -date 04-13-2023 -time 14:00";
         assertThrows(ParseException.class, () -> deleteExamParser.parse(userInputWrongDate));
 
         // Invalid time format
-        final String userInputWrongTime = " -id 123 -examname Maths -date 2023-04-13 -time 1400";
+        final String userInputWrongTime = " -id 123 -exam Maths -date 2023-04-13 -time 1400";
         assertThrows(ParseException.class, () -> deleteExamParser.parse(userInputWrongTime));
     }
 
     @Test
     public void parse_extraArguments_throwsParseException() {
         // Extra unparsed arguments
-        String userInput = " -id 123 -examname Maths -date 2023-04-13 -time 14:00 -extra unused";
+        String userInput = " -id 123 -exam Maths -date 2023-04-13 -time 14:00 -extra unused";
         assertThrows(ParseException.class, () -> deleteExamParser.parse(userInput));
     }
 
@@ -79,7 +79,7 @@ class DeleteExamCommandParserTest {
     @Test
     public void parse_noPreambleAllowed_throwsParseException() {
         // No preamble allowed
-        String userInput = "Some text -id 123 -examname Maths -date 2023-04-13";
+        String userInput = "Some text -id 123 -exam Maths -date 2023-04-13";
         assertThrows(ParseException.class, () -> deleteExamParser.parse(userInput));
     }
 }

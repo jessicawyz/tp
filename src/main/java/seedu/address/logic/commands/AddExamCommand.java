@@ -66,16 +66,10 @@ public class AddExamCommand extends Command {
         if (personToUpdate == null) {
             throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
         }
-        Set<Exam> updatedExams = new HashSet<>();
 
-        if (personToUpdate.getExams() != null) {
-            updatedExams.addAll(personToUpdate.getExams());
-        }
+        Set<Exam> updatedExams = getUpdatedExams(personToUpdate);
 
-        String personName = personToUpdate.getName().fullName;
-        Id personUniqueId = personToUpdate.getUniqueId();
-        Exam newExam = new Exam(examName, examDate, examTime, personName, personUniqueId);
-
+        Exam newExam = createNewExam(personToUpdate);
         try {
             model.addExam(newExam);
             updatedExams.add(newExam);
@@ -83,13 +77,54 @@ public class AddExamCommand extends Command {
             throw new CommandException(e.getMessage());
         }
 
-        Person updatedPerson = new Person(personToUpdate.getName(), personToUpdate.getPhone(),
-                personToUpdate.getEmail(), personToUpdate.getAddress(), personToUpdate.getTags(),
-                personToUpdate.getSubject(), personToUpdate.getUniqueId(), updatedExams,
-                personToUpdate.getPayment(), personToUpdate.getLogs());
+        Person updatedPerson = createUpdatedPerson(personToUpdate, updatedExams);
 
         model.setPerson(personToUpdate, updatedPerson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, uniqueId));
+    }
+
+    /**
+     * Retrieves the set of updated exams for the specified person.
+     * If the person has existing exams, a new set containing those exams is returned.
+     * If the person has no exams, an empty set is returned.
+     *
+     * @param personToUpdate The person whose exams are being updated.
+     * @return The set of updated exams for the person.
+     */
+    private Set<Exam> getUpdatedExams(Person personToUpdate) {
+        Set<Exam> updatedExams = new HashSet<>();
+        if (personToUpdate.getExams() != null) {
+            updatedExams.addAll(personToUpdate.getExams());
+        }
+        return updatedExams;
+    }
+
+    /**
+     * Creates a new exam object with the provided details.
+     *
+     * @param personToUpdate The person for whom the exam is being created.
+     * @return A new exam object with the specified details.
+     */
+    private Exam createNewExam(Person personToUpdate) {
+        String personName = personToUpdate.getName().fullName;
+        Id personUniqueId = personToUpdate.getUniqueId();
+        return new Exam(examName, examDate, examTime, personName, personUniqueId);
+    }
+
+
+    /**
+     * Creates an updated person object with the provided details.
+     * The updated person includes the specified set of exams.
+     *
+     * @param personToUpdate The original person object to be updated.
+     * @param updatedExams   The set of updated exams for the person.
+     * @return An updated person object with the specified exams.
+     */
+    private Person createUpdatedPerson(Person personToUpdate, Set<Exam> updatedExams) {
+        return new Person(personToUpdate.getName(), personToUpdate.getPhone(),
+                personToUpdate.getEmail(), personToUpdate.getAddress(), personToUpdate.getTags(),
+                personToUpdate.getSubject(), personToUpdate.getUniqueId(), updatedExams,
+                personToUpdate.getPayment(), personToUpdate.getLogs());
     }
 
     @Override
