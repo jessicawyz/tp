@@ -98,7 +98,7 @@ public class UniquePersonList implements Iterable<Person> {
 
         Payment toRemovePayment = toRemove.getPayment();
         decrementTotalPersons();
-        decrementPayment(toRemovePayment);// this handles deleting
+        decrementPayment(toRemovePayment);
 
     }
 
