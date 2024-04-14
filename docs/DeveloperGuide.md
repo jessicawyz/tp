@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S2-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S2-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/address/Main.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -213,7 +213,8 @@ The `ViewCommandParser` uses ``ViewCommandParser#arePrefixesPresent`` to check f
 **Step 2:** The check for ``-add`` prefix returns false, and a similar check routine for prefixes is carried out for ``-name`` and ``-id``
 <puml src="diagrams/ViewParserSequenceDiagram1.puml" />
 
-**Step 3:** All checks for prefixes return false, and falls into the default case. A ``CommandResult`` with the ``isStatsCommand`` set to true is returned
+**Step 3:** The check for ``-stats`` return true, and a ``StatCommmand`` instance is returned to the ``LogicManager``.
+The ``LogicManager`` then executes ``StatCommand`` which returns a  ``CommandResult`` with the ``isStatsCommand`` set to true.
 <puml src="diagrams/ViewParserSequenceDiagram2.puml" />
 
 For the prefixes ``-name`` and ``-id``, a filtered list containing the search results will be returned.
@@ -386,7 +387,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is`TuteeTally` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Add a Student**
 
@@ -394,9 +395,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User initiates the command to add a student by providing the student's name, address, contact number, subject, and level.
 
-2. The AddressBook processes the provided information, adds the student particulars into the system, and assigns a unique ID to the student.
+2. TuteeTally processes the provided information, adds the student particulars into the system, and assigns a unique ID to the student.
 
-3. AddressBook displays a confirmation message along with the details of the newly added student at the top of the list.
+3. TuteeTally displays a confirmation message along with the details of the newly added student at the top of the list.
 
    Use case ends.
 
@@ -404,19 +405,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. User inputs the command in an incorrect format.
 
-    * 1a1. AddressBook shows an error message and the correct command format.
+    * 1a1. TuteeTally shows an error message and the correct command format.
 
   Use case ends.
 
-* 1b. User enters a name that already exists in the AddressBook.
+* 1b. User enters a name that already exists in TuteeTally.
 
-    * 1b1. AddressBook generates and assigns a unique ID to the new student to avoid duplication.
+    * 1b1. TuteeTally generates and assigns a unique ID to the new student to avoid duplication.
 
   Use case resumes at step 2.
 
 * 1c. User omits a required field in the command.
 
-    * 1c1. AddressBook shows an error message indicating the missing field.
+    * 1c1. TuteeTally shows an error message indicating the missing field.
 
   Use case ends.
 
@@ -426,7 +427,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to view details of students either by listing all or searching by name or ID.
 
-2. AddressBook retrieves and shows the relevant student details based on the request.
+2. TuteeTally retrieves and shows the relevant student details based on the request.
 
    Use case ends.
 
@@ -434,13 +435,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The requested student does not exist or the list is empty.
 
-    * 2a1. AddressBook displays a message indicating no such student exists or the list is empty.
+    * 2a1. TuteeTally displays a message indicating no such student exists or the list is empty.
 
   Use case ends.
 
 * 2b. User inputs an incorrect command format for viewing details.
 
-    * 2b1. AddressBook shows an error message and the correct command format.
+    * 2b1. TuteeTally shows an error message and the correct command format.
 
 Use case ends.
 
@@ -450,7 +451,7 @@ Use case ends.
 
 1. User requests to view summary statistics of students.
 
-2. AddressBook processes the request and displays the total number of students along with other relevant statistics.
+2. TuteeTally processes the request and displays the total number of students along with other relevant statistics.
 
    Use case ends.
 
@@ -458,7 +459,7 @@ Use case ends.
 
 * 2a. There is an error in processing the request.
 
-    * 2a1. AddressBook displays an error message in red.
+    * 2a1. TuteeTally displays an error message in red.
 
   Use case ends.
 
@@ -467,9 +468,9 @@ Use case ends.
 **MSS**
 
 1.  User requests to list Student
-2.  AddressBook shows a list of Student
+2.  TuteeTally shows a list of Student
 3.  User requests to delete a specific Student in the list
-4.  AddressBook deletes the Student
+4.  TuteeTally deletes the Student
 
     Use case ends.
 
@@ -481,7 +482,7 @@ Use case ends.
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TuteeTally shows an error message.
 
       Use case resumes at step 2.
 
