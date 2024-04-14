@@ -107,7 +107,7 @@ public class SummaryStatsWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
-    private void updateTotalCountOfPersons() {
+    private void updateTotalCountofPersons() {
         totalPerson = logic.getTotalPersons();
         String output = SUMMARYSTATS_MESSAGE_COUNT + " " + Integer.toString(totalPerson);
         summaryMessageCountLabel.setText(output);
@@ -126,7 +126,7 @@ public class SummaryStatsWindow extends UiPart<Stage> {
     }
 
     private void updateSummaryStats() {
-        updateTotalCountOfPersons();
+        updateTotalCountofPersons();
         updateTotalOwingsofPersons();
         updateUpcomingMonthExams();
     }

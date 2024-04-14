@@ -206,7 +206,7 @@ If more than one valid prefix `-all`, `-name`, `-id`, or `stats` are present, `V
 
 Below is an example usage scenario where the `view -stats` command was entered.
 
-**Step 1:** User first calls `view -stats`. The input is passed into ``AddressBookParser`` which instantiates a ``ViewCommandParser`` instance.
+**Step 1:** User first calls `view -stats`. The input is passed into ``AddressBookParser`` which instantiates a ``1CommandParser`` instance.
 The `ViewCommandParser` uses ``ViewCommandParser#arePrefixesPresent`` to check for presence of the ``-add`` prefix.
 
 <puml src="diagrams/ViewParserSequenceDiagram0.puml" />
@@ -246,15 +246,60 @@ Below is a sequence diagram of how view all interacts with multiple classes.
 
 
 ### View Stats feature
-This feature supports the viewing of summary statistics, it currently shows the total number of students, the total amount
-owed by them and the number of exams in the upcoming months.
+This feature supports the viewing of summary statistics, it currently shows the 
+- the total number of students
+- the total amount owed by students (Currently shows the exact amount)
+- the number of upcoming exams in following 1 month period (from today up to the same day of the next month)
 
 #### Implementation
-It's mechanism is similar to the `help` feature where a popout window is shown when called.
+Currently, the Summary Stats Window can be accessed in 3 ways.
+1. Typing `view -stats` in the command box.
+2. Pressing the `F2` key on your keyboard.
+3. Clicking the `Stats` dropdown menu on the top of TuteeTally and accessing the Summary stats from there.
 
-It gets it's info from the `logic` interface
+A Sequence Diagram can be seen below to show the interaction between the different class once "view -stats" is called:
+
+<puml src="diagrams/ViewStatsSequenceDiagramMain.puml" alt="ViewStatsSequenceDiagramMain" />
+
+The frame below shows how the logic class gets the command result.
+
+<puml src="diagrams/ViewStatsSequenceDiagramGetCommandResult.puml" alt="ViewStatsSequenceDiagramGetCommandResult" />
+
+The CommandResult will then be returned to the UIManager and a SummaryStatsWindow Instance will be created, the Sequence diagram below shows how
+it get the SummaryStats from `Logic`the respective frame will show `SummaryStatsWindow::updateSummaryStats` clearly. 
+
+<puml src="diagrams/ViewStatsSequenceDiagramUpdateTotalCountofPersons.puml" alt="ViewStatsSequenceDiagramUpdateTotalCountofPerson" />
+<puml src="diagrams/ViewStatsSequenceDiagramUpdateTotalOwingsOfPerson.puml" alt="ViewStatsSequenceDiagramUpdateTotalOwingsOfPerson" />
+<puml src="diagrams/ViewStatsSequenceDiagramUpdateUpcomingExams.puml" alt="ViewStatsSequenceDiagramUpdateUpcomingExams" />
+
+
+
+
+The window is powered by the `logic` interface, which fetches the necessary data to update the statistics.
+* getTotalPersons() to retrieve the total number of students.
+* getTotalOwings() to calculate the total tuition fees owed.
+* getUpcomingMonthExamCount() to count the exams scheduled for the upcoming month.
+
+
+
+
+
 
 #### Design Considerations
+**Aspect: Where to store the SummaryStats:**
+
+* **Alternative 1 (current choice):** The Summary Stats is stored in the `UniquePersonsList` and is updated everytime their respective field get updated.
+  * Pros: Easy access to this information and ensures that the statistics are always updated.
+  * Cons: High coupling, changes in the UniquePersonsList may have ripple effects on the parts of the application that depend on summary statistics.
+
+* **Alternative 2:** Compute statistics on demand
+    * Pros: Decreases the coupling between the data management and data viewing functionalities.
+    * Cons: Could lead to a delay in presenting statistics to the user since computations are performed at the time of request.
+
+**User Experience
+* **Useful Information**: We want the user to have useful information in a quick manner to aid their tuition administration.
+* **Many ways to access**: We want the user to have many ways to open the Summary Stats Window.
+
 ### View Name Feature
 ** to add in v1.4**
 #### Implementation
