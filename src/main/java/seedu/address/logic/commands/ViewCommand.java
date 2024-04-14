@@ -14,12 +14,8 @@ import seedu.address.model.person.Person;
  * Keyword matching is case insensitive.
  */
 public class ViewCommand extends Command {
-    /*
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": shows the summary stats"
-            + "Example: " + COMMAND_WORD;*/
 
     public static final String MESSAGE_SUCCESS = "Viewing the stats of students";
-
     public static final String MESSAGE_MULTIPREFIX = "Please only use one prefix in your command!";
 
     public static final String COMMAND_WORD = "view";
@@ -27,6 +23,7 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views student related details\n"
             + "Prefixes available: -all, -name, -id, -stats\n"
+            + "Note that field after -id must be a positive integer and should not exceed 6 digits excluding leading 0s\n"
             + "Example: " + COMMAND_WORD + " -name John OR "
             + COMMAND_WORD + " -id 12345 OR "
             + COMMAND_WORD + " -all OR "
