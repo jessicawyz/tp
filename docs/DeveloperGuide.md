@@ -436,6 +436,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
+<puml src="diagrams/UseCaseDiagram.puml" alt="UseCaseDiagram" />
 (For all use cases below, the **System** is`TuteeTally` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Add a Student**
