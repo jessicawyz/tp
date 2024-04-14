@@ -4,7 +4,7 @@ title: "Developer Guide"
 pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# TuteeTally Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -150,12 +150,28 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
-This consists of
-- `Core`
-    -  Files like `Config`, `GuiSettings` and `LogsCenter`
+The Commons package in the `seedu.address` contains classes that are shared across various components of the application. 
+This ensures that common functionalities are easily accessible across the system and thus promote code reuse. This also simplifies the task of 
+updating or enhancing functionality in one place. 
+
+Below is a breakdown of the main categories within this package:
+
+-`Core`
+This category includes essential classes that are central to the application's operation:
+
+    -Config: Manages configuration settings of the application, such as file paths and application-level settings. 
+            It helps in maintaining a flexible codebase that can adapt to different deployment environments without requiring code changes.
+
+    -GuiSettings: Holds GUI configuration details which can be serialized for persistence across sessions. This class includes settings such as window size, window position, and other UI-related preferences that enhance the user's experience by maintaining a consistent application state.
+
+    -LogsCenter: Provides a central management facility for logging messages throughout the application. It configures the logging libraries and specifies the uniform format and logging levels, making the debugging process and monitoring of runtime behaviors more systematic.
+
+
 - `Exceptions`
+This category defines custom exceptions that handle specific error situations unique to the application:
+  
 - `Util`
+Utility classes that provide helper functions and shared functionalities used by multiple components:
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -522,10 +538,12 @@ Use case ends.
 
 ### Planned Enhancements
 1. Update Edit command to use ID instead of index.
-2. Remove all white spaces from the UI.
+2. Improve the UI such as removing all white spaces from it.
 3. Learning styles can be tagged to Person so that it doesn't need to be logged every lesson.
 4. Logging of a lesson will automatically update the payment info.
 5. View -id or -name should automatically filter and show the exams of the person on the right.
+6. Checking of duplicate persons.
+7. 
 
 ### Non-Functional Requirements
 
