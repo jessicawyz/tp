@@ -177,34 +177,47 @@ Utility classes that provide helper functions and shared functionalities used by
 
 ## **Implementation**
 
+# Student Details Retrieval System
+
+## Introduction
+
+This section of the developer guide covers the functionalities provided for retrieving student related details. This includes finding a student with a specific id or name, adding and checking past logs of a student, and retrieving summary statistics of all students.
+
+### Features Overview
+
 This section describes some noteworthy details on how certain features are implemented.
+- **Viewing all**: Displays full student list.
+- **Viewing by name**: Displays students with at least one keyword in their name.
+- **Viewing by unique ID**: Displays specific student with a matching unique ID.
+- **Adding log of a student**: Adds a log to the log list attached to the student.
+- **Viewing logs of a student**: Displays the specific student's log list.
+- **Viewing summary statistics**: Displays summary statistics such as number of students and total outstanding payment.
+
 ### View student feature
-The `view` command is a feature that allows the user to find details related to student(s) and retrieve their details.
-It consists of 3 variants
+The `view` command is a feature that allows the user to find and retrieve details related to student(s).
+It consists of 4 variants
 1. `view -all` : shows all students currently recorded in TuteeTally.
 2. `view -name`: shows all students recorded with their name, or part of their name matching the input.
-2. `view -id` : finds (unique) student associated with the unique id.
+2. `view -id` : finds (unique) student associated with the unique id, and opens the log window.
 3. `view -stats` : opens a popup for summary statistics with regard to all students.
+
 #### Implementation
 The checking of which variant of `view` is triggered is detected based on the presence of prefixes in `ViewCommandParser#parse`.
 
-If more than one valid prefix `-all`, `-name`, `-id`, or `stats` are present, `ViewCommandParser` creates `ViewCommands` in the following order of precedence:
-* `all` > `name` > `id` > `stats`
+Only one prefix is allowed to be in the command format at once. If more than one prefix is present, the user will receive an error message to remind them only one prefix is allowed. 
 
 #### Design considerations:
-**Aspect: How to check which command to execute:**
+**Aspect: What to do when encountering more than 1 prefix:**
 
-* **Alternative 1 (current choice):** Goes through checks for presence of prefix variants, and execute the first detected based on the precedence of ``-all`` > ``-name`` > ``-id`` > ``-stats``
-    * Pros: Easy to implement.
-    * Cons: If variants increase in the future, might take extra time falling through the conditional checks. Precedence of prefixes can also not be aligned with what the user intended.
+* **Alternative 1 (current choice):** Throws an error and prompts the user that only 1 prefix is allowed
+    * Pros: Easy to implement, unambiguous and structured.
+    * Cons: User will only be able to check the details provided by one view command at one time.
 
-* **Alternative 2:** Executes all variants given in the command
-  itself.
-    * Pros: More intuitive for user, gives quick overview of multiple view commands.
+* **Alternative 2:** Executes all variants given in the command.
+    * Pros: Gives quick overview of multiple view commands at once.
     * Cons: Difficult to implement and requires drastic changes in GUI.
 
-Below is an example usage scenario where the `view -stats` command was entered.
-
+### Example invocation procedure for view -stats command
 **Step 1:** User first calls `view -stats`. The input is passed into ``AddressBookParser`` which instantiates a ``ViewCommandParser`` instance.
 The `ViewCommandParser` uses ``ViewCommandParser#arePrefixesPresent`` to check for presence of the ``-add`` prefix.
 
@@ -222,12 +235,12 @@ Both variants utilize a similar logic to of passing in a ``prefix`` to ``model#u
 <puml src="diagrams/ViewIdSequenceDiagram.puml" />
 
 ### View all feature
-
+This feature allows the user to see all current students stored in the app.
 #### Implementation
 
-The mechanism is similar to list feature in `AddressBook`. parser checks for `-all` flag and execute showing the entire list of students.
+The mechanism is similar to list feature in `AddressBook`. Parser checks for `-all` flag using the sequence above and execute showing the entire list of students.
 
-The feature can return user to the whole list after user uses view -id/view -name function to see specific student. A list of students will only be displayed if there are at least 1 student added to TuteeTally.
+The feature can return user to the whole list after user uses `view -id/view -name` function to see specific student. A list of students will only be displayed if there is at least 1 student added to TuteeTally.
 
 Below is a sequence diagram of how view all interacts with multiple classes.
 
@@ -235,32 +248,52 @@ Below is a sequence diagram of how view all interacts with multiple classes.
 
 #### Design considerations:
 **Aspect: How view all executes:**
-* **Alternative 1:** In a view command class with view -id/-name.
-    * Pros: Clear execution line.
+* **Alternative 1 (current choice):** In a view command class with view -id/-name.
+    * Pros: Easy to implement, clear execution line.
     * Cons: Several if else checks, more prone to errors.
 
-* **Alternative 2 (current choice) :** Separate classes for view -all and other view commands
+* **Alternative 2:** Separate classes for view -all and other view commands
     * Pros: Easy to implement, less merge conflicts.
-    * Cons: More files and parsers needed.
+    * Cons: More files and parsers needed, might be difficult to navigate.
 
+### View Name
+This feature allows the user to find all students with at least one matching keyword in their name.
+#### Implementation
+This mechanism is similar to the `find` command in `AddressBook`. Parser checks for the `-name` flag using the sequence above and places the keywords into a `NameContainsKeywordsPredicate`.<br>
+This command will display any student with at least **one keyword** fully matching with a part of the name. (e.g. `John` keyword will display `John Lim` but not `Joh Ng`). If there are no such students, an empty list will be displayed.<br>
+Below is a sequence diagram of how `view -name` interacts with multiple classes.
+#### Design considerations:
+**Aspect: How view name executes:**
+* **Alternative 1 (current choice):** Returns students only if a part of their name **fully** matches a keyword.
+    * Pros: Easy to implement, only needs to check for equality of Strings.
+    * Cons: Prone to typos by the user.
+
+* **Alternative 2:** Returns students as long as their name contains **all the characters** of any keyword, and they appear in the **right order**.
+    * Pros: Enables more extensive searching, will allow room for typos.
+    * Cons: Harder to implement, user need to look through redundant names. (e.g. User wants to find student called `John`, but has to first scroll through `Jo` `Jon` and even `James Ong`)
+### Add Log feature
+This command is has a similar mechanism to the `add` feature, but targets a specific student instead. <br>
+This feature enables tutors to log session specific details for record to a specific student. Each log entry includes the total hours of the lesson, lesson content, the learning style of the student, as well as any additional notes. The date of the log entry is recorded as the system time when the user added the log.
+#### Implementation 
+The parser first checks if the there exists a student with the `ID` specified using the `-id` in current records. Then, the app adds the log entry to the end of the log list attached as a field to the student.
+Below is the sequence diagram of how the `log` command interacts with multiple classes.
+### View ID Feature
+This feature allows the user to search for a specific student with the corresponding ID. The list of all logs of the target student will also be displayed in a popup.
+#### Implementation
+Parser checks for the `-id` flag using the sequence above and checks if the id is a valid id. Then, it passes the id into a `IsSameIdPredicate` to filter for the student. <br>
+This command will display the student with the matching id, and open a popup containing their log information. If such a student does not exist, a prompt will be given to the user to retry.
+Below is the activity diagram of how `view -id` executes.
+Below is a sequence diagram of how `view -id` interacts with multiple classes.
 
 ### View Stats feature
 This feature supports the viewing of summary statistics, it currently shows the total number of students, the total amount
 owed by them and the number of exams in the upcoming months.
 
 #### Implementation
-It's mechanism is similar to the `help` feature where a popout window is shown when called.
+Its mechanism is similar to the `help` feature where a popout window is shown when called.
 
-It gets it's info from the `logic` interface
+It gets its info from the `logic` interface
 
-### View Name Feature
-** to add in v1.4**
-#### Implementation
-** to add in v1.4**
-### View ID Feature
-** to add in v1.4**
-#### Implementation
-** to add in v1.4**
 
 # Student Payment Management System
 
