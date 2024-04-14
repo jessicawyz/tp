@@ -4,7 +4,7 @@ title: "Developer Guide"
 pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# TuteeTally Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -35,7 +35,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+**`Main`** (consisting of classes [`Main`](https://github.com/AY2324S2-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S2-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/address/Main.java)) is in charge of the app launch and shut down.
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -150,12 +150,28 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
-This consists of
-- `Core`
-    -  Files like `Config`, `GuiSettings` and `LogsCenter`
+The Commons package in the `seedu.address` contains classes that are shared across various components of the application. 
+This ensures that common functionalities are easily accessible across the system and thus promote code reuse. This also simplifies the task of 
+updating or enhancing functionality in one place. 
+
+Below is a breakdown of the main categories within this package:
+
+-`Core`
+This category includes essential classes that are central to the application's operation:
+
+    -Config: Manages configuration settings of the application, such as file paths and application-level settings. 
+            It helps in maintaining a flexible codebase that can adapt to different deployment environments without requiring code changes.
+
+    -GuiSettings: Holds GUI configuration details which can be serialized for persistence across sessions. This class includes settings such as window size, window position, and other UI-related preferences that enhance the user's experience by maintaining a consistent application state.
+
+    -LogsCenter: Provides a central management facility for logging messages throughout the application. It configures the logging libraries and specifies the uniform format and logging levels, making the debugging process and monitoring of runtime behaviors more systematic.
+
+
 - `Exceptions`
+This category defines custom exceptions that handle specific error situations unique to the application:
+  
 - `Util`
+Utility classes that provide helper functions and shared functionalities used by multiple components:
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -197,7 +213,8 @@ The `ViewCommandParser` uses ``ViewCommandParser#arePrefixesPresent`` to check f
 **Step 2:** The check for ``-add`` prefix returns false, and a similar check routine for prefixes is carried out for ``-name`` and ``-id``
 <puml src="diagrams/ViewParserSequenceDiagram1.puml" />
 
-**Step 3:** All checks for prefixes return false, and falls into the default case. A ``CommandResult`` with the ``isStatsCommand`` set to true is returned
+**Step 3:** The check for ``-stats`` return true, and a ``StatCommmand`` instance is returned to the ``LogicManager``.
+The ``LogicManager`` then executes ``StatCommand`` which returns a  ``CommandResult`` with the ``isStatsCommand`` set to true.
 <puml src="diagrams/ViewParserSequenceDiagram2.puml" />
 
 For the prefixes ``-name`` and ``-id``, a filtered list containing the search results will be returned.
@@ -301,19 +318,45 @@ This feature enables the system to reset the payment status of students, which i
 
 This guide provides a concise overview of the payment management functionalities within the system, designed to assist developers in understanding and utilizing these features effectively. For further details or clarification, please refer to the system documentation or contact the development team.
 
+## Student Exam Management
 
-### Add Exam feature
-This feature allow users to add exams to students by uniqueId. Exams added will contain exam name,
-exam date, optional exam time as information and student name and uniqueId for reference.
-This feature is implemented to ensure data integrity and provide users with the ability to track and manage student exams efficiently.
+### Introduction
+
+This section covers the exam management system including add exam and delete exam.
+
+#### Features Overview
+
+Add Exam: Allows the addition of exam records to student accounts using unique identifiers.
+Delete Exam: Enables the deletion of exam records from student accounts.
+
+### Add Exam Feature
+
+The AddExamCommand enables users to add exam records to students by specifying a unique student ID, exam name, exam date, and optionally, exam time.
+<puml src="diagrams/AddExamSequenceDiagram.puml" alt="AddExamSequenceDiagram" />
 
 #### Implementation
 
+1. The user inputs a command with the -addexam flag, followed by the student's uniqueId, exam name, exam date, and optionally, exam time. 
+2. The system parses this command, extracting the necessary details. 
+3. A new exam record is created and added to the student and the AllExamsList in the system.
+<puml src="diagrams/AddExamActivityDiagram.puml" alt="AddExamActivityDiagram" />
 
-### Delete Exam feature
-** to add in v1.4**
+### Delete Exam Feature
+
+The DeleteExamCommand allows deleting a specific exam record from a student.
+<puml src="diagrams/DeleteExamSequenceDiagram.puml" alt="DeleteExamSequenceDiagram" />
+
 #### Implementation
-** to add in v1.4**
+
+The user inputs a command with the -deleteexam flag, followed by the student's uniqueId, exam name, exam date, and optionally, exam time.
+The system identifies the corresponding student and the specified exam.
+The system removes the specified exam record from the student and AllExamsList.
+<puml src="diagrams/DeleteExamActivityDiagram.puml" alt="DeleteExamActivityDiagram" />
+
+### Conclusion
+
+These descriptions provide an overview of the exam management features, their purposes, and how they are implemented in the system. They also include sequence diagrams illustrating the interactions between the user and the system for each feature. For further details or clarification, please refer to the system documentation or contact the development team.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -346,7 +389,7 @@ This feature is implemented to ensure data integrity and provide users with the 
 * Easier time to track Student’s grades and weaknesses
 * Manage parent’s expectations
 * Easy tracking of payment
-* Logging of Lessons for retrevial in the future
+* Logging of Lessons for retrieval in the future
 * Easily track Exams dates
 
 
@@ -355,22 +398,22 @@ This feature is implemented to ensure data integrity and provide users with the 
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                              | So that I can…​                                           |
-|----------|---------|-------------------------------------------|-----------------------------------------------------------|
-| `* * *`  | Tutor   | add a student                             | track the details of the student                          |
+| Priority | As a …​ | I want to …​                        | So that I can…​                                           |
+|----------|---------|-------------------------------------|-----------------------------------------------------------|
+| `* * *`  | Tutor   | add a student                       | track the details of the student                          |
 | `* * *`  | Tutor   | view student details summary on main page | get a brief idea of the student while navigating the list |
-| `* * *`  | Tutor   | delete a person                           | remove entries that I no longer need                      |
-| `* * *`  | Tutor   | view single students detail               | see the individual detail for a single student            |
-| `* * *`  | Tutor   | view total number of students             | check if I have space for more students                   |
-| `* * *`  | Tutor   | track my payments                         | won't miss out on any payments                            |
-| `* * *`  | Tutor   | track my student's exam dates             | personalise and plan better for lessons                   |
+| `* * *`  | Tutor   | delete a person                     | remove entries that I no longer need                      |
+| `* * *`  | Tutor   | view single students detail         | see the individual detail for a single student            |
+| `* * *`  | Tutor   | view total number of students       | check if I have space for more students                   |
+| `* * *`  | Tutor   | track my payments                   | won't miss out on any payments                            |
+| `* * *`  | Tutor   | track my students' exams            | personalise and plan better for lessons                   |
 
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is`TuteeTally` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Add a Student**
 
@@ -378,9 +421,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User initiates the command to add a student by providing the student's name, address, contact number, subject, and level.
 
-2. The AddressBook processes the provided information, adds the student particulars into the system, and assigns a unique ID to the student.
+2. TuteeTally processes the provided information, adds the student particulars into the system, and assigns a unique ID to the student.
 
-3. AddressBook displays a confirmation message along with the details of the newly added student at the top of the list.
+3. TuteeTally displays a confirmation message along with the details of the newly added student at the top of the list.
 
    Use case ends.
 
@@ -388,19 +431,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. User inputs the command in an incorrect format.
 
-    * 1a1. AddressBook shows an error message and the correct command format.
+    * 1a1. TuteeTally shows an error message and the correct command format.
 
   Use case ends.
 
-* 1b. User enters a name that already exists in the AddressBook.
+* 1b. User enters a name that already exists in TuteeTally.
 
-    * 1b1. AddressBook generates and assigns a unique ID to the new student to avoid duplication.
+    * 1b1. TuteeTally generates and assigns a unique ID to the new student to avoid duplication.
 
   Use case resumes at step 2.
 
 * 1c. User omits a required field in the command.
 
-    * 1c1. AddressBook shows an error message indicating the missing field.
+    * 1c1. TuteeTally shows an error message indicating the missing field.
 
   Use case ends.
 
@@ -410,7 +453,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to view details of students either by listing all or searching by name or ID.
 
-2. AddressBook retrieves and shows the relevant student details based on the request.
+2. TuteeTally retrieves and shows the relevant student details based on the request.
 
    Use case ends.
 
@@ -418,13 +461,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The requested student does not exist or the list is empty.
 
-    * 2a1. AddressBook displays a message indicating no such student exists or the list is empty.
+    * 2a1. TuteeTally displays a message indicating no such student exists or the list is empty.
 
   Use case ends.
 
 * 2b. User inputs an incorrect command format for viewing details.
 
-    * 2b1. AddressBook shows an error message and the correct command format.
+    * 2b1. TuteeTally shows an error message and the correct command format.
 
 Use case ends.
 
@@ -434,7 +477,7 @@ Use case ends.
 
 1. User requests to view summary statistics of students.
 
-2. AddressBook processes the request and displays the total number of students along with other relevant statistics.
+2. TuteeTally processes the request and displays the total number of students along with other relevant statistics.
 
    Use case ends.
 
@@ -442,7 +485,7 @@ Use case ends.
 
 * 2a. There is an error in processing the request.
 
-    * 2a1. AddressBook displays an error message in red.
+    * 2a1. TuteeTally displays an error message in red.
 
   Use case ends.
 
@@ -451,9 +494,9 @@ Use case ends.
 **MSS**
 
 1.  User requests to list Student
-2.  AddressBook shows a list of Student
+2.  TuteeTally shows a list of Student
 3.  User requests to delete a specific Student in the list
-4.  AddressBook deletes the Student
+4.  TuteeTally deletes the Student
 
     Use case ends.
 
@@ -465,7 +508,7 @@ Use case ends.
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TuteeTally shows an error message.
 
       Use case resumes at step 2.
 
@@ -520,12 +563,63 @@ Use case ends.
 
       Use case ends.
 
+**Use case: Add Exam**
+
+**MSS** (Main Success Story)
+
+1. The user selects the option to add an exam. 
+2. The system prompts the user to enter the student's unique ID, exam name, exam date, and optional exam time. 
+3. The user enters the required information and submits the command. 
+4. The system validates the information and confirms the student exists with student ID. 
+5. The system adds the exam to the student. 
+6. The system notifies the user that the exam has been successfully added.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid student ID. 
+    * 1a1. The system displays an error message and prompts the user to re-enter the student ID.
+      
+      Use case resumes at step 2.
+
+* 2a. The user enters an invalid exam date or time. 
+    * 2a1. The system displays an error message and prompts the user to re-enter the exam date or time in the command. 
+      
+      Use case resumes at step 3.
+
+**Use case: Delete Exam**
+
+**MSS (Main Success Story)**
+1. The user selects the option to delete an exam. 
+2. The system prompts the user to enter the student's unique ID, exam name, exam date, and optional exam time. 
+3. The user enters the required information and submits the command. 
+4. The system validates the information and confirms the student exists and the specified exam exist. 
+5. The system removes the exam from the student. 
+6. The system notifies the user that the exam has been successfully deleted.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The user enters an invalid student ID. 
+    * 1a1. The system displays an error message and prompts the user to re-enter the student ID.
+      
+      Use case resumes at step 2.
+  
+* 2a. The user enters incorrect exam details.
+    * 2a1. The system displays an error message and prompts the user to re-enter the exam details.
+
+      Use case resumes at step 3.
+
 ### Planned Enhancements
 1. Update Edit command to use ID instead of index.
-2. Remove all white spaces from the UI.
+2. Improve the UI such as removing all white spaces from it.
 3. Learning styles can be tagged to Person so that it doesn't need to be logged every lesson.
 4. Logging of a lesson will automatically update the payment info.
 5. View -id or -name should automatically filter and show the exams of the person on the right.
+6. Checking of duplicate persons.
+7. 
 
 ### Non-Functional Requirements
 
@@ -640,6 +734,43 @@ testers are expected to do more *exploratory* testing.
 ### Additional Notes
 - Use the `resetpayments` command with caution, as it will clear all payment records for the specified student, potentially impacting their payment history and account status.
 - Ensure accuracy when entering the `ID` to avoid unintentional resets of payment information for the wrong student account.
+
+### Exam commands
+
+#### Adding an Exam to a Student Account
+- **Command**: `addexam`
+- **Description**: Adds an exam record to a specified student by their unique id. This command allows for specifying the exam name, exam date, and optionally, exam time.
+
+##### Prerequisites
+- The student associated with the given unique id must exist within the system.
+
+##### Usage
+- **To add an exam**:
+    `addexam -id ID -examname EXAM_NAME -date EXAM_DATE [-time EXAM_TIME]`
+- Only EXAM_DATE from current date onwards can be used. 
+- EXAM_DATE should be in the format of yyyy-MM-DD.
+- EXAM_TIME should be in the format of HH:mm
+    **Expected Outcome**: An exam with the specified name, date, and optionally time is added to the student identified by ID. The system confirms the addition with a success message and updates the student's exam records accordingly.
+
+#### Deleting an Exam from a Student Account
+- **Command**: `deleteexam`
+- **Description**: Deletes a specific exam record from a student by specifying the student's unique identifier, exam name, exam date, and optionally, exam time.
+
+##### Prerequisites
+- The student associated with the given unique id must exist and have the specified exam recorded.
+
+##### Usage
+- **To delete an exam**:
+    `deleteexam -id ID -examname EXAM_NAME -date EXAM_DATE [-time EXAM_TIME]`
+    **Expected Outcome**: The exam with the specified name, date, and optionally time is removed from the student identified by ID. The system confirms the deletion with a success message, and the student's exam records are updated accordingly.
+
+#### Extensions and Error Handling
+- **Invalid ID**: If an invalid ID is provided, the system will return an error message indicating the issue and suggesting corrective actions.
+- **No Recorded Exam**: If the student does not have the specified exam recorded, the system will notify the user that there are no exams to delete.
+
+### Additional Notes
+Always ensure that the unique id, exam name, and date are correctly entered to avoid discrepancies or errors in exam management.
+These commands are designed to interact seamlessly with the system's exam management module, ensuring accurate tracking and reporting of student exam records.
 
 ### Saving Data
 
