@@ -78,18 +78,27 @@ public class LogicManagerTest {
         assertCommandSuccess(helpCommand, HelpCommand.SHOWING_HELP_MESSAGE, model);
     }
 
-    //    @Test
-    //    public void execute_storageThrowsIoException_throwsCommandException() {
-    //        assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
-    //                LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
-    //    }
+    @Test
+    public void getTotalPersons_retrievesTotalPersons_success() {
+        int expectedTotal = 0;
+        int actualTotal = logic.getTotalPersons();
+        assertEquals(expectedTotal, actualTotal);
+    }
 
-    //    @Test
-    //    public void execute_storageThrowsAdException_throwsCommandException() {
-    //        assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
-    //                LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
-    //    }
 
+    @Test
+    public void getTotalOwings_retrievesTotalOwings_success() {
+        double expectedOwings = 0;
+        double actualOwings = logic.getTotalOwings();
+        assertEquals(expectedOwings, actualOwings);
+    }
+
+    @Test
+    public void getUpcomingMonthExamCount_retrievesExamCount_success() {
+        int expectedCount = 0;
+        int actualCount = logic.getUpcomingMonthExamCount();
+        assertEquals(expectedCount, actualCount);
+    }
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
