@@ -130,7 +130,8 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list and a `AllExamList` in the `AddressBook`, which `Person` references. 
+This allows `AddressBook` to only require one `Tag` object per unique tag and correspondingly one `Exam` object per unique exam, instead of each `Person` needing their own `Tag` and `Exam` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -253,6 +254,7 @@ It's mechanism is similar to the `help` feature where a popout window is shown w
 
 It gets it's info from the `logic` interface
 
+#### Design Considerations
 ### View Name Feature
 ** to add in v1.4**
 #### Implementation
@@ -311,7 +313,7 @@ This feature enables the system to reset the payment status of students, which i
 
 1. A specific command with the `-resetpayments` flag and the student's `uniqueId` is issued by the user.
 2. The system locates the student's record and resets the payment information, clearing any completed payments or dues.
-3. A success message is sent to the user, confirming the reset.
+3. A success message is sent to the user, confirming the reset. <br>
    <puml src="diagrams/ResetPaymentsActivityDiagram.puml" alt="ResetPaymentsActivityDiagram" />
 
 ## Conclusion
