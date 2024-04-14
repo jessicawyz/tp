@@ -95,12 +95,21 @@ public class UniquePersonList implements Iterable<Person> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+
+        Payment toRemovePayment = toRemove.getPayment();
         decrementTotalPersons();
+        decrementPayment(toRemovePayment);// this handles deleting
+
     }
 
     private void incrementPayment(Payment payment) {
         double paymentAmount = payment.getAmount();
         totalOwings += paymentAmount;
+    }
+
+    private void decrementPayment(Payment payment) {
+        double paymentAmount = payment.getAmount();
+        totalOwings -= paymentAmount;
     }
     private void incrementTotalPersons() {
         totalPersons++;
