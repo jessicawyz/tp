@@ -95,9 +95,9 @@ All commands are case-sensitive.
 * Prefixes for parameters need to have a space before the `-`. <br>
 e.g. `add -name Xiao Ming -address 13, Computing Dr, 117417 -email xiaoming@email.com -phone 88888888 -subject Math` is valid, but `add-name Xiao Ming-address 13, Computing Dr, 117417-email xiaoming@email.com-phone 88888888-subject Math` is not.
 * All id inputs in commands labelled `{ID}` can omit any leading 0s.<br>
-e.g. `1`, `01`, `000000001` are all valid id inputs for the id `#000001`
+e.g. `1`, `01`, `000000001` are all valid id inputs for the id `#000001` as leading 0s are ignored.
 
-* All `{ID}` are by default a positive integer of maximum *6 digits* excluding leading 0s. Any ID that exceeds a positive 6 digit integer number (e.g. 1234567) may cause errors. However, 000000001 is still a valid ID as leading 0s are ignored.
+* All `{ID}` are by default a positive integer of maximum *6 digits* excluding leading 0s. Any ID that exceeds a positive 6 digit integer number (e.g. 1234567) may cause errors. However, 000000999999 is still a valid ID.
 
 * The maximum number of students that can be stored in TuteeTally is 999999.
 
@@ -402,7 +402,7 @@ This will add a log to the lessons of a student. The time field of the log entry
 | **Learning Style** | `-style`   | Yes      | Learning style should be a string, special characters are allowed.                                                                                                                                                                                                                        |
 | **Notes**          | `-notes`   | Yes      | Notes should be a string, special characters are allowed.                                                                                                                                                                                                                                 |
 Even though the prefixes are compulsory, their content can be left blank (except ID). <br>
-E.g. `log -id 1 -hours -content -style -notes` adds a log with blank `hours`, `content`, `style` and `notes` field.
+E.g. `log -id 000001 -hours -content -style -notes` adds a log with blank `hours`, `content`, `style` and `notes` field.
 </box>
 
 **Example:** <br>
