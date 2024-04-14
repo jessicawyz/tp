@@ -257,6 +257,11 @@ Currently, the Summary Stats Window can be accessed in 3 ways.
 2. Pressing the `F2` key on your keyboard.
 3. Clicking the `Stats` dropdown menu on the top of TuteeTally and accessing the Summary stats from there.
 
+The Summary Stats window fetches the necessary stats from `logic`, which fetches the necessary data to update the statistics.
+* getTotalPersons() to retrieve the total number of students.
+* getTotalOwings() to calculate the total tuition fees owed.
+* getUpcomingMonthExamCount() to count the exams scheduled for the upcoming month.
+
 A Sequence Diagram can be seen below to show the interaction between the different class once "view -stats" is called:
 
 <puml src="diagrams/ViewStatsSequenceDiagramMain.puml" alt="ViewStatsSequenceDiagramMain" />
@@ -275,10 +280,7 @@ it get the SummaryStats from `Logic`the respective frame will show `SummaryStats
 
 
 
-The window is powered by the `logic` interface, which fetches the necessary data to update the statistics.
-* getTotalPersons() to retrieve the total number of students.
-* getTotalOwings() to calculate the total tuition fees owed.
-* getUpcomingMonthExamCount() to count the exams scheduled for the upcoming month.
+
 
 
 
