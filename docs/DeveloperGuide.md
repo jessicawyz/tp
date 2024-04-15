@@ -259,9 +259,11 @@ Both variants utilize a similar logic to of passing in a ``prefix`` to ``model#u
 <puml src="diagrams/ViewNameSequenceDiagram.puml" alt="ViewNameSequenceDiagram" />
 ### View Name
 This feature allows the user to find all students with at least one matching keyword in their name.
+
 #### Implementation
 This mechanism is similar to the `find` command in `AddressBook`. Parser checks for the `-name` flag using the sequence above and places the keywords into a `NameContainsKeywordsPredicate`.<br>
 This command will display any student with at least **one keyword** fully matching with a part of the name. (e.g. `John` keyword will display `John Lim` but not `Joh Ng`). If there are no such students, an empty list will be displayed.<br>
+
 #### Design considerations:
 **Aspect: How view name finds students to display:**
 * **Alternative 1 (current choice):** Returns students only if a part of their name **fully** matches a keyword.
@@ -342,7 +344,7 @@ This feature enables tutors to log session specific details for record to a spec
 #### Implementation
 The parser first checks if the there exists a student with the `ID` specified using the `-id` in current records. Then, the app adds the log entry to the end of the log list attached as a field to the student.
 Below is the sequence diagram of how the `log` command interacts with multiple classes.
-<puml src="diagrams/LogSequenceDiagram.puml">
+<puml src="diagrams/LogSequenceDiagram.puml" />
 #### Design Considerations
 **Aspect: Whether all fields in log should be compulsory**
 * **Alternative 1 (current choice):** All fields are compulsory

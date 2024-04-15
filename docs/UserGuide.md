@@ -450,16 +450,16 @@ TuteeTally's data is saved automatically as a JSON file at `[JAR file location]/
 **Q**: What are the system requirements for TuteeTally?<br>
 **A**: TuteeTally requires Java 11 or above to run. It is compatible with Windows, MacOS, and Linux operating systems.
 
-**Q**: Can I back up my TuteeTally data?
+**Q**: Can I back up my TuteeTally data?<br>
 **A**: Yes, it is recommended to regularly back up your tuteetally.json data file by copying it to a secure location. This ensures that your data can be restored in case of software or hardware issues.
 
-**Q**: What are the common mistakes to avoid when using TuteeTally?
+**Q**: What are the common mistakes to avoid when using TuteeTally?<br>
 **A**: Common mistakes include inputting commands in the wrong format,in such instances you may reference either the error message or this User Guide on the correct format.
 
-**Q**: How can I recover deleted student data?
+**Q**: How can I recover deleted student data?<br>
 **A**: Once student data is deleted, it cannot be recovered through the application. Regular backups of your data file are recommended to prevent loss of data.
 
-**Q**: What happens if I encounter a bug?
+**Q**: What happens if I encounter a bug?<br>
 **A**: You may report any bugs on our [GitHub](https://github.com/AY2324S2-CS2103T-F10-2/tp/issues). If possible, do provide a detailed description of the problem, steps to reproduce it, and any screenshots.
 --------------------------------------------------------------------------------------------------------------------
 
