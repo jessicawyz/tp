@@ -130,7 +130,8 @@ The `Model` component,
 
 <box type="info" seamless>
 
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list and a `AllExamList` in the `AddressBook`, which `Person` references. 
+This allows `AddressBook` to only require one `Tag` object per unique tag and correspondingly one `Exam` object per unique exam, instead of each `Person` needing their own `Tag` and `Exam` objects.<br>
 
 <puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
 
@@ -245,13 +246,61 @@ Below is a sequence diagram of how view all interacts with multiple classes.
 
 
 ### View Stats feature
-This feature supports the viewing of summary statistics, it currently shows the total number of students, the total amount
-owed by them and the number of exams in the upcoming months.
+This feature supports the viewing of summary statistics, it currently shows the 
+- the total number of students
+- the total amount owed by students (Currently shows the exact amount)
+- the number of upcoming exams in following 1 month period (from today up to the same day of the next month)
 
 #### Implementation
-It's mechanism is similar to the `help` feature where a popout window is shown when called.
+Currently, the Summary Stats Window can be accessed in 3 ways.
+1. Typing `view -stats` in the command box.
+2. Pressing the `F2` key on your keyboard.
+3. Clicking the `Stats` dropdown menu on the top of TuteeTally and accessing the Summary stats from there.
 
-It gets it's info from the `logic` interface
+The Summary Stats window fetches the necessary stats from `logic`, which fetches the necessary data to update the statistics.
+* getTotalPersons() to retrieve the total number of students.
+* getTotalOwings() to calculate the total tuition fees owed.
+* getUpcomingMonthExamCount() to count the exams scheduled for the upcoming month.
+
+A Sequence Diagram can be seen below to show the interaction between the different class once "view -stats" is called:
+
+<puml src="diagrams/ViewStatsSequenceDiagramMain.puml" alt="ViewStatsSequenceDiagramMain" />
+
+The frame below shows how the logic class gets the command result.
+
+<puml src="diagrams/ViewStatsSequenceDiagramGetCommandResult.puml" alt="ViewStatsSequenceDiagramGetCommandResult" />
+
+The CommandResult will then be returned to the UIManager and a SummaryStatsWindow Instance will be created, the Sequence diagram below shows how
+it get the SummaryStats from `Logic`the respective frame will show `SummaryStatsWindow::updateSummaryStats` clearly. 
+
+<puml src="diagrams/ViewStatsSequenceDiagramUpdateTotalCountofPersons.puml" alt="ViewStatsSequenceDiagramUpdateTotalCountofPerson" />
+<puml src="diagrams/ViewStatsSequenceDiagramUpdateTotalOwingsOfPerson.puml" alt="ViewStatsSequenceDiagramUpdateTotalOwingsOfPerson" />
+<puml src="diagrams/ViewStatsSequenceDiagramUpdateUpcomingExams.puml" alt="ViewStatsSequenceDiagramUpdateUpcomingExams" />
+
+
+
+
+
+
+
+
+
+
+
+#### Design Considerations
+**Aspect: Where to store the SummaryStats:**
+
+* **Alternative 1 (current choice):** The Summary Stats is stored in the `UniquePersonsList` and is updated everytime their respective field get updated.
+  * Pros: Easy access to this information and ensures that the statistics are always updated.
+  * Cons: High coupling, changes in the UniquePersonsList may have ripple effects on the parts of the application that depend on summary statistics.
+
+* **Alternative 2:** Compute statistics on demand
+    * Pros: Decreases the coupling between the data management and data viewing functionalities.
+    * Cons: Could lead to a delay in presenting statistics to the user since computations are performed at the time of request.
+
+**User Experience
+* **Useful Information**: We want the user to have useful information in a quick manner to aid their tuition administration.
+* **Many ways to access**: We want the user to have many ways to open the Summary Stats Window.
 
 ### View Name Feature
 ** to add in v1.4**
@@ -311,7 +360,7 @@ This feature enables the system to reset the payment status of students, which i
 
 1. A specific command with the `-resetpayments` flag and the student's `uniqueId` is issued by the user.
 2. The system locates the student's record and resets the payment information, clearing any completed payments or dues.
-3. A success message is sent to the user, confirming the reset.
+3. A success message is sent to the user, confirming the reset. <br>
    <puml src="diagrams/ResetPaymentsActivityDiagram.puml" alt="ResetPaymentsActivityDiagram" />
 
 ## Conclusion
@@ -413,6 +462,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
+<puml src="diagrams/UseCaseDiagram.puml" alt="UseCaseDiagram" />
 (For all use cases below, the **System** is`TuteeTally` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Add a Student**
@@ -613,13 +663,15 @@ Use case ends.
       Use case resumes at step 3.
 
 ### Planned Enhancements
+Team size: 4 <br>
 1. Update Edit command to use ID instead of index.
 2. Improve the UI such as removing all white spaces from it.
 3. Learning styles can be tagged to Person so that it doesn't need to be logged every lesson.
 4. Logging of a lesson will automatically update the payment info.
 5. View -id or -name should automatically filter and show the exams of the person on the right.
-6. Checking of duplicate persons.
-7. 
+6. Log window will update its content to respond to addition of logs to a student.
+7. Log entry can be deleted and its fields can be edited, including editing the date and time of the log to a custom date to match the lesson time.
+8. Implement checking of duplicate persons to ensure the same person is not recorded multiple times.
 
 ### Non-Functional Requirements
 

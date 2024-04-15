@@ -56,7 +56,6 @@ public class SummaryStatsWindow extends UiPart<Stage> {
     public SummaryStatsWindow(Logic logic) {
         this(new Stage());
         this.logic = logic;
-        updateSummaryStats();
     }
 
     /**
@@ -88,7 +87,6 @@ public class SummaryStatsWindow extends UiPart<Stage> {
      * Returns true if the SummaryStatsWindow window is currently being shown.
      */
     public boolean isShowing() {
-        updateSummaryStats();
         return getRoot().isShowing();
     }
 
@@ -107,9 +105,9 @@ public class SummaryStatsWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
-    private void updateTotalCountOfPersons() {
+    private void updateTotalCountofPersons() {
         totalPerson = logic.getTotalPersons();
-        String output = SUMMARYSTATS_MESSAGE_COUNT + " " + Integer.toString(totalPerson);
+        String output = String.format(SUMMARYSTATS_MESSAGE_COUNT + " %d", totalPerson);
         summaryMessageCountLabel.setText(output);
     }
 
@@ -121,12 +119,12 @@ public class SummaryStatsWindow extends UiPart<Stage> {
 
     private void updateUpcomingMonthExams() {
         upcomingMonthExams = logic.getUpcomingMonthExamCount();
-        String output = SUMMARYSTATS_MESSAGE_EXAM + " " + Integer.toString(upcomingMonthExams);
+        String output = String.format(SUMMARYSTATS_MESSAGE_EXAM + " %d", upcomingMonthExams);
         summaryMessageUpcomingExamCountLabel.setText(output);
     }
 
     private void updateSummaryStats() {
-        updateTotalCountOfPersons();
+        updateTotalCountofPersons();
         updateTotalOwingsofPersons();
         updateUpcomingMonthExams();
     }
