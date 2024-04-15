@@ -23,8 +23,8 @@ public class DeleteExamCommandParser implements Parser<DeleteExamCommand> {
     public DeleteExamCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_EXAM_NAME, PREFIX_DATE, PREFIX_TIME);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_EXAM_NAME)) {
+        assert argMultimap != null : "ArgumentMultimap cannot be null";
+        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_EXAM_NAME, PREFIX_DATE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteExamCommand.MESSAGE_USAGE));
         }
 

@@ -11,7 +11,10 @@ import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -38,7 +41,7 @@ public class AddExamCommand extends Command {
             + PREFIX_TIME + "09:00";
 
     public static final String MESSAGE_SUCCESS = "Added exam to person with ID: %1$s";
-
+    private final Logger logger = LogsCenter.getLogger(AddExamCommand.class);
     private final String uniqueId;
     private final LocalDate examDate;
     private final Optional<LocalTime> examTime;
@@ -48,6 +51,10 @@ public class AddExamCommand extends Command {
      * Creates an AddExamCommand to add the specified {@code Exam} to the person with the specified {@code Id}.
      */
     public AddExamCommand(String uniqueId, String examName, LocalDate examDate, Optional<LocalTime> examTime) {
+        assert uniqueId != null : "UniqueId must not be null";
+        assert examName != null : "ExamName must not be null";
+        assert examDate != null : "ExamDate must not be null";
+        assert examTime != null : "ExamTime must not be null";
         requireNonNull(uniqueId);
         requireNonNull(examName);
         requireNonNull(examDate);
@@ -56,11 +63,16 @@ public class AddExamCommand extends Command {
         this.examName = examName;
         this.examDate = examDate;
         this.examTime = examTime;
+
+        logger.log(Level.FINE, "Creating AddExamCommand with parameters: uniqueId={0}, "
+                        + "examName={1}, examDate={2}, examTime={3}",
+                new Object[]{uniqueId, examName, examDate, examTime});
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing AddExamCommand");
         Person personToUpdate = model.getPersonByUniqueId(uniqueId);
 
         if (personToUpdate == null) {
@@ -80,6 +92,7 @@ public class AddExamCommand extends Command {
         Person updatedPerson = createUpdatedPerson(personToUpdate, updatedExams);
 
         model.setPerson(personToUpdate, updatedPerson);
+        logger.info("AddExamCommand execute successful");
         return new CommandResult(String.format(MESSAGE_SUCCESS, uniqueId));
     }
 
@@ -136,6 +149,7 @@ public class AddExamCommand extends Command {
         if (!(other instanceof AddExamCommand)) {
             return false;
         }
+        logger.log(Level.FINE, "Comparing AddExamCommand equality");
 
         AddExamCommand otherCommand = (AddExamCommand) other;
         return uniqueId.equals(otherCommand.uniqueId)
