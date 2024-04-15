@@ -63,7 +63,8 @@ public class AddExamCommand extends Command {
         this.examDate = examDate;
         this.examTime = examTime;
 
-        logger.log(Level.FINE, "Creating AddExamCommand with parameters: uniqueId={0}, examName={1}, examDate={2}, examTime={3}",
+        logger.log(Level.FINE, "Creating AddExamCommand with parameters: uniqueId={0}, "
+                        + "examName={1}, examDate={2}, examTime={3}",
                 new Object[]{uniqueId, examName, examDate, examTime});
     }
 
