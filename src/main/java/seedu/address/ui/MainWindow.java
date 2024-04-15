@@ -171,10 +171,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSummaryStats() {
-        if (!summaryStatsWindow.isShowing()) {
-            summaryStatsWindow.show();
-        } else {
+        if (summaryStatsWindow.isShowing()) {
             summaryStatsWindow.focus();
+        } else {
+            summaryStatsWindow.show();
         }
     }
 

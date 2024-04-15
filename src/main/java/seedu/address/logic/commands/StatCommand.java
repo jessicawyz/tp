@@ -2,8 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
+
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -18,11 +22,14 @@ public class StatCommand extends ViewCommand {
 
     public static final String MESSAGE_SUCCESS = "Viewing the Summary stats of students";
 
+    private static final Logger logger = LogsCenter.getLogger(StatCommand.class);
+
 
     /**
      * Constructor for a non search based view command (stats or all)
      */
     public StatCommand() {
+        logger.info("Stat Command is Constructed");
     }
 
     @Override
