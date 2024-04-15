@@ -820,7 +820,7 @@ testers are expected to do more *exploratory* testing.
 #### 1. Deleting a Person While All Persons Are Being Shown
 - **Prerequisites**: List/view all persons using the `list` or `view -all` command. Multiple persons in the list.
 - **Test Case**: `delete 000001`
-  **Expected**: Contact with the ID #000001 is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+  **Expected**: Contact with the `ID` #000001 is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 - **Test Case**: `delete 000000`
   **Expected**: No person is deleted. Error details shown in the status message. Status bar remains the same.
 - **Other Incorrect Delete Commands to Try**: `delete`, `delete x`, `...` (where x is larger than the list size)
@@ -833,10 +833,10 @@ testers are expected to do more *exploratory* testing.
 #### Adding a Payment to a Student Account
 
 - **Command**: `addpayment`
-- **Description**: Adds a payment record to a specified student by their unique id. This command allows for specifying the payment amount either as a numerical value or as a text string for more descriptive purposes.
+- **Description**: Adds a payment record to a specified student by their `ID`. This command allows for specifying the payment amount either as a numerical value or as a text string for more descriptive purposes.
 
 ##### Prerequisites
-- The student associated with the given unique id must exist within the system.
+- The student associated with the given `ID` must exist within the system.
 
 ##### Usage
 - **To add a payment with a numerical amount**:
@@ -849,7 +849,7 @@ testers are expected to do more *exploratory* testing.
 - **Description**: Marks a specified payment as complete for a student. This command is used to update the status of a student's payments to reflect that they have been successfully processed or received.
 
 ##### Prerequisites
-- The student associated with the given unique id must exist.
+- The student associated with the given `ID` must exist.
 
 ##### Usage
 - **To mark a payment as complete**:
@@ -867,10 +867,10 @@ testers are expected to do more *exploratory* testing.
 #### Resetting Payments for a Student Account
 
 - **Command**: `resetpayments`
-- **Description**: Resets the payment status for all recorded payments in a specified student. This command is used when a student's payment record needs to be cleared, typically after all dues have been settled or in case of adjustments.
+- **Description**: Resets the payment status for all recorded payments in a specified student identified by `ID`. This command is used when a student's payment record needs to be cleared, typically after all dues have been settled or in case of adjustments.
 
 ##### Prerequisites
-- The student account associated with the given unique identifier must exist.
+- The student account associated with the given `ID` must exist.
 
 ##### Usage
 - **To reset all payments for a student**:
@@ -883,16 +883,16 @@ testers are expected to do more *exploratory* testing.
 
 ### Additional Notes
 - Use the `resetpayments` command with caution, as it will clear all payment records for the specified student, potentially impacting their payment record.
-- Ensure accuracy when entering the `ID` to avoid unintentional resets of payment information for the wrong student account.
+- Ensure accuracy when entering the `ID` to avoid unintentional resets of payment information for the wrong student.
 
 ### Exam commands
 
 #### Adding an Exam to a Student Account
 - **Command**: `addexam`
-- **Description**: Adds an exam record to a specified student by their unique id. This command allows for specifying the exam name, exam date, and optionally, exam time.
+- **Description**: Adds an exam record to a specified student by their `ID`. This command allows for specifying the exam name, exam date, and optionally, exam time.
 
 ##### Prerequisites
-- The student associated with the given unique id must exist within the system.
+- The student associated with the given `ID` must exist within the system.
 
 ##### Usage
 - **To add an exam**:
@@ -900,22 +900,22 @@ testers are expected to do more *exploratory* testing.
 - Only EXAM_DATE from current date onwards can be used. 
 - EXAM_DATE should be in the format of yyyy-MM-DD.
 - EXAM_TIME should be in the format of HH:mm <br>
-    **Expected Outcome**: An exam with the specified name, date, and optionally time is added to the student identified by ID. The system confirms the addition with a success message and updates the student's exam records accordingly.
+    **Expected Outcome**: An exam with the specified name, date, and optionally time is added to the student identified by `ID`. The system confirms the addition with a success message and updates the student's exam records accordingly.
 
 #### Deleting an Exam from a Student Account
 - **Command**: `deleteexam`
-- **Description**: Deletes a specific exam record from a student by specifying the student's unique identifier, exam name, exam date, and optionally, exam time.
+- **Description**: Deletes a specific exam record from a student by specifying the student's `ID`, exam name, exam date, and optionally, exam time.
 
 ##### Prerequisites
-- The student associated with the given unique id must exist and have the specified exam recorded.
+- The student associated with the given `ID` must exist and have the specified exam recorded.
 
 ##### Usage
 - **To delete an exam**:
     `deleteexam -id ID -examname EXAM_NAME -date EXAM_DATE [-time EXAM_TIME]`<br>
-    **Expected Outcome**: The exam with the specified name, date, and optionally time is removed from the student identified by ID. The system confirms the deletion with a success message, and the student's exam records are updated accordingly.
+    **Expected Outcome**: The exam with the specified name, date, and optionally time is removed from the student identified by `ID`. The system confirms the deletion with a success message, and the student's exam records are updated accordingly.
 
 #### Extensions and Error Handling
-- **Invalid ID**: If an invalid ID is provided, the system will return an error message indicating the issue and suggesting corrective actions.
+- **Invalid ID**: If an invalid `ID` is provided, the system will return an error message indicating the issue and suggesting corrective actions.
 - **No Recorded Exam**: If the student does not have the specified exam recorded, the system will notify the user that there are no exams to delete.
 
 ### Additional Notes
