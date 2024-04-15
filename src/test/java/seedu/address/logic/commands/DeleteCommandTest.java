@@ -21,48 +21,12 @@ public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    //I'm not sure why this testcase pass in isolation but fails when tested in totality,
-    // commented out -Marcus
-    //    @Test
-    //    public void execute_validIndexUnfilteredList_success() {
-    //        Person personToDelete = model.getPersonByUniqueId(ID_FIRST_PERSON.toString());
-    //        DeleteCommand deleteCommand = new DeleteCommand(ID_FIRST_PERSON);
-    //        System.out.println(personToDelete);
-    //
-    //        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-    //                Messages.format(personToDelete));
-    //
-    //        System.out.println(Messages.format(personToDelete));
-    //
-    //        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-    //        expectedModel.deletePerson(personToDelete);
-    //
-    //        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    //    }
-
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         DeleteCommand deleteCommand = new DeleteCommand(new Id("invalid_id"));
 
         assertCommandFailure(deleteCommand, model, DeleteCommand.MESSAGE_PERSON_NOT_FOUND);
     }
-
-    //        @Test
-    //        public void execute_validIndexFilteredList_success() {3
-    //            showPersonAtIndex(model, ID_FIRST_PERSON.getInt());
-    //
-    //            Person personToDelete = model.getPersonByUniqueId(ID_FIRST_PERSON.toString());
-    //            DeleteCommand deleteCommand = new DeleteCommand(ID_FIRST_PERSON.toString());
-    //
-    //            String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-    //                    Messages.format(personToDelete));
-    //
-    //            Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-    //            expectedModel.deletePerson(personToDelete);
-    //            showNoPerson(expectedModel);
-    //
-    //            assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    //        }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {

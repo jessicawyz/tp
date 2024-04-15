@@ -127,11 +127,27 @@ public class AllExamsList {
         upcomingMonthExamCount = 0;
         for (Exam exam : exams) {
             LocalDate examDate = exam.date;
-            if (examDate.isAfter(currentDate) && examDate.isBefore(nextMonthAndADay) || examDate.isEqual(currentDate)) {
+            if (isExamDateInUpcomingMonth(examDate, currentDate, nextMonthAndADay)) {
                 upcomingMonthExamCount++;
             }
         }
         return upcomingMonthExamCount;
+    }
+    /**
+     * Checks if the exam date is in the upcoming month. from today to the next month of the same date (inclusive)
+     * (for e.g if today is 1st Jan, this method will return true for all exams scheduled from 1st Jan to 1st Feb)
+     *
+     * @param examDate The date of the exam.
+     * @param currentDate The current date.
+     * @param nextMonthAndADay The date of the next month and a day.
+     * @return True if the exam date is in the upcoming month, false otherwise.
+     */
+
+    private boolean isExamDateInUpcomingMonth(LocalDate examDate, LocalDate currentDate, LocalDate nextMonthAndADay) {
+        if (examDate.isAfter(currentDate) && examDate.isBefore(nextMonthAndADay) || examDate.isEqual(currentDate)) {
+            return true;
+        }
+        return false;
     }
 
 }
