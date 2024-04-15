@@ -322,7 +322,7 @@ The CommandResult will then be returned to the UIManager and a SummaryStatsWindo
 it get the SummaryStats from `Logic`the respective frame will show `SummaryStatsWindow::updateSummaryStats` clearly. 
 
 <puml src="diagrams/ViewStatsSequenceDiagramUpdateTotalCountofPersons.puml" alt="ViewStatsSequenceDiagramUpdateTotalCountofPerson" />
-<puml src="diagrams/ViewStatsSequenceDiagramUpdateTotalOwingsOfPerson.puml" alt="ViewStatsSequenceDiagramUpdateTotalOwingsOfPerson" />
+<puml src="diagrams/ViewStatsSequenceDiagramUpdateTotalOwingsOfPersons.puml" alt="ViewStatsSequenceDiagramUpdateTotalOwingsOfPersons" />
 <puml src="diagrams/ViewStatsSequenceDiagramUpdateUpcomingExams.puml" alt="ViewStatsSequenceDiagramUpdateUpcomingExams" />
 
 #### Design Considerations
@@ -504,22 +504,20 @@ These descriptions provide an overview of the exam management features, their pu
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                        | So that I can…​                                           |
-|----------|---------|-------------------------------------|-----------------------------------------------------------|
-| `* * *`  | Tutor   | add a student                       | track the details of the student                          |
+| Priority | As a …​ | I want to …​                              | So that I can…​                                          |
+|----------|---------|-------------------------------------------|----------------------------------------------------------|
+| `* * *`  | Tutor   | add a student                             | track the details of the student                         |
 | `* * *`  | Tutor   | view student details summary on main page | get a brief idea of the student while navigating the list |
-| `* * *`  | Tutor   | delete a person                     | remove entries that I no longer need                      |
-| `* * *`  | Tutor   | view single students detail         | see the individual detail for a single student            |
-| `* * *`  | Tutor   | view total number of students       | check if I have space for more students                   |
-| `* * *`  | Tutor   | track my payments                   | won't miss out on any payments                            |
-| `* * *`  | Tutor   | track my students' exams            | personalise and plan better for lessons                   |
-
-
-*{More to be added}*
+| `* * *`  | Tutor   | delete a person                           | remove entries that I no longer need                     |
+| `* * *`  | Tutor   | view single students detail               | see the individual detail for a single student           |
+| `* * *`  | Tutor   | view total number of students             | check if I have space for more students                  |
+| `* * *`  | Tutor   | track my payments                         | won't miss out on any payments                           |
+| `* * *`  | Tutor   | track my students' exams                  | personalise and plan better for lessons                  |
+| `**`      | Tutor   | log the lessons of a student             | analyse past lessons when planning                       |
 
 ### Use cases
 
-<puml src="diagrams/UseCaseDiagram.puml" alt="UseCaseDiagram" />
+<puml src="diagrams/UseCaseDiagram.puml" alt="UseCaseDiagram" /> <br>
 (For all use cases below, the **System** is`TuteeTally` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Add a Student**
