@@ -9,6 +9,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STYLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -39,6 +42,7 @@ public class LogCommand extends Command {
             + PREFIX_STYLE + " Visual "
             + PREFIX_NOTES + " Great improvement!";
 
+    private final Logger logger = LogsCenter.getLogger(LogCommand.class);
     private final int targetId;
     private final Log logDetails;
 
@@ -55,7 +59,8 @@ public class LogCommand extends Command {
         requireNonNull(model);
         assert logDetails != null : "Log details should have been added already";
 
-        if (targetId < 0) { // Positive Integer or 0, to discuss
+        logger.info("Started executing add log command");
+        if (targetId <= 0) {
             throw new CommandException(MESSAGE_POSITIVE_INTEGER_AND_ZERO);
         }
 
@@ -66,6 +71,7 @@ public class LogCommand extends Command {
         }
 
         model.addLog(targetPerson, logDetails);
+        logger.info(String.format("Added log to user %s", targetPerson));
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(logDetails)));
     }
