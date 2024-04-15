@@ -143,6 +143,8 @@ After entering the command, the interface will update as shown below:
 
 ![Add Student Display](images/add/add.png) _The display showing *ALL* the students after a new student gets added._
 
+<box type="info" seamless>
+
 **Tip:**<br>
 * You can opt to drag the middle portion of the UI to vary the space allocated for student and exam details. <br>
 </box>
@@ -322,9 +324,9 @@ This will add an exam to a student by searching for their `ID`. Time is an optio
 **Format 1:** `addexam -id {ID} -exam {EXAMNAME} -date {DATE}` <br>
 **Format 2:** `addexam -id {ID} -exam {EXAMNAME} -date {DATE} -time {TIME}` <br>
 
-<box type="note" seamless>
+<box type="tip" seamless>
 
-**Notes on Fields for add exam command:**
+**Notes on the fields for addexam command:**
 
 | Field         | Prefix  | Required | Caveats                                                                                                                                                                                                                                                                                    |
 |---------------|---------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -435,13 +437,14 @@ _The display reflects the updated log entries for the student with ID #000001._
 
 TuteeTally's data is saved automatically as a JSON file at `[JAR file location]/data/tuteetally.json`. Do proceed carefully if you intend to edit this file directly.
 
-[!CAUTION]
+<box type="caution" seamless>
 
-> Certain edits can cause the TuteeTally to behave in unexpected and magical ways (e.g., if a value entered is outside the acceptable range, or invalid characters are added). 
-> Therefore, edit the data file only if you are confident that you can update it correctly. 
-> It's up to you to ensure the validity of the data if you choose to edit it.
-> Hence, it is recommended to make a backup of the file (by copying and pasting to another location) before editing it.<br>
+* Certain edits can cause the TuteeTally to behave in unexpected and magical ways (e.g., if a value entered is outside the acceptable range, or invalid characters are added). 
+* Therefore, edit the data file only if you are confident that you can update it correctly. 
+* It's up to you to ensure the validity of the data if you choose to edit it.
+* Hence, it is recommended to make a backup of the file (by copying and pasting to another location) before editing it.<br>
 
+</box>
 
 
 --------------------------------------------------------------------------------------------------------------------
