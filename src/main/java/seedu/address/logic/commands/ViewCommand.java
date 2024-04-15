@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -20,7 +23,6 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views student related details\n"
             + "Prefixes available: -all, -name, -id, -stats\n"
             + "Note that field after -id must be a positive integer "
@@ -30,6 +32,7 @@ public class ViewCommand extends Command {
             + COMMAND_WORD + " -all OR "
             + COMMAND_WORD + " -stats";
 
+    private final Logger logger = LogsCenter.getLogger(ViewCommand.class);
     private final NameContainsKeywordsPredicate namePredicate;
     private final IsSameIdPredicate idPredicate;
 
@@ -63,27 +66,50 @@ public class ViewCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         if (namePredicate != null) {
-            model.updateFilteredPersonList(namePredicate);
+            generateFilteredNameList(model);
             if (model.getFilteredPersonList().size() == 0) {
+                logger.info("No person with name found");
                 return new CommandResult(Messages.MESSAGE_PERSON_NOT_FOUND);
             }
             return new CommandResult(
-                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
-                    null,
-                    false, false, false, false);
+                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
         } else if (idPredicate != null) {
-            if (!model.hasPersonById(idPredicate.getTestId())) {
+            generateFilteredIdList(model);
+            int filteredListSize = model.getFilteredPersonList().size();
+            if (filteredListSize == 0) {
+                return new CommandResult(Messages.MESSAGE_PERSON_NOT_FOUND);
+            } else {
+                Person person = model.getFilteredPersonList().get(0);
                 return new CommandResult(
-                        Messages.MESSAGE_PERSON_NOT_FOUND);
+                        String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                        person.getLogs().toString(),
+                        false, false, false, true);
             }
-            model.updateFilteredPersonList(idPredicate);
-            Person person = model.getFilteredPersonList().get(0);
-            return new CommandResult(
-                    String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
-                    person.getLogs().toString(),
-                    false, false, false, true);
         } else {
-            return new CommandResult(MESSAGE_SUCCESS, null, false, false, true, false);
+            // Should not reach here
+            assert false;
+            return null;
+        }
+    }
+
+    private void generateFilteredNameList(Model model) {
+        assert idPredicate == null : "only 1 prefix should be present";
+        logger.info("Started executing view name command");
+        model.updateFilteredPersonList(namePredicate);
+    }
+
+    private void generateFilteredIdList(Model model) {
+        assert namePredicate == null : "only 1 prefix should be present";
+        logger.info("Started executing view id command");
+        if (!model.hasPersonById(idPredicate.getTestId())) {
+            logger.info("No person with id found");
+        } else if (model.hasPersonById(idPredicate.getTestId())) {
+            logger.info("Found a student with id");
+            model.updateFilteredPersonList(idPredicate);
+            assert model.getFilteredPersonList().size() == 1 : "There should only be 1 student with the matching id";
+        } else {
+            // Should not reach here
+            assert false;
         }
     }
 
@@ -92,7 +118,6 @@ public class ViewCommand extends Command {
         if (other == this) {
             return true;
         }
-
         // instanceof handles nulls
         if (!(other instanceof ViewCommand)) {
             return false;
