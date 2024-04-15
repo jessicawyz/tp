@@ -63,6 +63,7 @@ public class ViewCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         if (namePredicate != null) {
+            assert idPredicate == null : "only 1 prefix should be present";
             model.updateFilteredPersonList(namePredicate);
             if (model.getFilteredPersonList().size() == 0) {
                 return new CommandResult(Messages.MESSAGE_PERSON_NOT_FOUND);
@@ -72,6 +73,7 @@ public class ViewCommand extends Command {
                     null,
                     false, false, false, false);
         } else if (idPredicate != null) {
+            assert namePredicate == null : "only 1 prefix should be present";
             if (!model.hasPersonById(idPredicate.getTestId())) {
                 return new CommandResult(
                         Messages.MESSAGE_PERSON_NOT_FOUND);

@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 /**
  * Represents a Person's log details in the address book.
  */
@@ -22,6 +24,7 @@ public class Log {
      * @param notes A valid note.
      */
     public Log(String learningStyle, String hours, String lessonContent, String notes, String date) {
+        requireAllNonNull(learningStyle, hours, lessonContent, notes);
         if (date == null) {
             Date currentDate = new Date();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

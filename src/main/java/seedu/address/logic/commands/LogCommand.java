@@ -53,6 +53,7 @@ public class LogCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert logDetails != null : "Log details should have been added already";
 
         if (targetId < 0) { // Positive Integer or 0, to discuss
             throw new CommandException(MESSAGE_POSITIVE_INTEGER_AND_ZERO);
@@ -81,7 +82,7 @@ public class LogCommand extends Command {
 
         LogCommand otherCommand = (LogCommand) other;
         return targetId == otherCommand.targetId
-                && (logDetails != null ? logDetails.equals(otherCommand.logDetails) : otherCommand.logDetails == null);
+                && logDetails.equals(otherCommand.logDetails);
     }
 
 }
