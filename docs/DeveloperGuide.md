@@ -142,7 +142,7 @@ This allows `AddressBook` to only require one `Tag` object per unique tag and co
 
 **API** : [`Storage.java`](https://github.com/AY2324S2-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml"/>
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -157,7 +157,7 @@ updating or enhancing functionality in one place.
 
 Below is a breakdown of the main categories within this package:
 
--`Core`
+- `Core`
 This category includes essential classes that are central to the application's operation:
 
     -Config: Manages configuration settings of the application, such as file paths and application-level settings. 
