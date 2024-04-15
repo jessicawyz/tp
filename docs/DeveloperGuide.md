@@ -303,10 +303,14 @@ Below is the sequence diagram of how the `log` command interacts with multiple c
     * Pros: Allows flexibility in user input, saves time for user
     * Cons: Log entries will not be structured. Tutor may also accidentally forget important information to log, such as a change in learning style or lesson content covered.
       As we are currently in the early stage of development and have yet to carry out user testing for what fields should be compulsory, we chose to mandate every field so tutors are reminded of all possibly important aspects to record.
-      **Aspect: Restrictions on log feature fields' contents**
+
+**Aspect: Restrictions on log feature fields' contents**
 * **Alternative 1 (current choice):** All fields are strings, and can be empty
     * Pros: Easy to implement, flexible, allowing customised inputs like `45 minutes` for hours instead of restricting to an integer. Allowing empty fields partially mitigates aforementioned con of being forced to enter content even if the user deems it unnecessary, all while still providing a reminder to possibly important fields.
     * Cons: Prone to user errors, which can make the log entry messy.
+* **Alternative 2:** All fields have their own required format and data types.
+    * Pros: More systematic, less prone to user errors and typos.
+    * Cons: More complicated to implement and use.
 
 ## Student Payment Management System
 
@@ -501,6 +505,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 2. TuteeTally retrieves and shows the relevant student details based on the request.
 
+3. TuteeTally opens a popup and shows the past log entries of the student.
+
    Use case ends.
 
 **Extensions**
@@ -515,6 +521,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2b1. TuteeTally shows an error message and the correct command format.
 
+Use case ends.
+* 3a. The requested student does not have valid logs recorded.
+    * 3a1. TuteeTally opens a popup containing "No logs yet!" instead.
 Use case ends.
 
 **Use case: View Summary Statistics**
