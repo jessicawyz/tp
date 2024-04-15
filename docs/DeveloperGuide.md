@@ -372,7 +372,7 @@ Below is the sequence diagram of how the `log` command interacts with multiple c
 
 ### Conclusion
 
-This guide provides a concise overview of the logs management functionalities within the system, designed to assist developers in understanding and utilizing these features effectively. For further details or clarification, please refer to the system documentation or contact the development team.
+This guide provides a concise overview of the student details retrieval system, designed to assist developers in understanding and utilizing these features effectively. For further details or clarification, please contact the development team.
 
 ## Student Payment Management System
 
@@ -428,7 +428,7 @@ This feature enables the system to reset the payment status of students, which i
 
 ### Conclusion
 
-This guide provides a concise overview of the payment management functionalities within the system, designed to assist developers in understanding and utilizing these features effectively. For further details or clarification, please refer to the system documentation or contact the development team.
+This guide provides a concise overview of the payment management functionalities within the system, designed to assist developers in understanding and utilizing these features effectively. For further details or clarification, please contact the development team.
 
 ## Student Exam Management System
 
@@ -502,7 +502,7 @@ The system removes the specified exam record from the student and AllExamsList.
 
 ### Conclusion
 
-These descriptions provide an overview of the exam management features, their purposes, and how they are implemented in the system. They also include sequence diagrams illustrating the interactions between the user and the system for each feature. For further details or clarification, please refer to the system documentation or contact the development team.
+These descriptions provide an overview of the exam management features, their purposes, and how they are implemented in the system. They also include sequence diagrams illustrating the interactions between the user and the system for each feature. For further details or clarification, please contact the development team.
 
 
 --------------------------------------------------------------------------------------------------------------------
