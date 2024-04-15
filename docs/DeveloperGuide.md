@@ -504,16 +504,17 @@ These descriptions provide an overview of the exam management features, their pu
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                              | So that I can…​                                          |
-|----------|---------|-------------------------------------------|----------------------------------------------------------|
-| `* * *`  | Tutor   | add a student                             | track the details of the student                         |
-| `* * *`  | Tutor   | view student details summary on main page | get a brief idea of the student while navigating the list |
-| `* * *`  | Tutor   | delete a person                           | remove entries that I no longer need                     |
-| `* * *`  | Tutor   | view single students detail               | see the individual detail for a single student           |
-| `* * *`  | Tutor   | view total number of students             | check if I have space for more students                  |
-| `* * *`  | Tutor   | track my payments                         | won't miss out on any payments                           |
-| `* * *`  | Tutor   | track my students' exams                  | personalise and plan better for lessons                  |
-| `**`      | Tutor   | log the lessons of a student             | analyse past lessons when planning                       |
+| Priority | As a …​ | I want to …​                              | So that I can…​                                           |
+|---------|---------|-------------------------------------------|-----------------------------------------------------------|
+| `* * *` | Tutor   | add a student                             | track the details of the student                          |
+| `* * *` | Tutor   | view student details summary on main page | get a brief idea of the student while navigating the list |
+| `* * *` | Tutor   | delete a person                           | remove entries that I no longer need                      |
+| `* * *` | Tutor   | view single students detail               | see the individual detail for a single student            |
+| `* * *` | Tutor   | view total number of students             | check if I have space for more students                   |
+| `* * *` | Tutor   | track my payments                         | won't miss out on any payments                            |
+| `* * *` | Tutor   | track my students' exams                  | personalise and plan better for lessons                   |
+| `**`    | Tutor   | log the lessons of a student              | analyse past lessons when planning                        |
+| `*`      | Tutor   | filter students by their subjects         | manage my students better                                 |
 
 ### Use cases
 
