@@ -13,7 +13,16 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+The following table contains the numerous third party libaries, API and documentation consulted during the course of developing TuteeTally.
+
+| Name                                                                              | Description                                                                                           |
+|-----------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| [AddressBook-Level 3 (AB-3)](https://se-education.org/addressbook-level3/)        | Tuteetally is adapted from AB-3 that is created by the [SE-EDU initiative](https://se-education.org). |
+| [Gradle](https://gradle.org/)                                                     | Used for build automation                                                                             |
+| [Jackson](https://github.com/FasterXML/jackson)                                   | Used for parsing JSON files.                                                                          |
+| [JavaFX](https://openjfx.io)                                                      | Used in rendering the GUI.                                                                            |
+| [JUnit5](https://junit.org/junit5/)                                               | Used for testing the codebase.                                                                        |
+| [Oracle Java Docs](https://docs.oracle.com/en/java/javase/11/docs/api/index.html) | Used for understanding the default Java API                                                           |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -142,7 +151,7 @@ This allows `AddressBook` to only require one `Tag` object per unique tag and co
 
 **API** : [`Storage.java`](https://github.com/AY2324S2-CS2103T-F10-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
-<puml src="diagrams/StorageClassDiagram.puml" width="550" />
+<puml src="diagrams/StorageClassDiagram.puml"/>
 
 The `Storage` component,
 * can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
@@ -157,15 +166,15 @@ updating or enhancing functionality in one place.
 
 Below is a breakdown of the main categories within this package:
 
--`Core`
+- `Core`
 This category includes essential classes that are central to the application's operation:
 
-    -Config: Manages configuration settings of the application, such as file paths and application-level settings. 
+    * Config: Manages configuration settings of the application, such as file paths and application-level settings. 
             It helps in maintaining a flexible codebase that can adapt to different deployment environments without requiring code changes.
 
-    -GuiSettings: Holds GUI configuration details which can be serialized for persistence across sessions. This class includes settings such as window size, window position, and other UI-related preferences that enhance the user's experience by maintaining a consistent application state.
+    * GuiSettings: Holds GUI configuration details which can be serialized for persistence across sessions. This class includes settings such as window size, window position, and other UI-related preferences that enhance the user's experience by maintaining a consistent application state.
 
-    -LogsCenter: Provides a central management facility for logging messages throughout the application. It configures the logging libraries and specifies the uniform format and logging levels, making the debugging process and monitoring of runtime behaviors more systematic.
+    * LogsCenter: Provides a central management facility for logging messages throughout the application. It configures the logging libraries and specifies the uniform format and logging levels, making the debugging process and monitoring of runtime behaviors more systematic.
 
 
 - `Exceptions`
@@ -233,6 +242,7 @@ The ``LogicManager`` then executes ``StatCommand`` which returns a  ``CommandRes
 
 ### View all feature
 This feature allows the user to see all current students stored in the app.
+
 #### Implementation
 
 The mechanism is similar to list feature in `AddressBook`. Parser checks for `-all` flag using the sequence above and execute showing the entire list of students.
@@ -257,11 +267,14 @@ Below is a sequence diagram of how view all interacts with multiple classes.
 For the prefixes ``-name`` and ``-id``, a filtered list containing the search results will be returned.
 Both variants utilize a similar logic to of passing in a ``prefix`` to ``model#updateFilteredPersonList`` to adjust the entries displayed by the GUI.
 <puml src="diagrams/ViewNameSequenceDiagram.puml" alt="ViewNameSequenceDiagram" />
+
 ### View Name
 This feature allows the user to find all students with at least one matching keyword in their name.
+
 #### Implementation
 This mechanism is similar to the `find` command in `AddressBook`. Parser checks for the `-name` flag using the sequence above and places the keywords into a `NameContainsKeywordsPredicate`.<br>
 This command will display any student with at least **one keyword** fully matching with a part of the name. (e.g. `John` keyword will display `John Lim` but not `Joh Ng`). If there are no such students, an empty list will be displayed.<br>
+
 #### Design considerations:
 **Aspect: How view name finds students to display:**
 * **Alternative 1 (current choice):** Returns students only if a part of their name **fully** matches a keyword.
@@ -271,8 +284,10 @@ This command will display any student with at least **one keyword** fully matchi
 * **Alternative 2:** Returns students as long as their name contains **all the characters** of any keyword, and they appear in the **right order**.
     * Pros: Enables more extensive searching, will allow room for typos.
     * Cons: Harder to implement, user need to look through redundant names. (e.g. User wants to find student called `John`, but has to first scroll through `Jo` `Jon` and even `James Ong`)
+
 ### View student and their logs by ID Feature
 This feature allows the user to search for a specific student with the corresponding ID. The list of all logs of the target student will also be displayed in a popup.
+
 #### Implementation
 Parser checks for the `-id` flag using the sequence above and checks if the id is a valid id. Then, it passes the id into a `IsSameIdPredicate` to filter for the student. <br>
 This command will display the student with the matching id, and open a popup containing their log information. If such a student does not exist, a prompt will be given to the user to retry.
@@ -308,18 +323,8 @@ The CommandResult will then be returned to the UIManager and a SummaryStatsWindo
 it get the SummaryStats from `Logic`the respective frame will show `SummaryStatsWindow::updateSummaryStats` clearly. 
 
 <puml src="diagrams/ViewStatsSequenceDiagramUpdateTotalCountofPersons.puml" alt="ViewStatsSequenceDiagramUpdateTotalCountofPerson" />
-<puml src="diagrams/ViewStatsSequenceDiagramUpdateTotalOwingsOfPerson.puml" alt="ViewStatsSequenceDiagramUpdateTotalOwingsOfPerson" />
+<puml src="diagrams/ViewStatsSequenceDiagramUpdateTotalOwingsOfPersons.puml" alt="ViewStatsSequenceDiagramUpdateTotalOwingsOfPersons" />
 <puml src="diagrams/ViewStatsSequenceDiagramUpdateUpcomingExams.puml" alt="ViewStatsSequenceDiagramUpdateUpcomingExams" />
-
-
-
-
-
-
-
-
-
-
 
 #### Design Considerations
 **Aspect: Where to store the SummaryStats:**
@@ -330,19 +335,22 @@ it get the SummaryStats from `Logic`the respective frame will show `SummaryStats
 
 * **Alternative 2:** Compute statistics on demand
     * Pros: Decreases the coupling between the data management and data viewing functionalities.
-    * Cons: Could lead to a delay in presenting statistics to the user since computations are performed at the time of request.
+    * Cons: Could lead to a delay in presenting statistics to the user since computations are performed at the time of request. <br>
 
-**User Experience
+**User Experience**
+
 * **Useful Information**: We want the user to have useful information in a quick manner to aid their tuition administration.
 * **Many ways to access**: We want the user to have many ways to open the Summary Stats Window.
 
 ### Add Log feature
 This command is has a similar mechanism to the `add` feature, but targets a specific student instead. <br>
 This feature enables tutors to log session specific details for record to a specific student. Each log entry includes the total hours of the lesson, lesson content, the learning style of the student, as well as any additional notes. The date of the log entry is recorded as the system time when the user added the log.
+
 #### Implementation
 The parser first checks if the there exists a student with the `ID` specified using the `-id` in current records. Then, the app adds the log entry to the end of the log list attached as a field to the student.
 Below is the sequence diagram of how the `log` command interacts with multiple classes.
-<puml src="diagrams/LogSequenceDiagram.puml">
+<puml src="diagrams/LogSequenceDiagram.puml" alt="LogSequenceDiagram.puml" />
+
 #### Design Considerations
 **Aspect: Whether all fields in log should be compulsory**
 * **Alternative 1 (current choice):** All fields are compulsory
@@ -360,6 +368,10 @@ Below is the sequence diagram of how the `log` command interacts with multiple c
 * **Alternative 2:** All fields have their own required format and data types.
     * Pros: More systematic, less prone to user errors and typos.
     * Cons: More complicated to implement and use.
+
+### Conclusion
+
+This guide provides a concise overview of the student details retrieval system, designed to assist developers in understanding and utilizing these features effectively. For further details or clarification, please contact the development team.
 
 ## Student Payment Management System
 
@@ -415,9 +427,9 @@ This feature enables the system to reset the payment status of students, which i
 
 ### Conclusion
 
-This guide provides a concise overview of the payment management functionalities within the system, designed to assist developers in understanding and utilizing these features effectively. For further details or clarification, please refer to the system documentation or contact the development team.
+This guide provides a concise overview of the payment management functionalities within the system, designed to assist developers in understanding and utilizing these features effectively. For further details or clarification, please contact the development team.
 
-## Student Exam Management
+## Student Exam Management System
 
 ### Introduction
 
@@ -440,6 +452,41 @@ The AddExamCommand enables users to add exam records to students by specifying a
 3. A new exam record is created and added to the student and the AllExamsList in the system.
 <puml src="diagrams/AddExamActivityDiagram.puml" alt="AddExamActivityDiagram" />
 
+#### Design Considerations
+
+**Aspect: Compulsory Fields**
+
+* **Alternative 1:** Both Date and Time are Compulsory
+    * Pros: Ensures that users provide complete information for scheduling exams, reducing ambiguity.
+    * Cons: Adds extra burden on users to provide both date and time even if they may not have exact timing.
+
+* **Alternative 2 (current choice):** Only Date is Compulsory, Time is Optional
+    * Pros: Provides flexibility to users who may not have specific time information for exams.
+    * Cons: May lead to incomplete scheduling if users don't specify exam times.
+
+**Aspect: Restrictions on Date and Time**
+
+* **Alternative 1: Allow Past Dates and Times**
+    * Pros: Gives users the freedom to schedule exams retroactively if needed.
+    * Cons: May lead to confusion or misuse if users inadvertently schedule exams for past dates or times.
+
+* **Alternative 2 (current choice): Allow Current Date with Past Time**
+    * Pros: Allows users to schedule exams for the current day, even if the time has already passed.
+    * Cons: Still prevents scheduling exams for past dates to avoid confusion and errors.
+
+* **Alternative 3: Do Not Allow Past Dates or Times**
+    * Pros: Ensures that all scheduled exams are for future dates and times, reducing the likelihood of scheduling errors.
+    * Cons: Restricts users from scheduling exams for immediate or past instances, which may be necessary in certain situations.
+
+**Aspect: Time Slot Conflicts**
+* **Alternative 1: Allow Exams at the Same Time Slot**
+    * Pros: Provides flexibility for users to schedule exams without strict limitations on time slots.
+    * Cons: May lead to scheduling conflicts or confusion if multiple exams are scheduled for the same time slot.
+
+* **Alternative 2: Does Not Allow Exams at the Same Time Slot**
+    * Pros: Helps prevent scheduling conflicts and ensures each exam has its dedicated time slot and prevent errors. More similar to real world contexts.
+    * Cons: Less flexibility.
+
 ### Delete Exam Feature
 
 The DeleteExamCommand allows deleting a specific exam record from a student.
@@ -454,7 +501,7 @@ The system removes the specified exam record from the student and AllExamsList.
 
 ### Conclusion
 
-These descriptions provide an overview of the exam management features, their purposes, and how they are implemented in the system. They also include sequence diagrams illustrating the interactions between the user and the system for each feature. For further details or clarification, please refer to the system documentation or contact the development team.
+These descriptions provide an overview of the exam management features, their purposes, and how they are implemented in the system. They also include sequence diagrams illustrating the interactions between the user and the system for each feature. For further details or clarification, please contact the development team.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -497,22 +544,21 @@ These descriptions provide an overview of the exam management features, their pu
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​ | I want to …​                        | So that I can…​                                           |
-|----------|---------|-------------------------------------|-----------------------------------------------------------|
-| `* * *`  | Tutor   | add a student                       | track the details of the student                          |
-| `* * *`  | Tutor   | view student details summary on main page | get a brief idea of the student while navigating the list |
-| `* * *`  | Tutor   | delete a person                     | remove entries that I no longer need                      |
-| `* * *`  | Tutor   | view single students detail         | see the individual detail for a single student            |
-| `* * *`  | Tutor   | view total number of students       | check if I have space for more students                   |
-| `* * *`  | Tutor   | track my payments                   | won't miss out on any payments                            |
-| `* * *`  | Tutor   | track my students' exams            | personalise and plan better for lessons                   |
-
-
-*{More to be added}*
+| Priority | As a …​ | I want to …​                              | So that I can…​                                           |
+|---------|---------|-------------------------------------------|-----------------------------------------------------------|
+| `* * *` | Tutor   | add a student                             | track the details of the student                          |
+| `* * *` | Tutor   | view student details summary on main page | get a brief idea of the student while navigating the list |
+| `* * *` | Tutor   | delete a person                           | remove entries that I no longer need                      |
+| `* * *` | Tutor   | view single students detail               | see the individual detail for a single student            |
+| `* * *` | Tutor   | view total number of students             | check if I have space for more students                   |
+| `* * *` | Tutor   | track my payments                         | won't miss out on any payments                            |
+| `* * *` | Tutor   | track my students' exams                  | personalise and plan better for lessons                   |
+| `**`    | Tutor   | log the lessons of a student              | analyse past lessons when planning                        |
+| `*`      | Tutor   | filter students by their subjects         | manage my students better                                 |
 
 ### Use cases
 
-<puml src="diagrams/UseCaseDiagram.puml" alt="UseCaseDiagram" />
+<puml src="diagrams/UseCaseDiagram.puml" alt="UseCaseDiagram" /> <br>
 (For all use cases below, the **System** is`TuteeTally` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Add a Student**
@@ -878,11 +924,4 @@ testers are expected to do more *exploratory* testing.
 ### Additional Notes
 Always ensure that the unique id, exam name, and date are correctly entered to avoid discrepancies or errors in exam management.
 These commands are designed to interact seamlessly with the system's exam management module, ensuring accurate tracking and reporting of student exam records.
-
-### Saving Data
-
-#### 1. Dealing with Missing/Corrupted Data Files
-- _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-#### 2. _{ more test cases …​ }_
 

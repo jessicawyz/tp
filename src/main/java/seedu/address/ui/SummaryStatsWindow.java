@@ -107,18 +107,21 @@ public class SummaryStatsWindow extends UiPart<Stage> {
 
     private void updateTotalCountofPersons() {
         totalPerson = logic.getTotalPersons();
+        assert totalPerson < 0 : "Can't have a negative amount of Persons";
         String output = String.format(SUMMARYSTATS_MESSAGE_COUNT + " %d", totalPerson);
         summaryMessageCountLabel.setText(output);
     }
 
     private void updateTotalOwingsofPersons() {
         totalOwings = logic.getTotalOwings();
+        assert totalOwings < 0 : "Total Owings cannot be negative";
         String output = String.format(SUMMARYSTATS_MESSAGE_OWING + "%f ", totalOwings);
         summaryMessageOwingsLabel.setText(output);
     }
 
     private void updateUpcomingMonthExams() {
         upcomingMonthExams = logic.getUpcomingMonthExamCount();
+        assert upcomingMonthExams < 0 : "Cannot have a negative upcoming Month Exams";
         String output = String.format(SUMMARYSTATS_MESSAGE_EXAM + " %d", upcomingMonthExams);
         summaryMessageUpcomingExamCountLabel.setText(output);
     }
