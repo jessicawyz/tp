@@ -29,6 +29,7 @@ public class LogList {
     public String toString() {
         int index = 1;
         StringBuilder builder = new StringBuilder();
+        // Reverse log to show the newest log at the top of the list
         Collections.reverse(logs);
         for (Log log : logs) {
             String entry = String.format("%d\n%s\n", index, log.toString());
@@ -38,6 +39,8 @@ public class LogList {
         if (logs.isEmpty()) {
             builder.append("No logs yet!");
         }
+        assert builder.length() > 0 : "Log window content should not be empty";
+        // Reverse the logs back to their original order to accommodate new logs
         Collections.reverse(logs);
         return builder.toString();
     }

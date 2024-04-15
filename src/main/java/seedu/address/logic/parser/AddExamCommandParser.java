@@ -24,8 +24,9 @@ public class AddExamCommandParser implements Parser<AddExamCommand> {
     public AddExamCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_EXAM_NAME, PREFIX_DATE, PREFIX_TIME);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_DATE) || !argMultimap.getPreamble().isEmpty()) {
+        assert argMultimap != null : "ArgumentMultimap cannot be null";
+        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_EXAM_NAME, PREFIX_DATE)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExamCommand.MESSAGE_USAGE));
         }
 

@@ -11,7 +11,9 @@ import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -38,7 +40,7 @@ public class DeleteExamCommand extends Command {
             + PREFIX_TIME + "14:00";
 
     public static final String MESSAGE_SUCCESS = "Deleted exam from person with ID: %1$s";
-
+    private final Logger logger = LogsCenter.getLogger(DeleteExamCommand.class);
     private final String uniqueId;
     private final LocalDate examDate;
     private final Optional<LocalTime> examTime;
@@ -61,8 +63,10 @@ public class DeleteExamCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        logger.info("Executing DeleteExamCommand");
 
         Person personToUpdate = getPersonToUpdate(model);
+        assert personToUpdate != null : "Person to update not found in model";
 
         Set<Exam> updatedExams = getUpdatedExams(personToUpdate);
 
@@ -71,6 +75,7 @@ public class DeleteExamCommand extends Command {
 
         updateModelWithUpdatedPerson(model, personToUpdate, updatedExams);
 
+        logger.info("DeleteExamCommand executed successfully" + examToDelete.toString());
         return new CommandResult(String.format(MESSAGE_SUCCESS, uniqueId));
     }
 

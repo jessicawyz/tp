@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -22,6 +24,7 @@ public class Log {
      * @param notes A valid note.
      */
     public Log(String learningStyle, String hours, String lessonContent, String notes, String date) {
+        requireAllNonNull(learningStyle, hours, lessonContent, notes);
         if (date == null) {
             Date currentDate = new Date();
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
