@@ -833,35 +833,32 @@ testers are expected to do more *exploratory* testing.
 #### Adding a Payment to a Student Account
 
 - **Command**: `addpayment`
-- **Description**: Adds a payment record to a specified student's account by their unique identifier. This command allows for specifying the payment amount either as a numerical value or as a text string for more descriptive purposes.
+- **Description**: Adds a payment record to a specified student by their unique id. This command allows for specifying the payment amount either as a numerical value or as a text string for more descriptive purposes.
 
 ##### Prerequisites
-- User must be logged in with sufficient privileges to add payments.
-- The student account associated with the given unique identifier must exist within the system.
+- The student associated with the given unique id must exist within the system.
 
 ##### Usage
 - **To add a payment with a numerical amount**:
-  `addpayment -id ID -amount 100.00`
-  **Expected Outcome**: A payment of $100.00 is added to the student's account identified by `ID`. The system confirms the addition with a success message and updates the student's payment history accordingly.
+  `addpayment -id ID -amount 100.00` <br>
+  **Expected Outcome**: A payment of $100.00 is added to the student identified by `ID`. The system confirms the addition with a success message and updates the student's payment history accordingly.
 
 #### Marking a Student's Payment
 
 - **Command**: `markpayment`
-- **Description**: Marks a specified payment as complete for a student's account. This command is used to update the status of a student's payments to reflect that they have been successfully processed or received.
+- **Description**: Marks a specified payment as complete for a student. This command is used to update the status of a student's payments to reflect that they have been successfully processed or received.
 
 ##### Prerequisites
-- User must be logged in with sufficient privileges to mark payments as complete.
-- The student account associated with the given unique identifier must exist and have outstanding payments.
+- The student associated with the given unique id must exist.
 
 ##### Usage
 - **To mark a payment as complete**:
-  `markpayment -id ID -payment PAYMENT_AMOUNT`
+  `markpayment -id ID -payment PAYMENT_AMOUNT` <br>
   **Expected Outcome**: The payment identified by `PAYMENT_AMOUNT` for the student `ID` is marked as complete. The system updates the payment status and provides a confirmation message.
 
 #### Extensions and Error Handling
 - **Invalid ID**: If an invalid `ID` or `PAYMENT_AMOUNT` is provided, the system will return an error message indicating the issue and suggesting corrective actions.
 - **No Outstanding Payments**: If there are no outstanding payments to mark as complete, the system will notify the user accordingly.
-- **Permission Denied**: If the user attempts to execute a command without sufficient privileges, the system will deny the request and provide an appropriate warning message.
 
 ### Additional Notes
 - These commands are designed to interact seamlessly with the system's payment management module, ensuring accurate tracking and reporting of student payment statuses.
@@ -870,24 +867,22 @@ testers are expected to do more *exploratory* testing.
 #### Resetting Payments for a Student Account
 
 - **Command**: `resetpayments`
-- **Description**: Resets the payment status for all recorded payments in a specified student's account. This command is used when a student's payment record needs to be cleared, typically after all dues have been settled or in case of account adjustments.
+- **Description**: Resets the payment status for all recorded payments in a specified student. This command is used when a student's payment record needs to be cleared, typically after all dues have been settled or in case of adjustments.
 
 ##### Prerequisites
-- User must be logged in with sufficient privileges to reset payment records.
-- The student account associated with the given unique identifier must exist and have one or more payments recorded.
+- The student account associated with the given unique identifier must exist.
 
 ##### Usage
 - **To reset all payments for a student**:
-  `resetpayments -id ID`
-  **Expected Outcome**: All payments recorded for the student account identified by `ID` are reset. The system confirms the reset with a success message, indicating that the student's payment history is now cleared.
+  `resetpayments -id ID` <br>
+  **Expected Outcome**: All payments recorded for the student identified by `ID` are reset. The system confirms the reset with a success message, indicating that the student's payment history is now cleared.
 
 #### Extensions and Error Handling
-- **Invalid ID**: If an invalid `ID` is provided, the system will return an error message indicating that the student account could not be found.
-- **No Recorded Payments**: If the student account does not have any recorded payments, the system will notify the user that there are no payments to reset.
-- **Permission Denied**: Similar to the other commands, if the user attempts to execute the `resetpayments` command without sufficient privileges, the system will deny the request and display an appropriate warning message.
+- **Invalid ID**: If an invalid `ID` is provided, the system will return an error message indicating that the student could not be found.
+- **No Recorded Payments**: If the student does not have any recorded payments, the system will notify the user that there are no payments to reset.
 
 ### Additional Notes
-- Use the `resetpayments` command with caution, as it will clear all payment records for the specified student, potentially impacting their payment history and account status.
+- Use the `resetpayments` command with caution, as it will clear all payment records for the specified student, potentially impacting their payment record.
 - Ensure accuracy when entering the `ID` to avoid unintentional resets of payment information for the wrong student account.
 
 ### Exam commands
@@ -904,7 +899,7 @@ testers are expected to do more *exploratory* testing.
     `addexam -id ID -examname EXAM_NAME -date EXAM_DATE [-time EXAM_TIME]`
 - Only EXAM_DATE from current date onwards can be used. 
 - EXAM_DATE should be in the format of yyyy-MM-DD.
-- EXAM_TIME should be in the format of HH:mm
+- EXAM_TIME should be in the format of HH:mm <br>
     **Expected Outcome**: An exam with the specified name, date, and optionally time is added to the student identified by ID. The system confirms the addition with a success message and updates the student's exam records accordingly.
 
 #### Deleting an Exam from a Student Account
@@ -916,7 +911,7 @@ testers are expected to do more *exploratory* testing.
 
 ##### Usage
 - **To delete an exam**:
-    `deleteexam -id ID -examname EXAM_NAME -date EXAM_DATE [-time EXAM_TIME]`
+    `deleteexam -id ID -examname EXAM_NAME -date EXAM_DATE [-time EXAM_TIME]`<br>
     **Expected Outcome**: The exam with the specified name, date, and optionally time is removed from the student identified by ID. The system confirms the deletion with a success message, and the student's exam records are updated accordingly.
 
 #### Extensions and Error Handling
