@@ -206,7 +206,7 @@ If more than one valid prefix `-all`, `-name`, `-id`, or `stats` are present, `V
 
 Below is an example usage scenario where the `view -stats` command was entered.
 
-**Step 1:** User first calls `view -stats`. The input is passed into ``AddressBookParser`` which instantiates a ``1CommandParser`` instance.
+**Step 1:** User first calls `view -stats`. The input is passed into ``AddressBookParser`` which instantiates a ``ViewCommandParser`` instance.
 The `ViewCommandParser` uses ``ViewCommandParser#arePrefixesPresent`` to check for presence of the ``-add`` prefix.
 
 <puml src="diagrams/ViewParserSequenceDiagram0.puml" />
