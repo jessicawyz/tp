@@ -193,7 +193,7 @@ public class MainWindow extends UiPart<Stage> {
         if (!studentDetailsWindow.isShowing()) {
             studentDetailsWindow.show(content);
         } else {
-            studentDetailsWindow.focus();
+            studentDetailsWindow.focus(content);
         }
     }
 
