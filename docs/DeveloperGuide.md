@@ -332,7 +332,7 @@ it get the SummaryStats from `Logic`the respective frame will show `SummaryStats
 
 * **Alternative 2:** Compute statistics on demand
     * Pros: Decreases the coupling between the data management and data viewing functionalities.
-    * Cons: Could lead to a delay in presenting statistics to the user since computations are performed at the time of request.
+    * Cons: Could lead to a delay in presenting statistics to the user since computations are performed at the time of request. <br>
 
 **User Experience
 * **Useful Information**: We want the user to have useful information in a quick manner to aid their tuition administration.
